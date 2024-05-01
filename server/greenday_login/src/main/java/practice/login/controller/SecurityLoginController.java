@@ -66,4 +66,18 @@ public class SecurityLoginController {
         model.addAttribute("loginRequest", new LoginRequest());
         return "login";
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> loginSuccess(@Valid @ModelAttribute LoginRequest loginRequest, BindingResult bindingResult) {
+        // 바인딩 에러가 있다면 에러 메시지 반환
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body("로그인 정보가 올바르지 않습니다.");
+        }
+
+        // 로그인 처리 로직 작성
+
+        // 로그인이 성공했을 경우 성공 메시지 반환
+        return ResponseEntity.ok("로그인이 성공했습니다.");
+    }
+
 }
