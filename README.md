@@ -14,11 +14,38 @@
 <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=flat&logo=Javascript&logoColor=white" />
 </div>
 
-## 🦹‍ Team
-|김도현|김효원|백채연|장혜원|정아란|
-|:---:|:---:|:---:|:---:|:---:|
-|BE|FE|BE|BE|FE|
-|[pu2rile](https://github.com/pu2rile)|[khw010419](https://github.com/khw010419)|[Chaeyeon0](https://github.com/Chaeyeon0)|[janghw0126](https://github.com/janghw0126)|[aranlll](https://github.com/aranlll)|
+<hr>
+
+<table align="center">
+    <thead>
+     <tr>
+            <th colspan="5">Team</th>
+        </tr>
+        <tr>
+            <th>김도현</th>
+            <th>김효원</th>
+            <th>백채연</th>
+            <th>장혜원</th>
+            <th>정아란</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>BE</td>
+            <td>FE</td>
+            <td>BE</td>
+            <td>BE</td>
+            <td>FE</td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/pu2rile">pu2rile</a></td>
+            <td><a href="https://github.com/khw010419">khw010419</a></td>
+            <td><a href="https://github.com/Chaeyeon0">Chaeyeon0</a></td>
+            <td><a href="https://github.com/janghw0126">janghw0126</a></td>
+            <td><a href="https://github.com/aranlll">aranlll</a></td>
+        </tr>
+    </tbody>
+</table>
 
 
 
