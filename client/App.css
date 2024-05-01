@@ -1,0 +1,66 @@
+body {
+  background-image: linear-gradient(to right, white 250px,#d7eec4 250px);
+  width: 150px;
+  height: 100%;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+ul {
+  width: 190px;
+  height: 100%;
+  list-style-type: none;
+  margin: 5;
+  padding: 0;
+}
+
+li a {
+  display: block;
+  color: #000000;
+  padding: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+li a:hover {
+  color: #71885e;
+  background-color: rgb(192, 192, 192);
+}
+h1 {
+  padding: 8px 8px;
+  font-size: 120%;
+}
+
+.one {
+  width : 180px;
+  height: 1px;
+  border-bottom-style: solid;
+  border-bottom-color:#b5b5b5;
+  /* margin: 10px; */
+}
+.live_list{
+  background-color: rgb(192, 192, 192);
+}
+
+.tree_image{
+  background-color: transparent;
+  border: none; 
+  cursor: pointer; /* 커서모양변경 */
+}
+
+.tree_image img{
+  position: absolute;
+  left: 600px;
+  top: 62px;
+  width: 500px;
+  height: 650px;
+  z-index: -1;
+}
+
+.button{
+  position:absolute;
+  left: 1200px;
+  top: 650px;
+  background-color: transparent;
+  border: none; 
+}
