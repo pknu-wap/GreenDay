@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './modiary.css'; 
-import axios from 'axios';
+// import axios from 'axios';
 
 // function SendDiaryEntry() {
 //   // 초기 상태 설정
