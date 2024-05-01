@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f14a2e5d-f546-4b75-b685-6517d671c7e8" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/controller/Diarycontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/controller/Diarycontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/domain/entity/DiaryEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/domain/entity/DiaryEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/dro/DiaryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/dro/DiaryDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-aws.properties.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +111,9 @@
       <option name="presentableId" value="Default" />
       <updated>1714570624057</updated>
       <workItem from="1714570625116" duration="5350000" />
-      <workItem from="1714580360474" duration="4313000" />
+      <workItem from="1714580360474" duration="7446000" />
+      <workItem from="1714590700711" duration="13000" />
+      <workItem from="1714592527473" duration="366000" />
     </task>
     <servers />
   </component>
