@@ -1,6 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import './modiary.css'; 
+import axios from 'axios';
 
+// function SendDiaryEntry() {
+//   // 초기 상태 설정
+//   const [diaryEntry, setDiaryEntry] = useState({
+//     diary_content: ' ', // 초기값은 빈 문자열
+//     login_id: ' ', // 초기값은 빈 문자열
+//   });
+
+//   // POST 요청을 보내는 함수
+//   const sendDiaryEntry = () => {
+//     fetch('/wirte_diary', { // 요청을 보낼 백엔드 엔드포인트
+//       method: 'POST', // HTTP 메소드는 POST
+//       headers: {
+//         'Content-Type': 'application/json', // 요청 본문이 JSON 형식
+//       },
+//       body: JSON.stringify(diaryEntry), // 본문에 전송할 데이터
+//     })
+//       .then((response) => {
+//         if (!response.ok) {
+//           throw new Error('Network response was not ok');
+//         }
+//         return response.json(); // 응답을 JSON으로 파싱
+//       })
+//       .then((data) => console.log('Received response:', data))
+//       .catch((error) => console.error('Error sending data:', error)); // 에러 처리
+//   };
+  
+//   }
 const Modal = ({ isOpen, onClose, onSubmit }) => {
     const [text, setText] = useState(''); //text가 값 추적하고 setText함수 통해 상태
     const [message, setMessage] = useState('');
@@ -44,7 +72,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
                         placeholder="오늘의 일기를 작성하세요"
                     ></textarea>
                     </div>
-                    <button className="Save-button" onClick={handleSubmit}>
+                    <button className="Save-button" onSubmit={handleSubmit} onClick={onClose} >
                         <img src='apple.png'/></button>
                         {/* {message && <p>{message}</p>} */}
              </div>

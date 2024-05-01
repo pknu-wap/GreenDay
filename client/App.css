@@ -3,7 +3,7 @@ body {
   width: 150px;
   height: 100%;
   border-radius: 20px;
-  margin: 10px;
+  margin: 20px;
 }
 
 ul {
@@ -26,9 +26,29 @@ li a:hover {
   color: #71885e;
   background-color: rgb(192, 192, 192);
 }
-h1 {
-  padding: 8px 8px;
+
+h1{
+  position: absolute;
+  font-size: 65px;
+  top: -30px;
+  /* padding:30px 30px; */
+  text-align: center;
+  left: 700px;
+}
+
+h4{
+  position: absolute;
+  font-size: 17px;
+  top: 110px;
+  /* padding:30px 30px; */
+  text-align: center;
+  left: 550px;
+}
+
+h5 {
+  padding: 0px 8px;
   font-size: 120%;
+  text-align: center;
 }
 
 .one {
@@ -50,17 +70,30 @@ h1 {
 
 .tree_image img{
   position: absolute;
-  left: 600px;
-  top: 62px;
-  width: 500px;
-  height: 650px;
+  left: 700px;
+  top: 213px;
+  width: 360px;
+  height: 500px;
   z-index: -1;
 }
 
-.button{
+
+.button img{
   position:absolute;
-  left: 1200px;
-  top: 650px;
+  left: 600px;
+  top: 105px;
   background-color: transparent;
   border: none; 
+  width: 500px;
+  height:500px;
+  border-radius: 15px;
+}
+.button_content img{
+  position:absolute;
+  left: 1064px;
+  top: 111px;
+  background-color: transparent;
+  border: none; 
+  width: 30px;
+  height:30px;
 }
