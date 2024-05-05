@@ -16,7 +16,7 @@ public class Diarycontroller {
         // 서비스를 통해 일기를 작성하고 데이터베이스에 저장
         this.diaryservice = diaryservice;
     }
-    @PostMapping("/wirte_diary")//api 경로 지정
+    @PostMapping("/write_diary")//api 경로 지정
     public ResponseEntity<String> writeDiary(@RequestBody DiaryDto diaryDto){
         // 작성된 일기에 대한 응답 반환
         diaryservice.writeDiary(diaryDto);
