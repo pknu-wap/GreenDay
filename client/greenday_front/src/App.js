@@ -7,18 +7,17 @@ import Notice from "./notice.js";
 import History from "./history.js";
 import Greenmate from "./greenmate.js";
 import Login from "./login.js";
-
 import React,{ useState } from "react";
 
 
 function App() {
-  const [buttonOpen,setButtonOpen]=useState(false);
-  
-  const openButton=()=>{
+  const [buttonOpen,setButtonOpen]=useState(false); 
+
+  const openButton=()=>{ 
     setButtonOpen(true);
   };
 
-  const closeButton=()=>{
+  const closeButton=()=>{ 
     setButtonOpen(false);
   };
 
