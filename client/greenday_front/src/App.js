@@ -1,25 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {Routes, Route,Link, useNavigate} from "react-router-dom";
 import Modal from './modiary';
-import Home from "./App";
-import Notice from "./notice.js";
-import History from "./history.js";
-import Greenmate from "./greenmate.js";
-import Login from "./login.js";
-import React,{ useState } from "react";
+import Home from "./Home.js";
+import Notice from "./Notice.js";
+import History from "./History.js";
+import Xlog from "./xlog.js";
+
+
+import { useState ,useEffect} from "react";
 
 
 function App() {
-  const [buttonOpen,setButtonOpen]=useState(false); 
-
-  const openButton=()=>{ 
-    setButtonOpen(true);
-  };
-
-  const closeButton=()=>{ 
-    setButtonOpen(false);
-  };
+  let [buttonOpen,setButtonOpen]=useState(false);
+  /*let [shouldRenderApp,setShouldRenderApp]=useState(true);*/
+  
 
   const [isModalOpen, setModalOpen] = useState(false);//useState사용하여 상태 초기화 및 모달의 열림/닫힘 상태관리
   
@@ -47,57 +42,36 @@ function App() {
   //     console.error('데이터를 가져오는 중 오류 발생:', error);
   //   }
   // }
- 
+  /*  useEffect(() => {
+      const path = window.location.pathname;
+      const excludedPaths = ['/History', '/Notice',"/Home"]; // 제외할 경로들
+      setShouldRenderApp(!excludedPaths.includes(path));
+    }, []);
+  
+    if (!shouldRenderApp) {
+      return null; 
+    };
+  */
   return (
-    <Router>
-      <h1>Green Day!</h1>
-      <h4>Q. 여러분은 평소에 환경을 얼마큼 생각하시나요?<br />
-Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들을 위한 공간입니다.</h4>
-  <title>네이버 로그인</title>
-    <div className="App">
+    <>
       <div>
-        <h5>
-           방문자님,<br />
-          환영합니다.<br /><br />
-          <div className="one"></div>
-        </h5>
-        
-        <ul className="navigation-menu">
-          <li><a href="App.js">홈</a></li><br />
-          <li><a href="notice.js">게시판</a></li><br />
-          <li><a href="history.js">히스토리</a></li><br />
-          <li><a href="greenmate.js">그린메이트</a></li><br />
-          <li><a href="#" onClick={openModal}>그린일기</a></li><br />
-        </ul>
-        
+
         <Routes>
-          <Route path="/home" element={<Home />}></Route>
-          <Route path="/notice" element={<Notice />}></Route>
-          <Route path="/history" element={<History />}></Route>
-          <Route path="/greenmate" element={<Greenmate />}></Route>
+          <Route path="/Home" element={<Home />}></Route>
+          <Route path="/Notice" element={<Notice />}></Route>
+          <Route path="/History" element={<History />}></Route>
+          <Route path="/Xlog" element={<Xlog />}></Route>
         </Routes>
 
-        <Modal isOpen={isModalOpen} onClose={closeModal} /> {/* 모달을 닫기 위한 콜백 전달 */}
+        <Modal isOpen={isModalOpen} onClose={closeModal} /> 
       
       
       </div>
 
-      {buttonOpen && (
-        <div>
-          <div className="button">
-          <img src="a.png" /></div>
-          <button onClick={closeButton}>
-            <div className="button_content">
-              <img src='x.png' />
-            </div>
-          </button>
-        </div>
-      )}
-      </div>
-      <button className="tree_image" onClick={openButton}>
-        <img src='tree.png'a href="APIExamNaverLogin.html" /></button>
-    </Router>
+    </>
   );
 }
+
+
 
 export default App;

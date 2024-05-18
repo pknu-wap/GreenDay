@@ -1,3 +1,42 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 body {
   background-image: linear-gradient(to right, white 250px,#d7eec4 250px);
   width: 150px;
@@ -22,7 +61,12 @@ li a {
   font-weight: bold;
 }
 
-li a:hover {
+.click {
+  display: block;
+  color: #000000;
+  padding: 8px;
+  text-decoration: none;
+  font-weight: bold;
   color: #71885e;
   background-color: rgb(192, 192, 192);
 }
@@ -71,14 +115,14 @@ h5 {
 .tree_image img{
   position: absolute;
   left: 700px;
-  top: 213px;
-  width: 360px;
-  height: 500px;
+  top: 183px;
+  width: 400px;
+  height: 530px;
   z-index: -1;
 }
 
 
-.button img{
+.login_button img{
   position:absolute;
   left: 600px;
   top: 105px;
@@ -88,7 +132,7 @@ h5 {
   height:500px;
   border-radius: 15px;
 }
-.button_content img{
+.login_button_content img{
   position:absolute;
   left: 1064px;
   top: 111px;
@@ -96,4 +140,23 @@ h5 {
   border: none; 
   width: 30px;
   height:30px;
+}
+
+.apple_image{
+  position:absolute;
+  border: none; 
+  background-color: transparent;
+  cursor: pointer;
+  z-index: -1;
+}
+
+.apple_image img{
+  width: 50px;
+  height:50px;
+}
+
+.xlog-navigation-menu{
+  font-weight: bold;
+  cursor: pointer;
+  color: #444444;
 }
