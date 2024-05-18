@@ -4,7 +4,7 @@ import {Routes, Route,Link, useNavigate} from "react-router-dom";
 import Modal from './modiary';
 import Notice from "./Notice.js";
 import History from "./History.js";
-
+import axios from 'axios';
 
 
 import { useState } from "react";
@@ -12,7 +12,8 @@ import { useState } from "react";
 
 function Home() {
   let [buttonOpen,setButtonOpen]=useState(false);
-  
+  // let [userName,setUserName]=useState(userName);
+
 
   const [isModalOpen, setModalOpen] = useState(false);//useState사용하여 상태 초기화 및 모달의 열림/닫힘 상태관리
   
@@ -40,7 +41,7 @@ function Home() {
   //     console.error('데이터를 가져오는 중 오류 발생:', error);
   //   }
   // }
- 
+
   return (
     <>
       <h1>Green Day!</h1>
@@ -50,7 +51,15 @@ Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들�
     <div className="App">
       <div>
         <h5>
-           방문자님,<br />
+          
+        <div  />
+
+          {/* <button onClick={()=>{
+
+          }}>
+            {userName.id[0]}
+          </button> */}
+           님,<br />
           환영합니다.<br /><br />
           <div className="one"></div>
         </h5>
@@ -94,7 +103,6 @@ Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들�
     </>
   );
 }
-
 
 
 export default Home;

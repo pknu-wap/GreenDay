@@ -7,11 +7,12 @@ import Notice from "./Notice.js";
 import History from "./History.js";
 
 
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 
 
 function App() {
   let [buttonOpen,setButtonOpen]=useState(false);
+  /*let [shouldRenderApp,setShouldRenderApp]=useState(true);*/
   
 
   const [isModalOpen, setModalOpen] = useState(false);//useState사용하여 상태 초기화 및 모달의 열림/닫힘 상태관리
@@ -40,14 +41,18 @@ function App() {
   //     console.error('데이터를 가져오는 중 오류 발생:', error);
   //   }
   // }
- 
+  /*  useEffect(() => {
+      const path = window.location.pathname;
+      const excludedPaths = ['/History', '/Notice',"/Home"]; // 제외할 경로들
+      setShouldRenderApp(!excludedPaths.includes(path));
+    }, []);
+  
+    if (!shouldRenderApp) {
+      return null; 
+    };
+  */
   return (
     <>
-      <h1>Green Day!</h1>
-      <h4>Q. 여러분은 평소에 환경을 얼마큼 생각하시나요?<br />
-Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들을 위한 공간입니다.</h4>
-  <title>네이버 로그인</title>
-    <div className="App">
       <div>
 
         <Routes>
@@ -60,25 +65,6 @@ Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들�
       
       
       </div>
-
-      
-      </div>
-      <button className="tree_image" onClick={()=>{setButtonOpen(true)}}>
-        <img src='tree.png'a href="APIExamNaverLogin.html" /></button>
-
-        {
-          buttonOpen == true ? <div>
-          <div className="login_button">
-           <img src="a.png" />
-          </div>
-      
-          <button>
-            <div className="login_button_content">
-              <img src='x.png' onClick={()=>{setButtonOpen(false)}}/>
-            </div>
-          </button>
-         </div> : null
-        }
 
     </>
   );
