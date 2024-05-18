@@ -17,6 +17,7 @@ public class JoinRequest {
     // 이름을 입력받는 필드. 비어 있을 수 없음을 나타냄
     @NotBlank(message = "이름을 입력하세요.")
     private String name;
+    private String email;
 
     // Member 엔티티로 변환하는 메서드
     public Member toEntity(){
@@ -24,6 +25,7 @@ public class JoinRequest {
         return Member.builder()
                 .loginId(this.loginId) // ID를 설정함
 //                .password(this.password)
+                .email(this.email) //email을 설정함
                 .name(this.name) // 이름을 설정함
                 .role(MemberRole.USER) // 사용자의 역할을 기본적으로 USER로 설정함
                 .build(); // Member 객체를 생성하여 반환함

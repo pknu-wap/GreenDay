@@ -21,7 +21,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 @Controller
-@RequestMapping("/oauth-login")
+@RequestMapping("/greenday")
 public class SecurityLoginController {
 
     private final MemberService memberService;
@@ -46,6 +46,7 @@ public class SecurityLoginController {
         // 로그인한 사용자가 있으면 모델에 이름을 추가함
         if (loginMember != null) {
             model.addAttribute("name", loginMember.getName());
+            model.addAttribute("email", loginMember.getEmail());
         }
         // home.html 템플릿을 반환 (임시)
         return "home";
@@ -68,7 +69,7 @@ public class SecurityLoginController {
         return "login";
     }
     // 소셜 로그인 성공 핸들러 메서드
-    @PostMapping("/oauth-login/oauth-success")
+    @PostMapping("/oauth-success")
     public ResponseEntity<String> oauthLoginSuccess() {
         // 성공 메시지를 생성함
         String message = "네이버 소셜로그인이 성공하였습니다.";

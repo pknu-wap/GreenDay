@@ -53,6 +53,7 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
             member = Member.builder()
                     .loginId(loginId)
                     .name(name)
+                    .email(email)
                     .provider(provider)
                     .providerId(providerId)
                     .role(MemberRole.USER)
