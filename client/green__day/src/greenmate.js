@@ -1,17 +1,8 @@
-import './App.css';
-import {Routes, Route,Link, useNavigate, Outlet} from "react-router-dom";
-import Modal from './modiary';
-import Home from "./App";
-import Notice from "./notice.js";
-import History from "./history.js";
-
-
 import { useState } from "react";
-
+import Modal from './modiary';
 
 function Greenmate() {
   let [buttonOpen,setButtonOpen]=useState(false);
-  let navigate=useNavigate();
   
 
   const [isModalOpen, setModalOpen] = useState(false);//useState사용하여 상태 초기화 및 모달의 열림/닫힘 상태관리
@@ -26,6 +17,7 @@ function Greenmate() {
   const closeModal = () => {
     setModalOpen(false); // 모달 닫기
   };
+
 
   //   useEffect(() => {
   //   fetchData();
@@ -56,20 +48,13 @@ Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들�
         </h5>
         
         <ul className="navigation-menu">
-          <li onClick={()=>{navigate("/app")}}>홈</li><br />
-          <li onClick={()=>{navigate("/notice")}}>게시판</li><br />
-          <li onClick={()=>{navigate("/history")}}>히스토리</li><br />
-          <li onClick={()=>{navigate("greenmate")}}>그린메이트</li><br />
+          <li>홈</li><br />
+          <li>게시판</li><br />
+          <li>히스토리</li><br />
+          <li>그린메이트</li><br />
           <li><a href="#" onClick={openModal}>그린일기</a></li><br />
         </ul>
-        
-        <Routes>
-          <Route path="/home" element={<Home />}></Route>
-          <Route path="/notice" element={<Notice />}></Route>
-          <Route path="/history" element={<History />}></Route>
-          <Route path="/greenmate" element={<Greenmate />}></Route>
-        </Routes>
-
+       
         <Modal isOpen={isModalOpen} onClose={closeModal} /> {/* 모달을 닫기 위한 콜백 전달 */}
       
       
@@ -97,5 +82,7 @@ Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들�
     </>
   );
 }
+
+
 
 export default Greenmate;
