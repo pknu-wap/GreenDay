@@ -2,10 +2,9 @@ import logo from './logo.svg';
 import './App.css';
 import {Routes, Route,Link, useNavigate} from "react-router-dom";
 import Modal from './modiary';
-import Home from "./App";
+import Home from "./Home.js";
 import Notice from "./Notice.js";
 import History from "./History.js";
-import Greenmate from "./Greenmate.js";
 
 
 import { useState } from "react";
@@ -50,24 +49,11 @@ Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들�
   <title>네이버 로그인</title>
     <div className="App">
       <div>
-        <h5>
-           방문자님,<br />
-          환영합니다.<br /><br />
-          <div className="one"></div>
-        </h5>
-        
-        <ul className="navigation-menu">
-          <li><Link to="/">홈</Link></li><br />
-          <li><Link to="/Notice">게시판</Link></li><br />
-          <li><Link to ='/History'>히스토리</Link></li><br />
-          <li><Link to="/Greenmate">그린메이트</Link></li><br />
-          <li><a href="#" onClick={openModal}>그린일기</a></li><br />
-        </ul>
-        
+
         <Routes>
+          <Route path="/Home" element={<Home />}></Route>
           <Route path="/Notice" element={<Notice />}></Route>
           <Route path="/History" element={<History />}></Route>
-          <Route path="/Greenmate" element={<Greenmate />}></Route>
         </Routes>
 
         <Modal isOpen={isModalOpen} onClose={closeModal} /> {/* 모달을 닫기 위한 콜백 전달 */}

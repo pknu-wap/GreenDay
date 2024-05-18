@@ -1,7 +1,16 @@
-import { useState } from "react";
+import logo from './logo.svg';
+import './App.css';
+import {Routes, Route,Link, useNavigate} from "react-router-dom";
 import Modal from './modiary';
+import Notice from "./Notice.js";
+import History from "./History.js";
 
-function Greenmate() {
+
+
+import { useState } from "react";
+
+
+function Home() {
   let [buttonOpen,setButtonOpen]=useState(false);
   
 
@@ -17,7 +26,6 @@ function Greenmate() {
   const closeModal = () => {
     setModalOpen(false); // 모달 닫기
   };
-
 
   //   useEffect(() => {
   //   fetchData();
@@ -48,13 +56,17 @@ Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들�
         </h5>
         
         <ul className="navigation-menu">
-          <li>홈</li><br />
-          <li>게시판</li><br />
-          <li>히스토리</li><br />
-          <li>그린메이트</li><br />
+          <li><div className="click">홈</div></li><br />
+          <li><Link to="/Notice">게시판</Link></li><br />
+          <li><Link to ='/History'>히스토리</Link></li><br />
           <li><a href="#" onClick={openModal}>그린일기</a></li><br />
         </ul>
-       
+        
+        <Routes>
+          <Route path="/Notice" element={<Notice />}></Route>
+          <Route path="/History" element={<History />}></Route>
+        </Routes>
+
         <Modal isOpen={isModalOpen} onClose={closeModal} /> {/* 모달을 닫기 위한 콜백 전달 */}
       
       
@@ -85,4 +97,4 @@ Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들�
 
 
 
-export default Greenmate;
+export default Home;

@@ -61,7 +61,12 @@ li a {
   font-weight: bold;
 }
 
-.front {
+.click {
+  display: block;
+  color: #000000;
+  padding: 8px;
+  text-decoration: none;
+  font-weight: bold;
   color: #71885e;
   background-color: rgb(192, 192, 192);
 }
