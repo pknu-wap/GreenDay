@@ -160,3 +160,13 @@ h5 {
   cursor: pointer;
   color: #444444;
 }
+
+.applebox_image{
+  position:absolute;
+  border: none; 
+  background-color: transparent;
+  cursor: pointer;
+  z-index: -1;
+  width:200px;
+
+}

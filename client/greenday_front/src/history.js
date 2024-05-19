@@ -4,29 +4,10 @@ import {Routes, Route,Link, useNavigate} from "react-router-dom";
 import Modal from './modiary';
 import Home from "./Home.js";
 import Notice from "./Notice.js";
-
-
-
+import History7day from "./History7day.js";
 import { useState } from "react";
 
-
 function History() {
-  let [buttonOpen,setButtonOpen]=useState(false);
-  
-
-  const [isModalOpen, setModalOpen] = useState(false);//useState사용하여 상태 초기화 및 모달의 열림/닫힘 상태관리
-  
-  //모달열기
-  const openModal = (event) => {
-    event.preventDefault(); // 링크의 기본 동작 방지
-    setModalOpen(true); //setModalOpen(true)를 호출하여 isModalOpen 상태를 true로 설정해 모달 열기
-  };
-
-  //모달닫기함수
-  const closeModal = () => {
-    setModalOpen(false); // 모달 닫기
-  };
-
   //   useEffect(() => {
   //   fetchData();
   // }, []); 
@@ -40,7 +21,15 @@ function History() {
   //     console.error('데이터를 가져오는 중 오류 발생:', error);
   //   }
   // }
- 
+  const applebox = [
+    { id: 1, src: 'applebox.png', style: { top: '25%', left: '30%' } },
+    { id: 2, src: 'applebox.png', style: { top: '25%', left: '50%' } },
+    { id: 3, src: 'applebox.png', style: { top: '25%', left: '70%' } },
+    { id: 4, src: 'applebox.png', style: { top: '55%', left: '30%' } },
+    { id: 5, src: 'applebox.png', style: { top: '55%', left: '50%' } },
+    { id: 6, src: 'applebox.png', style: { top: '55%', left: '70%' } },
+  ];
+
   return (
     <>
     <div className="App">
@@ -60,11 +49,28 @@ function History() {
         <Routes>
           <Route path="/Home" element={<Home />}></Route>
           <Route path="/Notice" element={<Notice />}></Route>
+          <Route path="/History7day" element={<History7day />}></Route>
         </Routes>
-      
       </div>
+    <div className="Applebox">
+      {applebox.map(applebox => (
+        <button 
+        key={applebox.id}
+        className="applebox_image"
+        style={{position: 'absolute', ...applebox.style}}
+        >
+          번호순
+          <img 
+          src={applebox.src}
+          alt={'Apple ${applebox.id}'}
+          style={{ border:'none', width:'130px'}}
+          />
+        </button>
 
-      
+      ))}
+
+    </div>
+
       </div>
     </>
   );

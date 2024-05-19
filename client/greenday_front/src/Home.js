@@ -50,7 +50,6 @@ function Home() {
 
   return (
     <>
-      
     <div className="App">
       <div>
       <h1>Green Day!</h1>
@@ -81,7 +80,6 @@ Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들�
         <img src='tree.png'a href="APIExamNaverLogin.html" /></button>
 
         <div className="App">
-      {/* 사과 그림 버튼 추가 부분 */}
       {apples.map(apple => (
         <button
           key={apple.id}
