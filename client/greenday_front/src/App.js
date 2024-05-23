@@ -6,6 +6,7 @@ import Home from "./Home.js";
 import Notice from "./Notice.js";
 import History from "./History.js";
 import Xlog from "./xlog.js";
+// import HistoryList from "./routes/HistoryList";
 
 
 import { useState ,useEffect} from "react";

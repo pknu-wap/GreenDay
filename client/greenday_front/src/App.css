@@ -75,7 +75,6 @@ h1{
   position: absolute;
   font-size: 65px;
   top: -30px;
-  /* padding:30px 30px; */
   text-align: center;
   left: 700px;
 }
@@ -84,7 +83,6 @@ h4{
   position: absolute;
   font-size: 17px;
   top: 110px;
-  /* padding:30px 30px; */
   text-align: center;
   left: 550px;
 }
@@ -100,8 +98,8 @@ h5 {
   height: 1px;
   border-bottom-style: solid;
   border-bottom-color:#b5b5b5;
-  /* margin: 10px; */
 }
+
 .live_list{
   background-color: rgb(192, 192, 192);
 }
@@ -109,7 +107,7 @@ h5 {
 .tree_image{
   background-color: transparent;
   border: none; 
-  cursor: pointer; /* 커서모양변경 */
+  cursor: pointer;
 }
 
 .tree_image img{
@@ -132,6 +130,7 @@ h5 {
   height:500px;
   border-radius: 15px;
 }
+
 .login_button_content img{
   position:absolute;
   left: 1064px;
@@ -169,4 +168,56 @@ h5 {
   z-index: -1;
   width:200px;
 
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+.input{
+  position:absolute;
+  left: 275px;
+  top:40px;
+  width: 1025px;
+  padding: 60px;
+  padding-bottom: 100px;
+  border : 2px solid grey;
+  border-radius: 15px;
+  font-size: 30px;
+  font-family: "Nanum Pen Script", cursive;
+
+}
+
+.input1{
+  border-bottom: 2px solid grey;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  font-weight: bold;
+  padding-left: 15px;
+}
+.input2{
+  font-size: 25px;
+  font-family: "Nanum Pen Script", cursive;
+  padding-top: 20px;
+}
+
+.input_data_list{
+  position:absolute;
+  left:275px;
+  border-bottom : 2px solid grey;
+  border-top : 2px solid grey;
+  top: 300px;
+  width: 1150px;
+  text-align: left;
+  padding-bottom: 60px;
+}
+
+.backrock_button{
+  border: none;
+}
+
+.backrock_button img{
+  position: absolute;
+  left:1300px;
+  width:90px;
+  top:180px;
+  border:none;
 }

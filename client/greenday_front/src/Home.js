@@ -94,8 +94,6 @@ Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들�
             />
         </button>
       ))}
-
-      {/* 모달 컴포넌트 */}
       <Modal isOpen={isModalOpen} onClose={closeModal} />
     </div>
 
