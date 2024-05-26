@@ -39,15 +39,14 @@ function Home() {
   // }
   
   const apples = [
-    { id: 1, src: 'apple.png', style: { top: '31%', left: '56%' } },
-    { id: 2, src: 'apple.png', style: { top: '38%', left: '63%' } },
-    { id: 3, src: 'apple.png', style: { top: '38%', left: '49%' } },
-    { id: 4, src: 'apple.png', style: { top: '44%', left: '59%' } },
-    { id: 5, src: 'apple.png', style: { top: '51%', left: '65%' } },
-    { id: 6, src: 'apple.png', style: { top: '53%', left: '48%' } },
-    { id: 7, src: 'apple.png', style: { top: '49%', left: '54%' } },
+    { id: 1, src: 'apple.png', style: { top: '215px', left: '850px' } },
+    { id: 2, src: 'apple.png', style: { top: '285px', left: '755px' } },
+    { id: 3, src: 'apple.png', style: { top: '320px', left: '890px' } },
+    { id: 4, src: 'apple.png', style: { top: '270px', left: '975px' } },
+    { id: 5, src: 'apple.png', style: { top: '390px', left: '730px' } },
+    { id: 6, src: 'apple.png', style: { top: '350px', left: '810px' } },
+    { id: 7, src: 'apple.png', style: { top: '360px', left: '1000px' } },
   ];
-
   return (
     <>
     <div className="App">

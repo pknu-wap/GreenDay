@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -22,10 +17,6 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {
@@ -71,7 +62,7 @@ li a {
   background-color: rgb(192, 192, 192);
 }
 
-h1{
+/* .h1{
   position: absolute;
   font-size: 65px;
   top: -30px;
@@ -79,13 +70,14 @@ h1{
   left: 700px;
 }
 
-h4{
+.h4{
   position: absolute;
   font-size: 17px;
   top: 110px;
   text-align: center;
   left: 550px;
-}
+  transform: translateX(0);
+} */
 
 h5 {
   padding: 0px 8px;
@@ -142,7 +134,7 @@ h5 {
 }
 
 .apple_image{
-  position:absolute;
+  position:relative;
   border: none; 
   background-color: transparent;
   cursor: pointer;
@@ -152,22 +144,13 @@ h5 {
 .apple_image img{
   width: 50px;
   height:50px;
+  position:relative;
 }
 
 .xlog-navigation-menu{
   font-weight: bold;
   cursor: pointer;
   color: #444444;
-}
-
-.applebox_image{
-  position:absolute;
-  border: none; 
-  background-color: transparent;
-  cursor: pointer;
-  z-index: -1;
-  width:200px;
-
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
@@ -220,4 +203,26 @@ h5 {
   width:90px;
   top:180px;
   border:none;
+}
+
+.nextbutton{
+  position: absolute;
+  left:820px;
+  top:600px;
+  border:none;
+  cursor: pointer;
+}
+
+.history{
+  background-color: rgb(255, 243, 201);
+  width : 700px;
+  height: 100px;
+  text-align: center;
+  font-family: "Nanum Pen Script", cursive;
+  transform: translateX(80%);
+  top: 20px;
+}
+
+.history_total{
+  height: 100px;
 }

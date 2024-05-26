@@ -10,21 +10,46 @@ import axios from "axios"
 
 
 function History() {
+  const [diary, setDiary] = useState([]);
+  const [page, setPage] = useState(1);
+  const navigate = useNavigate();
 
-  // let[diary, setDiary] = useState(date)
-  let[diary, setDiary] = useState()
-  let navigate = useNavigate();
+  const MyComponent = () => {
+    const [data, setData] = useState(null);
+  }
 
-  // const HistoryList = () => {
-  //   const [HistoryList, setHistoryList] = useState([]);
 
-  //   const getBoardList = async () => {
-  //     const resp = (await axios.get('//localhost:8080/modiary')).data
-  //     setHistoryList(resp.date)
+  // const getDiary = async () => {
+  //   const data = await (
+  //     await axios.get("https://codingapple1.github.io/shop/data2.json")
+  //   ).data; // 2) 게시글 목록 데이터에 할당
+  //   setBoardList(data); // 3) boardList 변수에 할당
+  //   console.log(boardList);
+  //   console.log(data);
+  // };
 
-  //     const pngn = resp.pagination;
-  //     console.log(HistoryList);
-  //   }
+  // useEffect(() => {
+  //   getBoardList(); // 1) 게시글 목록 조회 함수 호출
+  // }, []);
+  
+  useEffect(()=> {
+    axios.get('').then((response) => {
+      console.log(response);
+    })
+  },[]);
+
+  useEffect(() => {
+    const fetchDiary = async () => {
+      try {
+        const response = await fetch(`https://codingapple1.github.io/shop/data2.json`);
+        const data = await response.json();
+        setDiary(data);
+      } catch (error) {
+        console.error('Error fetching diary:', error);
+      }};
+
+      fetchDiary();
+    }, [page]);
 
     return (
       <>
@@ -51,31 +76,36 @@ function History() {
         <h1>
           your history!
         </h1>
+        
+        <div>
+        <ul className="history_total">
+          {diary.map((diary, index) => (
+            <div>
+              <li className="history" key={index}>{diary.title}</li><br />
+              <li className="history" key={index}>{diary.content}</li><br />
+              <li className="history" key={index}>{diary.price}</li><br />
+            </div>
+          ))}
+        </ul>
         </div>
 
-        
+        {/* 7개씩 데이터를 뜨게 하는 코드 */}
         {/* {diary.map((a, i) => {
             return <Card diary ={i} key={i}></Card>
           })} */}
+        
+        <div className ="nextbutton">
+          <button onClick={() => setPage(page - 1)} disabled={page === 1}>
+            이전
+          </button>
+          <button onClick={() => setPage(page + 1)}>
+            다음
+          </button>
+        </div>
+    </div>
 
 
         
-  
-        {/* <button onClick={() => {
-                        axios.get('url주소적기') //데이터 요청하는 백 url넣어야함 
-                        .then((결과) => {
-                            console.log(결과.data)
-                            let copy = [...diary, ...결과.data]; //리스트 [] 벗기고 {}만 정렬해줌
-                            setDiary(copy); 
-                        })
-                        .catch (() => {
-                            console.log(결과.data)
-                        })
-                    }   
-
-                    } >
-        자료 받기 
-        </button>               */}
       </>
     );
   }
