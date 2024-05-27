@@ -50,8 +50,8 @@ public class SecurityConfig {
                 // OAuth2 로그인 설정을 구성함
                 .oauth2Login((auth) -> auth.loginPage("/greenday/login")
 
-                        // 로그인 성공 후 기본적으로 이동할 URL을 지정함
-                        .defaultSuccessUrl("/greenday")
+                        // 로그인 성공 후 리다이렉트할 URL을 localhost:3000/greenday로 변경
+                        .defaultSuccessUrl("http://localhost:3000/greenday")
                         // 로그인 실패 후 이동할 URL을 지정함
                         .failureUrl("/greenday/login")
                         // 로그인 페이지에 대한 접근은 인증 없이 허용됨
