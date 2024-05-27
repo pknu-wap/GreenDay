@@ -1,10 +1,8 @@
-package com.example.green_day_history;
-
+package com.example.green_day_diary;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class GreenDayHistoryApplicationTests {
+class GreenDaydiaryApplicationTests {
 
     @Test
     void contextLoads() {
