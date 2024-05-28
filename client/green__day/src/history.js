@@ -1,100 +1,133 @@
-import logo from './logo.svg';
-import './App.css';
-import {Routes, Route,Link, useNavigate} from "react-router-dom";
-import Modal from './modiary';
+import logo from "./logo.svg";
+import "./App.css";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import Modal from "./modiary.js";
 import Home from "./Home.js";
 import Notice from "./Notice.js";
-
-
-
-import { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function History() {
-  let [buttonOpen,setButtonOpen]=useState(false);
-  
+  const [diary, setDiary] = useState([]);
+  const [page, setPage] = useState(1);
+  const navigate = useNavigate();
 
-  const [isModalOpen, setModalOpen] = useState(false);//useState사용하여 상태 초기화 및 모달의 열림/닫힘 상태관리
-  
-  //모달열기
-  const openModal = (event) => {
-    event.preventDefault(); // 링크의 기본 동작 방지
-    setModalOpen(true); //setModalOpen(true)를 호출하여 isModalOpen 상태를 true로 설정해 모달 열기
+  const MyComponent = () => {
+    const [data, setData] = useState(null);
   };
 
-  //모달닫기함수
-  const closeModal = () => {
-    setModalOpen(false); // 모달 닫기
+  // const getDiary = async () => {
+  //   const data = await (
+  //     await axios.get("https://codingapple1.github.io/shop/data2.json")
+  //   ).data; // 2) 게시글 목록 데이터에 할당
+  //   setBoardList(data); // 3) boardList 변수에 할당
+  //   console.log(boardList);
+  //   console.log(data);
+  // };
+
+  // useEffect(() => {
+  //   getBoardList(); // 1) 게시글 목록 조회 함수 호출
+  // }, []);
+
+  useEffect(() => {
+    axios.get("").then((response) => {
+      console.log(response);
+    });
+  }, []);
+
+  useEffect(() => {
+    const fetchDiary = async () => {
+      try {
+        const response = await fetch(
+          `https://codingapple1.github.io/shop/data2.json`
+        );
+        const data = await response.json();
+        setDiary(data);
+      } catch (error) {
+        console.error("Error fetching diary:", error);
+      }
+    };
+
+    fetchDiary();
+  }, [page]);
+  let [userInformation, setUserInformation] = useState([""]);
+
+  useEffect(() => {
+    getBoardList();
+  }, []);
+
+  const getBoardList = async () => {
+    const data = await (
+      await axios.get("https://codingapple1.github.io/shop/data2.json")
+    ).data;
+    setUserInformation(data);
+    console.log(userInformation);
   };
 
-  //   useEffect(() => {
-  //   fetchData();
-  // }, []); 
-
-  // async function fetchData() {
-  //   try {
-  //     const response = await fetch('https://api.example.com/visitor');
-  //     const data = await response.json();
-  //     setVisitorData(data); // 서버에서 받아온 데이터를 상태에 저장
-  //   } catch (error) {
-  //     console.error('데이터를 가져오는 중 오류 발생:', error);
-  //   }
-  // }
- 
   return (
     <>
-      <h1>Green Day!</h1>
-      <h4>Q. 여러분은 평소에 환경을 얼마큼 생각하시나요?<br />
-Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들을 위한 공간입니다.</h4>
-  <title>네이버 로그인</title>
-    <div className="App">
-      <div>
-        <h5>
-           방문자님,<br />
-          환영합니다.<br /><br />
-          <div className="one"></div>
-        </h5>
-        
-        <ul className="navigation-menu">
-          <li><Link to="/Home">홈</Link></li><br />
-          <li><Link to="/Notice">게시판</Link></li><br />
-          <li><div className="click">히스토리</div></li><br />
-          <li><a href="#" onClick={openModal}>그린일기</a></li><br />
-        </ul>
-        
-        <Routes>
-          <Route path="/Home" element={<Home />}></Route>
-          <Route path="/Notice" element={<Notice />}></Route>
-        </Routes>
+      <div className="App">
+        <div>
+          <h5>
+            {userInformation[0].title}님,
+            <br />
+            환영합니다.
+            <br />
+            <br />
+            <div className="one"></div>
+          </h5>
 
-        <Modal isOpen={isModalOpen} onClose={closeModal} /> {/* 모달을 닫기 위한 콜백 전달 */}
-      
-      
-      </div>
+          <ul className="navigation-menu">
+            <li>
+              <Link to="/Home">홈</Link>
+            </li>
+            <br />
+            <li>
+              <Link to="/Notice">게시판</Link>
+            </li>
+            <br />
+            <li>
+              <div className="click">히스토리</div>
+            </li>
+            <br />
+          </ul>
 
-      
-      </div>
-      <button className="tree_image" onClick={()=>{setButtonOpen(true)}}>
-        <img src='tree.png'a href="APIExamNaverLogin.html" /></button>
+          <Routes>
+            <Route path="/Home" element={<Home />}></Route>
+            <Route path="/Notice" element={<Notice />}></Route>
+          </Routes>
+        </div>
 
-        {
-          buttonOpen == true ? <div>
-          <div className="login_button">
-           <img src="a.png" />
-          </div>
-      
-          <button>
-            <div className="login_button_content">
-              <img src='x.png' onClick={()=>{setButtonOpen(false)}}/>
+        <h1>your history!</h1>
+
+        <div>
+          {diary.map((diary, index) => (
+            <div className="history">
+              <div className="day">
+                {diary.id}
+                <br />
+              </div>
+              <div className="content">{diary.title}</div>
+              {/* <li key={index}>{diary.id}</li>
+              <li key={index}>{diary.title}</li><br /> */}
             </div>
-          </button>
-         </div> : null
-        }
+          ))}
+        </div>
 
+        {/* 7개씩 데이터를 뜨게 하는 코드 */}
+        {/* {diary.map((a, i) => {
+            return <Card diary ={i} key={i}></Card>
+          })} */}
+
+        <div className="nextbutton">
+          <button onClick={() => setPage(page - 1)} disabled={page === 1}>
+            이전
+          </button>
+          <button onClick={() => setPage(page + 1)}>다음</button>
+        </div>
+      </div>
     </>
   );
 }
-
-
 
 export default History;

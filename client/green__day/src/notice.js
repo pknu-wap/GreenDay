@@ -1,20 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-import {Routes, Route,Link, useNavigate} from "react-router-dom";
-import Modal from './modiary';
+import logo from "./logo.svg";
+import "./App.css";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import Modal from "./modiary.js";
 import Home from "./Home.js";
 import History from "./History.js";
 
-
-import { useState } from "react";
-
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 function Notice() {
-  let [buttonOpen,setButtonOpen]=useState(false);
-  
+  let [buttonOpen, setButtonOpen] = useState(false);
+  let [text, setText] = useState("");
+  let onChange = (event) => {
+    setText(event.target.value);
+  };
+  let [oldText, setOldText] = useState("");
 
-  const [isModalOpen, setModalOpen] = useState(false);//useState사용하여 상태 초기화 및 모달의 열림/닫힘 상태관리
-  
+  const [isModalOpen, setModalOpen] = useState(false); //useState사용하여 상태 초기화 및 모달의 열림/닫힘 상태관리
+
   //모달열기
   const openModal = (event) => {
     event.preventDefault(); // 링크의 기본 동작 방지
@@ -28,7 +31,7 @@ function Notice() {
 
   //   useEffect(() => {
   //   fetchData();
-  // }, []); 
+  // }, []);
 
   // async function fetchData() {
   //   try {
@@ -39,61 +42,93 @@ function Notice() {
   //     console.error('데이터를 가져오는 중 오류 발생:', error);
   //   }
   // }
- 
+  let [userInformation, setUserInformation] = useState([""]);
+
+  useEffect(() => {
+    getBoardList();
+  }, []);
+
+  const getBoardList = async () => {
+    const data = await (
+      await axios.get("https://codingapple1.github.io/shop/data2.json")
+    ).data;
+    setUserInformation(data);
+    console.log(userInformation);
+  };
+
   return (
-    <>
-      <h1>Green Day!</h1>
-      <h4>Q. 여러분은 평소에 환경을 얼마큼 생각하시나요?<br />
-Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들을 위한 공간입니다.</h4>
-  <title>네이버 로그인</title>
-    <div className="App">
+    <div>
       <div>
         <h5>
-           방문자님,<br />
-          환영합니다.<br /><br />
+          {userInformation[0].title}님,
+          <br />
+          환영합니다.
+          <br />
+          <br />
           <div className="one"></div>
         </h5>
-        
         <ul className="navigation-menu">
-          <li><Link to="/Home">홈</Link></li><br />
-          <li><div className="click">게시판</div></li><br />
-          <li><Link to ='/History'>히스토리</Link></li><br />
-          <li><a href="#" onClick={openModal}>그린일기</a></li><br />
+          <li>
+            <Link to="/Home">홈</Link>
+          </li>
+          <br />
+          <li>
+            <div className="click">게시판</div>
+          </li>
+          <br />
+          <li>
+            <Link to="/History">히스토리</Link>
+          </li>
+          <br />
         </ul>
-        
         <Routes>
           <Route path="/Home" element={<Home />}></Route>
           <Route path="/History" element={<History />}></Route>
         </Routes>
-
-        <Modal isOpen={isModalOpen} onClose={closeModal} /> {/* 모달을 닫기 위한 콜백 전달 */}
-      
-      
+        <Modal isOpen={isModalOpen} onClose={closeModal} />{" "}
+        {/* 모달을 닫기 위한 콜백 전달 */}
       </div>
-
-      
-      </div>
-      <button className="tree_image" onClick={()=>{setButtonOpen(true)}}>
-        <img src='tree.png'a href="APIExamNaverLogin.html" /></button>
-
-        {
-          buttonOpen == true ? <div>
-          <div className="login_button">
-           <img src="a.png" />
-          </div>
-      
-          <button>
-            <div className="login_button_content">
-              <img src='x.png' onClick={()=>{setButtonOpen(false)}}/>
+      {userInformation.map((a, i) => (
+        <div>
+          <div className="line1" />
+          <div className="userdata">
+            <div className="bar">
+              <div className="title">{a.title}</div>
+              <div className="writetime">Price:{a.price}</div>
             </div>
-          </button>
-         </div> : null
-        }
+            <div className="noticeContent">{a.content}</div>
+            <br />
+            <br />
+            <br />
+          </div>
+        </div>
+      ))}
+      <div className="input_data_list">
+        <div className="input1">{oldText}</div>
 
-    </>
+        <input
+          className="input"
+          style={{ whiteSpace: "pre-wrap" }}
+          onChange={onChange}
+          value={text}
+        ></input>
+        <div>
+          <button
+            className="backrock_button"
+            style={{ whiteSpace: "pre-wrap" }}
+          >
+            <img
+              src="backrock_button.png"
+              onClick={() => {
+                setOldText({ text });
+                setOldText(text);
+              }}
+            />
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
-
-
 
 export default Notice;

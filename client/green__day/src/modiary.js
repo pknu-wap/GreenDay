@@ -1,43 +1,38 @@
+import { useNavigate, Route, Routes} from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import './modiary.css'; 
-// import axios from 'axios';
+import axios from 'axios';
 
-// function SendDiaryEntry() {
-//   // 초기 상태 설정
-//   const [diaryEntry, setDiaryEntry] = useState({
-//     diary_content: ' ', // 초기값은 빈 문자열
-//     login_id: ' ', // 초기값은 빈 문자열
-//   });
 
-//   // POST 요청을 보내는 함수
-//   const sendDiaryEntry = () => {
-//     fetch('/wirte_diary', { // 요청을 보낼 백엔드 엔드포인트
-//       method: 'POST', // HTTP 메소드는 POST
-//       headers: {
-//         'Content-Type': 'application/json', // 요청 본문이 JSON 형식
-//       },
-//       body: JSON.stringify(diaryEntry), // 본문에 전송할 데이터
-//     })
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error('Network response was not ok');
-//         }
-//         return response.json(); // 응답을 JSON으로 파싱
-//       })
-//       .then((data) => console.log('Received response:', data))
-//       .catch((error) => console.error('Error sending data:', error)); // 에러 처리
-//   };
-  
-//   }
 const Modal = ({ isOpen, onClose, onSubmit }) => {
     const [text, setText] = useState(''); //text가 값 추적하고 setText함수 통해 상태
     const [message, setMessage] = useState('');
+    const [placeholder, setPlaceholder] = useState('');
+    const [title, setTitle] = useState('오늘의 그린일기');
+    const navigate = useNavigate();
 
-    const handleInputChange = (event) => { //입력필드의 값이 변경될때 호출되는 함수
-        setText(event.target.value); //setText통해 text에 저장하는데 event를 인자로 받아event.target.value를 통해 입력 필드의 현재값을 받아 setText를 사용하여 업데이트
+const proverbs = [
+    "일회용품", "재활용", "물", "전기", "배달", "걷기", "카페-텀블러", "분리수거", "제로웨이스트쇼핑", "친환경", 
+    "멸종위기", "에코백", "설거지", "자전거", "대중교통", "미세먼지", "식물키우기", "손빨래", 
+    "플로깅", "봉사활동", "포장", "헌옷수거"
+    ];
+
+    const handleInputChange = (event) => { 
+        setText(event.target.value); 
     };
 
-    const handleSubmit = () => { //입력 필드에서 입력이 변경될 때마다 호출되며, 입력된 값을 setText를 통해 상태 text에 저장
+    const getRandomIndex = (length) => {
+        return Math.floor(Math.random() * length)
+    };
+
+    useEffect(() => {
+        if (isOpen) {
+        setPlaceholder(proverbs[getRandomIndex(proverbs.length)]);
+        setTitle(proverbs[getRandomIndex(proverbs.length)]);
+        }
+    }, [isOpen]);
+
+    const handleSubmit = async () => { //입력 필드에서 입력이 변경될 때마다 호출되며, 입력된 값을 setText를 통해 상태 text에 저장
         if (text.trim() === '') { //입력필드가 비어있는지 검사, 공백이나 빈칸 제출 못하게함
             setMessage('입력된 내용이 없습니다.');
             return;
@@ -46,37 +41,34 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
         onSubmit(text); // 글 등록 버튼 클릭 시 동작
         setText(''); // 텍스트 입력칸을 초기화=> 다음 입력위해 빈필드갖게함
         setMessage('저장됐습니다.');
-
         onClose(); //저장하면 하로 닫기게함 지체ㄴㄴ
     };
 
     if (!isOpen) {
         return null; // 모달이 닫혀 있을 때는 렌더링하지 않음
     }
-
-    // const handleOverlayClick = (event) => { // 모달 외부를 클릭했을 때 닫기
-    //     if (event.target === event.currentTarget) {
-    //         onClose(); //이걸 호출해서 닫음 
-    //     }
-    // };
     
     return (
-        // <div className="modal-overlay" onClick={handleOverlayClick}>
             <div className="modal">
                     <button className="Close-button" onClick={onClose}>close</button>  /*모달닫는버튼*/
-                    <h3>오늘의 그린일기</h3>
+                    <h3>{title}</h3>
                     <div style={{ display: isOpen ? 'block' : 'none' }}> //isOpen이'block'이면 요소가 보이고, 'none'이면 요소가 보이지 않음
-                    <textarea
+                    <textarea 
                         value={text} //입력된 값을 text와 연결
                         onChange={handleInputChange} // 입력된 텍스트 변경 시 상태 업데이트
                         placeholder="오늘의 일기를 작성하세요"
                     ></textarea>
                     </div>
-                    <button className="Save-button" onSubmit={handleSubmit} onClick={onClose} >
-                        <img src='apple.png'/></button>
-                        {/* {message && <p>{message}</p>} */}
+                    
+                    {/* axios.post('/wirte_diary', {"diary_content":"오늘의 일기 내용","login_id": "사용자 ID"}) */}
+
+                    {/* <button className="Save-button" onSubmit={handleSubmit} onClick={onClose} > */}
+                    {/* onSubmit 이벤트는 form 요소에서 사용되어야 하므로, button 요소에서는 제거 */}
+                    <button className="Save-button" onClick={handleSubmit} >
+                   
+                        <img src='apple.png' alt="저장됐습니다."/></button>
+                        {message && <p>{message}</p>}
              </div>
-        // </div>
     );
 };
 
