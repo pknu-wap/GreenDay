@@ -1,0 +1,74 @@
+.modal {
+    position:fixed;
+    transform: translate(75%, -3%); 
+
+    top: 70px;
+    background-color: white; 
+    width: 300px;
+    height: 210px;
+    padding: 200px; 
+    border-radius: 10px; /* 모서리둥글게 */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* 그림자효과 */
+    max-width: 500px; /* 최대너비제한 */
+    vertical-align: top;
+    text-align: center; 
+    border: 1px;
+    z-index:1;
+}
+
+.Close-button {
+    background-color: #f44336; 
+    color: white; 
+    position:absolute;
+    left: 610px;
+    top: 25px;
+    transform: translateX(-50%);
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+
+.Save-button {
+    background-color: transparent; 
+    color: white; 
+    position:absolute;
+    right: 0px;
+    bottom: 20px;
+    padding: 10px;
+    transform: translateX(-50%);
+    border: none; 
+    cursor: pointer; /* 커서모양변경 */
+}
+.Save-button img {
+    width:60px;
+    height:60px;
+}
+
+.modal h3 {
+    color: rgb(63, 82, 9);
+    padding: 10px;
+    width: 570px;
+    border: 3px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    position: absolute; 
+    top: 60px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+}
+
+.modal textarea {
+    color: rgb(82, 82, 82);
+    padding: 10px;
+    width: 570px;
+    height: 300px;
+    border: 3px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    position: absolute; 
+    top: 160px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    resize: none;
+}

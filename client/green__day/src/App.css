@@ -1,0 +1,315 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+body {
+  background-image: linear-gradient(to right, white 250px,#d7eec4 250px);
+  width: 150px;
+  height: 100%;
+  border-radius: 20px;
+  margin: 20px;
+}
+
+ul {
+  position: absolute;
+  width: 190px;
+  height: 100%;
+  list-style-type: none;
+  margin: 5;
+  padding: 0;
+  text-align: center;
+}
+
+li a {
+  display: block;
+  color: #000000;
+  padding: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.click {
+  display: block;
+  color: #000000;
+  padding: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #71885e;
+  background-color: rgb(192, 192, 192);
+}
+
+h1{
+  position: absolute;
+  font-size: 65px;
+  top: -30px;
+  text-align: center;
+  left: 700px;
+  
+}
+
+@media (max-width: 600px) {
+  h4 {
+    left: 50%; /* 중앙 정렬 유지 */
+    transform: translateX(-50%); /* 중앙 정렬 유지 */
+  }
+}
+
+h4{
+  position: absolute;
+  font-size: 17px;
+  top: 110px;
+  text-align: center;
+  left: 550px;
+}
+
+h5 {
+  position: relative;
+  padding: 0px 8px;
+  font-size: 120%;
+  text-align: center;
+  left: 20px;
+}
+
+.one {
+  position: relative;
+  width : 180px;
+  height: 1px;
+  border-bottom-style: solid;
+  border-bottom-color:#b5b5b5;
+  left: -20px;
+}
+
+.live_list{
+  background-color: rgb(192, 192, 192);
+}
+
+.tree_image{
+  background-color: transparent;
+  border: none; 
+  cursor: pointer;
+}
+
+.tree_image img{
+  position: absolute;
+  left: 700px;
+  top: 183px;
+  width: 400px;
+  height: 530px;
+  z-index: -1;
+}
+
+
+.login_button img{
+  position:absolute;
+  left: 600px;
+  top: 105px;
+  background-color: transparent;
+  border: none; 
+  width: 500px;
+  height:500px;
+  border-radius: 15px;
+}
+
+.login_button_content img{
+  position:absolute;
+  left: 1064px;
+  top: 111px;
+  background-color: transparent;
+  border: none; 
+  width: 30px;
+  height:30px;
+}
+
+.apple_image{
+  position:absolute;
+  border: none; 
+  background-color: transparent;
+  cursor: pointer;
+  z-index: -1;
+}
+
+.apple_image img{
+  width: 50px;
+  height:50px;
+}
+
+.xlog-navigation-menu{
+  font-weight: bold;
+  cursor: pointer;
+  color: #444444;
+}
+
+.applebox_image{
+  position:absolute;
+  border: none; 
+  background-color: transparent;
+  cursor: pointer;
+  z-index: -1;
+  width:200px;
+
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+.input{
+  position:absolute;
+  left: 275px;
+  top:40px;
+  width: 1025px;
+  padding: 60px;
+  padding-bottom: 100px;
+  border : 2px solid grey;
+  border-radius: 15px;
+  font-size: 30px;
+  font-family: "Nanum Pen Script", cursive;
+
+}
+
+
+.userdata {
+  position:relative;
+  top:100px;
+  left:15px;
+  border: black;
+  background-color: white;
+  border-top: 2px solid grey;
+  border-bottom: 2px solid grey;
+  padding-left: 15px;
+  width: 1090px;
+  margin-left: 260px;
+  text-align: left;
+  height:120px;
+}
+
+.input1{
+  position: absolute;
+  font-size: 25px;
+  font-family: "Nanum Pen Script", cursive;
+  padding-top: 20px;
+
+}
+.bar{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /* display:inline-block; */
+  /* float: right; */
+  border-bottom: 2px solid grey;
+  width:1070px;
+
+}
+
+.title {
+  display:inline-block;
+  color:#282c34;
+  font-weight: bold;
+}
+
+.writetime{
+  display:inline-block;
+  /* text-align: right;  */
+  float: right;
+  color:gray;
+
+}
+
+.line1{
+  width: 1090px;
+  display: flex;
+  flex-direction: column;
+  align-items:right;
+  padding-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 250px;
+}
+
+.noticeContent{
+  position: absolute;
+  font-size: 25px;
+  font-family: "Nanum Pen Script", cursive;
+  padding-top: 20px;
+  font-weight: lighter;
+  display:inline-block;
+}
+
+.backrock_button{
+  border: none;
+}
+
+.backrock_button img{
+  position: absolute;
+  left:1300px;
+  width:90px;
+  top:180px;
+  border:none;
+}
+.history{
+  position: relative;
+  width : 1000px;
+  height: 110px;
+  left: 350px;
+  /* transform: translateX(80%); */
+  top: -30px;
+}
+
+.day{
+  text-align: left;
+  height: 40px;
+  background-color: rgb(255, 243, 201);
+  /* border-radius: ; */
+}
+
+.content{
+  height: 50px;
+  background-color: rgb(255, 243, 201);
+  text-align: center;
+  font-family: "Nanum Pen Script", cursive;
+}
+.nextbutton{
+  position: absolute;
+  left:820px;
+  top:640px;
+  border:none;
+  cursor: pointer;
+}
+
+#naverIdLogin{
+  position:absolute;
+  z-index: 1;
+  left:40px;
+  top:10px;
+}
