@@ -72,15 +72,6 @@ function Xlog({ setGetToken, setUserInfo }) {
     loadNaverSDK();
     userAccessToken();
   }, []);
-  const apples = [
-    { id: 1, src: "apple.png", style: { top: "215px", left: "850px" } },
-    { id: 2, src: "apple.png", style: { top: "285px", left: "755px" } },
-    { id: 3, src: "apple.png", style: { top: "320px", left: "890px" } },
-    { id: 4, src: "apple.png", style: { top: "270px", left: "975px" } },
-    { id: 5, src: "apple.png", style: { top: "390px", left: "730px" } },
-    { id: 6, src: "apple.png", style: { top: "350px", left: "810px" } },
-    { id: 7, src: "apple.png", style: { top: "360px", left: "1000px" } },
-  ];
 
   return (
     <>
@@ -104,17 +95,24 @@ function Xlog({ setGetToken, setUserInfo }) {
 
           <ul className="xlog-navigation-menu">
             <li>
-              <div onClick={() => alert("로그인을 해주세요")}> 홈 </div>
+              <div onClick={() => alert("나무를 눌러서 로그인을 해주세요")}>
+                {" "}
+                홈{" "}
+              </div>
             </li>
             <br />
             <br />
             <li>
-              <div onClick={() => alert("로그인을 해주세요")}>게시판</div>
+              <div onClick={() => alert("나무를 눌러서 로그인을 해주세요")}>
+                게시판
+              </div>
             </li>
             <br />
             <br />
             <li>
-              <div onClick={() => alert("로그인을 해주세요")}>히스토리</div>
+              <div onClick={() => alert("나무를 눌러서 로그인을 해주세요")}>
+                히스토리
+              </div>
             </li>
             <br />
             <br />
@@ -160,24 +158,6 @@ function Xlog({ setGetToken, setUserInfo }) {
       {/* 구현할 위치에 아래와 같이 코드를 입력해주어야 한다. */}
       {/* 태그에 id="naverIdLogin"를 해주지 않으면 오류가 발생한다! */}
       <div id="naverIdLogin" />
-      {apples.map((apple) => (
-        <button
-          key={apple.id}
-          className="apple_image"
-          style={{ position: "absolute", ...apple.style }}
-        >
-          <img
-            src={apple.src}
-            alt={`Apple ${apple.id}`}
-            style={{
-              border: "none",
-              backgroundcolor: "transparent",
-              width: "56px",
-              height: "56px",
-            }}
-          />
-        </button>
-      ))}
     </>
   );
 }
