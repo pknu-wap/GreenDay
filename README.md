@@ -1,7 +1,7 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=0:90EE90,100:32CD32&section=header&height=250&text=WEB_9%20Github&fontSize=50&fontColor=228B22)
 <div align="center">
 <h3>:sparkles: Green Day!</h3>
-<h4> :green_heart: Green Day는 환경에 관심 있는 모든 사람들에게 제공 되는 공간입니다 :green_heart: </h4>
+<h4> :green_heart: Green Day는 제로웨이스트 시도, 관심 있는 모든 사람들에게 제공 되는 공간입니다 :green_heart: </h4>
 </div>
 
 <div align="center">
