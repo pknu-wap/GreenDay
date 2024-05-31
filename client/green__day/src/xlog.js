@@ -1,18 +1,17 @@
-import logo from "./logo.svg";
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./App.css";
-import Modal from "./modiary";
 import Notice from "./Notice.js";
 import History from "./History.js";
 import Home from "./Home.js";
 
 function Xlog({ setGetToken, setUserInfo }) {
   const [buttonOpen, setButtonOpen] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(false); // useState 사용하여 상태 초기화 및 모달의 열림/닫힘 상태 관리
+  const [isModalOpen, setModalOpen] = useState(false);
 
-  const NAVER_CLIENT_ID = "o72MtePRXsbwlztUtJoj"; // 발급 받은 Client ID 입력
-  const NAVER_CALLBACK_URL = "http://localhost:8080/login/oauth2/code/naver";
+  const NAVER_CLIENT_ID = "o72MtePRXsbwlztUtJoj";
+  const NAVER_CALLBACK_URL = "http://localhost:8080/oauth2/authorization/naver";
 
   const initializeNaverLogin = () => {
     if (!window.naver) {
@@ -42,7 +41,6 @@ function Xlog({ setGetToken, setUserInfo }) {
 
   const handleTreeClick = () => {
     initializeNaverLogin();
-    // 로그인 버튼을 클릭하도록 트리거
     document.getElementById("naverIdLogin").firstChild.click();
   };
 
@@ -58,6 +56,18 @@ function Xlog({ setGetToken, setUserInfo }) {
     console.log(token);
     localStorage.setItem("access_token", token);
     setGetToken(token);
+    sendTokenToBackend(token);
+  };
+
+  const sendTokenToBackend = (token) => {
+    axios
+      .post("http://localhost:3000/auth/naver", { token })
+      .then((response) => {
+        console.log("Token sent to backend successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error sending token to backend:", error);
+      });
   };
 
   useEffect(() => {
@@ -155,8 +165,6 @@ function Xlog({ setGetToken, setUserInfo }) {
         </div>
       ) : null}
 
-      {/* 구현할 위치에 아래와 같이 코드를 입력해주어야 한다. */}
-      {/* 태그에 id="naverIdLogin"를 해주지 않으면 오류가 발생한다! */}
       <div id="naverIdLogin" />
     </>
   );

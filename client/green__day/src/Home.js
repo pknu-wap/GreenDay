@@ -38,20 +38,6 @@ function Home() {
     console.log(userInformation);
   };
 
-  //   useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  // async function fetchData() {
-  //   try {
-  //     const response = await fetch('https://api.example.com/visitor');
-  //     const data = await response.json();
-  //     setVisitorData(data); // 서버에서 받아온 데이터를 상태에 저장
-  //   } catch (error) {
-  //     console.error('데이터를 가져오는 중 오류 발생:', error);
-  //   }
-  // }
-
   const apples = [
     { id: 1, src: "apple.png", style: { top: "215px", left: "850px" } },
     { id: 2, src: "apple.png", style: { top: "285px", left: "755px" } },
@@ -74,7 +60,7 @@ function Home() {
             공간입니다.
           </h4>
           <h5>
-            {userInformation[0].title}님,
+            {userInformation.name}님,
             <br />
             환영합니다.
             <br />

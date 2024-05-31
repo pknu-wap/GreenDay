@@ -9,7 +9,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 function Notice() {
-  let [buttonOpen, setButtonOpen] = useState(false);
   let [text, setText] = useState("");
   const [length, setLength] = useState(0);
   let onChange = (event) => {
@@ -32,19 +31,6 @@ function Notice() {
     setModalOpen(false); // 모달 닫기
   };
 
-  //   useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  // async function fetchData() {
-  //   try {
-  //     const response = await fetch('https://api.example.com/visitor');
-  //     const data = await response.json();
-  //     setVisitorData(data); // 서버에서 받아온 데이터를 상태에 저장
-  //   } catch (error) {
-  //     console.error('데이터를 가져오는 중 오류 발생:', error);
-  //   }
-  // }
   let [userInformation, setUserInformation] = useState([""]);
 
   useEffect(() => {
