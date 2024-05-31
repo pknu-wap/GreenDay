@@ -44,6 +44,34 @@ function Notice() {
     setUserInformation(data);
     console.log(userInformation);
   };
+  const navigate = useNavigate();
+
+  const [curPage, setCurPage] = useState(1);
+  const [lastPage, setLastPage] = useState(1);
+
+  useEffect(() => {
+    getBoardList();
+  }, [curPage]); // 현재 페이지가 변경될 때마다 목록을 다시 불러옴
+
+  // 페이지네이션 정보 설정
+  /*   const totalPageCnt = Math.ceil(data.length / 10); // 한 페이지에 보여줄 항목 수를 10으로 가정
+  setLastPage(totalPageCnt); */
+
+  const handleClickPrev = () => {
+    if (curPage > 1) {
+      setCurPage(curPage - 1);
+    }
+  };
+
+  const handleClickNext = () => {
+    if (curPage < lastPage) {
+      setCurPage(curPage + 1);
+    }
+  };
+
+  const handlePageClick = (page) => {
+    setCurPage(page);
+  };
 
   return (
     <div>
@@ -117,6 +145,30 @@ function Notice() {
             />
           </button>
         </div>
+      </div>
+      {userInformation.slice((curPage - 1) * 10, curPage * 10).map((a, i) => (
+        <div key={i}>
+          <div className="line1" />
+          <div className="userdata">
+            <div className="bar">
+              <div className="title">{a.title}</div>
+              <div className="writetime">Price:{a.price}</div>
+            </div>
+            <div className="noticeContent">{a.content}</div>
+            <br />
+            <br />
+            <br />
+          </div>
+        </div>
+      ))}
+      <div className="pagination">
+        <button onClick={handleClickPrev}>&lt;</button>
+        {Array.from({ length: lastPage }, (_, i) => (
+          <button key={i} onClick={() => handlePageClick(i + 1)}>
+            {i + 1}
+          </button>
+        ))}
+        <button onClick={handleClickNext}>&gt;</button>
       </div>
     </div>
   );

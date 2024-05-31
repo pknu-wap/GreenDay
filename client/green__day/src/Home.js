@@ -1,7 +1,13 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Modal from "./modiary";
+import {
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import Notice from "./Notice.js";
 import History from "./History.js";
 import Xlog from "./xlog.js";
@@ -9,6 +15,34 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function Home() {
+  const location = useLocation();
+  const [accessToken, setAccessToken] = useState("");
+  const handleTokenReceived = () => {
+    // URL에서 토큰 추출
+    const hash = location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    const accessToken = params.get("access_token");
+
+    // 토큰을 상태에 저장
+    if (accessToken) {
+      setAccessToken(accessToken);
+      console.log(accessToken);
+
+      // 백엔드로 토큰을 보낼 수 있음
+      sendTokenToBackend(accessToken);
+    }
+  };
+  const sendTokenToBackend = (token) => {
+    axios
+      .post("http://localhost:8080/api/user-info", { token })
+      .then((response) => {
+        console.log("Token sent to backend successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error sending token to backend:", error);
+      });
+  };
+
   // let [buttonOpen,setButtonOpen]=useState(false);
   const [isModalOpen, setModalOpen] = useState(false); //useState사용하여 상태 초기화 및 모달의 열림/닫힘 상태관리
   const [buttonOpen, setButtonOpen] = useState(false);
@@ -28,6 +62,7 @@ function Home() {
 
   useEffect(() => {
     getBoardList();
+    handleTokenReceived();
   }, []);
 
   const getBoardList = async () => {
@@ -95,7 +130,7 @@ function Home() {
           setButtonOpen(true);
         }}
       >
-        <img src="tree.png" a href="APIExamNaverLogin.html" />
+        <img src="tree.png" />
       </button>
 
       <div className="App">

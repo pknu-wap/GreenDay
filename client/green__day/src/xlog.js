@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import axios from "axios";
 import "./App.css";
 import Notice from "./Notice.js";
@@ -9,9 +15,11 @@ import Home from "./Home.js";
 function Xlog({ setGetToken, setUserInfo }) {
   const [buttonOpen, setButtonOpen] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const NAVER_CLIENT_ID = "o72MtePRXsbwlztUtJoj";
-  const NAVER_CALLBACK_URL = "http://localhost:8080/oauth2/authorization/naver";
+  const NAVER_CALLBACK_URL = "http://localhost:3000/Home";
 
   const initializeNaverLogin = () => {
     if (!window.naver) {
@@ -46,7 +54,9 @@ function Xlog({ setGetToken, setUserInfo }) {
 
   const userAccessToken = () => {
     const url = new URL(window.location.href);
-    const token = url.searchParams.get("access_token");
+    const hash = url.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    const token = params.get("access_token");
     if (token) {
       getToken(token);
     }
@@ -57,11 +67,27 @@ function Xlog({ setGetToken, setUserInfo }) {
     localStorage.setItem("access_token", token);
     setGetToken(token);
     sendTokenToBackend(token);
+    navigate("/home"); // 로그인 성공 후 홈으로 리다이렉트
   };
+  const [accessToken, setAccessToken] = useState("");
+  const handleTokenReceived = () => {
+    // URL에서 토큰 추출
+    const hash = location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    const accessToken = params.get("access_token");
 
+    // 토큰을 상태에 저장
+    if (accessToken) {
+      setAccessToken(accessToken);
+      console.log(accessToken);
+
+      // 백엔드로 토큰을 보낼 수 있음
+      sendTokenToBackend(accessToken);
+    }
+  };
   const sendTokenToBackend = (token) => {
     axios
-      .post("http://localhost:3000/auth/naver", { token })
+      .post("http://localhost:8080/api/user-info", { token })
       .then((response) => {
         console.log("Token sent to backend successfully:", response.data);
       })
@@ -81,7 +107,8 @@ function Xlog({ setGetToken, setUserInfo }) {
 
     loadNaverSDK();
     userAccessToken();
-  }, []);
+    handleTokenReceived();
+  }, [location]);
 
   return (
     <>
@@ -134,10 +161,10 @@ function Xlog({ setGetToken, setUserInfo }) {
           </ul>
 
           <Routes>
-            <Route path="/Home" element={<Home />}></Route>
-            <Route path="/Notice" element={<Notice />}></Route>
-            <Route path="/History" element={<History />}></Route>
-            <Route path="/Xlog" element={<Xlog />}></Route>
+            <Route path="/home" element={<Home />} />
+            <Route path="/Notice" element={<Notice />} />
+            <Route path="/History" element={<History />} />
+            <Route path="/Xlog" element={<Xlog />} />
           </Routes>
         </div>
       </div>
@@ -146,7 +173,7 @@ function Xlog({ setGetToken, setUserInfo }) {
         <img src="tree.png" alt="tree" />
       </button>
 
-      {buttonOpen == true ? (
+      {buttonOpen === true ? (
         <div>
           <div className="login_button">
             <img src="a.png" />
@@ -169,4 +196,5 @@ function Xlog({ setGetToken, setUserInfo }) {
     </>
   );
 }
+
 export default Xlog;
