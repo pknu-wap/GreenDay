@@ -4,47 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f14a2e5d-f546-4b75-b685-6517d671c7e8" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/config/CustomGrantedAuthority.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/LoginApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/controller/OauthLoginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/controller/SecurityLoginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/Member.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/MemberRole.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/dto/CustomOauth2UserDetails.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/dto/CustomSecurityUserDetails.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/dto/JoinRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/dto/LoginRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/dto/NaverUserDetails.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/dto/OAuth2UserInfo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/repository/MemberRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/service/CustomOauth2UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/service/CustomUserDetailsService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/service/MemberService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/test/java/practice/login/LoginApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DiaryConfig/DiaryConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/config/DiaryConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/GreenDaydiaryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenDayApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/controller/Diarycontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/controller/Diarycontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/domain/entity/DiaryEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domain/entity/DiaryEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/dro/DiaryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/dto/DiaryDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/repository/Diaryrepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/repository/Diaryrepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/service/Diaryservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/service/Diaryservice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-green_day_history.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-green_day.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/green_day_diary/GreenDaydiaryApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/GreenDayApplicationTests.java" afterDir="false" />
-    </list>
+    <list default="true" id="f14a2e5d-f546-4b75-b685-6517d671c7e8" name="변경" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -116,9 +76,9 @@
     "Spring Boot.GreenDayApplication.executor": "Run",
     "Spring Boot.GreenDaydiaryApplication.executor": "Run",
     "Spring Boot.GreendayDiaryApplication.executor": "Run",
-    "git-widget-placeholder": "feature/#24/naver__social__login__remerge",
+    "git-widget-placeholder": "feature/#30/spring__security__problem",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/janghyewon/Desktop/greenday_login",
+    "last_opened_file_path": "C:/Users/82102/OneDrive/바탕 화면/GreenDay/server",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -219,8 +179,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
       </set>
     </attachedChunks>
   </component>
@@ -256,6 +215,7 @@
       <workItem from="1716868823459" duration="558000" />
       <workItem from="1716870175940" duration="5832000" />
       <workItem from="1716877045671" duration="8799000" />
+      <workItem from="1717169793362" duration="16000" />
     </task>
     <servers />
   </component>

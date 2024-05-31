@@ -1,5 +1,4 @@
 package com.example.dto;
-
 import com.example.domain.entity.Member;
 import com.example.domain.entity.MemberRole;
 import jakarta.validation.constraints.NotBlank;

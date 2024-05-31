@@ -29,6 +29,7 @@ public class SecurityConfig {
                     c.configurationSource(source);
                 })
                 .authorizeRequests(authorize -> authorize
+                        .requestMatchers("/diary/write_diary").authenticated() //일기 페이지 엔드포인트 추가
                         .requestMatchers("/oauth-login/admin").hasRole(MemberRole.ADMIN.name())
                         .requestMatchers("/oauth-login/info").authenticated()
                         .anyRequest().permitAll()
