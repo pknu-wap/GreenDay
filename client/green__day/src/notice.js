@@ -9,10 +9,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 function Notice() {
-  let [buttonOpen, setButtonOpen] = useState(false);
   let [text, setText] = useState("");
+  const [length, setLength] = useState(0);
   let onChange = (event) => {
-    setText(event.target.value);
+    const value = event.target.value;
+    setText(value);
+    setLength(value.length);
   };
   let [oldText, setOldText] = useState("");
 
@@ -29,19 +31,6 @@ function Notice() {
     setModalOpen(false); // 모달 닫기
   };
 
-  //   useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  // async function fetchData() {
-  //   try {
-  //     const response = await fetch('https://api.example.com/visitor');
-  //     const data = await response.json();
-  //     setVisitorData(data); // 서버에서 받아온 데이터를 상태에 저장
-  //   } catch (error) {
-  //     console.error('데이터를 가져오는 중 오류 발생:', error);
-  //   }
-  // }
   let [userInformation, setUserInformation] = useState([""]);
 
   useEffect(() => {
@@ -60,7 +49,7 @@ function Notice() {
     <div>
       <div>
         <h5>
-          {userInformation[0].title}님,
+          {userInformation.name}님,
           <br />
           환영합니다.
           <br />
@@ -105,13 +94,15 @@ function Notice() {
       ))}
       <div className="input_data_list">
         <div className="input1">{oldText}</div>
-
-        <input
+        <textarea
           className="input"
+          placeholder="내용을 입력하세요"
           style={{ whiteSpace: "pre-wrap" }}
           onChange={onChange}
           value={text}
-        ></input>
+          maxLength={199}
+        ></textarea>
+        <div className="inputLength">{length}/200자</div>
         <div>
           <button
             className="backrock_button"

@@ -5,17 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f14a2e5d-f546-4b75-b685-6517d671c7e8" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/controller/CustomAuthenticationHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/controller/UserInfoResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/service/CookieUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/green__day/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/green__day/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/green__day/src/notice.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/green__day/src/notice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/green__day/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../client/green__day/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/controller/OauthLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/controller/OauthLoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domain/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domain/entity/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/repository/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/repository/MemberRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/service/MemberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +81,7 @@
     &quot;Spring Boot.GreenDayApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.GreenDaydiaryApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.GreendayDiaryApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/#24/naver__social__login__remerge&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/janghyewon/spring-oauth2-social-login&quot;,
@@ -232,6 +225,8 @@
       <workItem from="1717160074350" duration="12772000" />
       <workItem from="1717207256596" duration="18079000" />
       <workItem from="1717239166988" duration="4588000" />
+      <workItem from="1717252923596" duration="332000" />
+      <workItem from="1717255279076" duration="342000" />
     </task>
     <servers />
   </component>
@@ -260,6 +255,11 @@
           <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/6.1.5/360ba172a91847200a22dd8ed7c611c72c5d3f9/spring-web-6.1.5-sources.jar!/org/springframework/web/client/RestTemplate.java</url>
           <line>1031</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/controller/OauthLoginController.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
