@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.util.List;
 
@@ -18,16 +19,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.cors(c -> {
-                    CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(List.of("http://localhost:3000"));
-                    config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-                    config.setAllowedHeaders(List.of("*"));
-                    config.setAllowCredentials(true);
-                    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-                    source.registerCorsConfiguration("/**", config);
-                    c.configurationSource(source);
-                })
+        http.cors().configurationSource(corsConfigurationSource())
+                .and()
                 .authorizeRequests(authorize -> authorize
                         .requestMatchers("/oauth-login/admin").hasRole(MemberRole.ADMIN.name())
                         .requestMatchers("/oauth-login/info").authenticated()
@@ -35,15 +28,28 @@ public class SecurityConfig {
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/greenday/login")
-                        .defaultSuccessUrl("/greenday")
-                        .failureUrl("/greenday/login")
+                        .defaultSuccessUrl("/Home")
+                        .failureUrl("/Xlog")
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/oauth-login/logout")
                 )
-                .csrf().disable(); // csrf() 메서드를 호출하여 CSRF 보호를 비활성화합니다.
+                .csrf().disable();
         return http.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Bean

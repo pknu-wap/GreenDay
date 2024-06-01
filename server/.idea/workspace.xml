@@ -5,45 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f14a2e5d-f546-4b75-b685-6517d671c7e8" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/config/CustomGrantedAuthority.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/controller/CustomAuthenticationHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/controller/UserInfoResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/service/CookieUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/LoginApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/controller/OauthLoginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/controller/SecurityLoginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/Member.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/MemberRole.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/dto/CustomOauth2UserDetails.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/dto/CustomSecurityUserDetails.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/dto/JoinRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/dto/LoginRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/dto/NaverUserDetails.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/domain/dto/OAuth2UserInfo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/repository/MemberRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/service/CustomOauth2UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/service/CustomUserDetailsService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/java/practice/login/service/MemberService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/greenday_login/src/test/java/practice/login/LoginApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DiaryConfig/DiaryConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/config/DiaryConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/GreenDaydiaryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/GreenDayApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/controller/Diarycontroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/controller/Diarycontroller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/domain/entity/DiaryEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domain/entity/DiaryEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/dro/DiaryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/dto/DiaryDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/repository/Diaryrepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/repository/Diaryrepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/green_day_diary/service/Diaryservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/service/Diaryservice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-green_day_history.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-green_day.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/controller/OauthLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/controller/OauthLoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/domain/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/domain/entity/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/repository/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/repository/MemberRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/service/MemberService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/green_day_diary/GreenDaydiaryApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/GreenDayApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +43,7 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="green_day_history" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
@@ -102,40 +74,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build server.executor": "Run",
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.server [dependencies].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.GreenDayApplication.executor": "Run",
-    "Spring Boot.GreenDaydiaryApplication.executor": "Run",
-    "Spring Boot.GreendayDiaryApplication.executor": "Run",
-    "git-widget-placeholder": "feature/#24/naver__social__login__remerge",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/janghyewon/Desktop/greenday_login",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build server.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.server [dependencies].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.GreenDayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.GreenDaydiaryApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.GreendayDiaryApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/#24/naver__social__login__remerge&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/janghyewon/spring-oauth2-social-login&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Spring Boot.GreenDayApplication">
     <configuration name="server [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -256,11 +229,25 @@
       <workItem from="1716868823459" duration="558000" />
       <workItem from="1716870175940" duration="5832000" />
       <workItem from="1716877045671" duration="8799000" />
+      <workItem from="1717160074350" duration="12772000" />
+      <workItem from="1717207256596" duration="18079000" />
+      <workItem from="1717239166988" duration="4588000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -269,6 +256,11 @@
           <properties class="org.springframework.boot.context.config.InvalidConfigDataPropertyException" package="org.springframework.boot.context.config" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/6.1.5/360ba172a91847200a22dd8ed7c611c72c5d3f9/spring-web-6.1.5-sources.jar!/org/springframework/web/client/RestTemplate.java</url>
+          <line>1031</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

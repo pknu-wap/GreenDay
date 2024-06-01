@@ -10,4 +10,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     boolean existsByLoginId(String loginId);
     // 주어진 로그인 ID에 해당하는 회원을 찾는 메서드
     Member findByLoginId(String loginId);
+    Member findByEmail(String email);
+
 }
