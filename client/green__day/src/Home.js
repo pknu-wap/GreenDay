@@ -10,9 +10,6 @@ import {
 } from "react-router-dom";
 import Notice from "./Notice.js";
 import History from "./History.js";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
-import Modal from "./modiary";
-import Xlog from "./xlog.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -41,22 +38,6 @@ function Home() {
   const closeModal = () => {
     setModalOpen(false); // 모달 닫기
   };
-
-  const [buttonOpen, setButtonOpen] = useState(false);
-
-
-  useEffect(() => {
-    getBoardList();
-  }, []);
-
-  const getBoardList = async () => {
-    const data = await (
-      await axios.get("https://codingapple1.github.io/shop/data2.json")
-    ).data;
-    setUserInformation(data);
-    console.log(userInformation);
-  };
-
 
   const apples = [
     { id: 1, src: "apple.png", style: { top: "215px", left: "850px" } },
@@ -104,7 +85,6 @@ function Home() {
           <Routes>
             <Route path="/Notice" element={<Notice />} />
             <Route path="/History" element={<History />} />
-
           </Routes>
         </div>
       </div>
