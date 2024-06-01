@@ -6,12 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class OauthLoginController {
@@ -62,7 +64,7 @@ public class OauthLoginController {
     private Map<String, String> getAccessToken(String code) {
         String clientId = "o72MtePRXsbwlztUtJoj";
         String clientSecret = "syAjjCYexm";
-        String redirectUri = "http://3.36.87.184:8080/authuser";
+        String redirectUri = "http://ec2-3-36-87-184.ap-northeast-2.compute.amazonaws.com/authuser";
 
         String tokenUrl = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code" +
                 "&client_id=" + clientId +

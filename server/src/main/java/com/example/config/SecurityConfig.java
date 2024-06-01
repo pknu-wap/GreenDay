@@ -24,6 +24,7 @@ public class SecurityConfig {
                 .authorizeRequests(authorize -> authorize
                         .requestMatchers("/oauth-login/admin").hasRole(MemberRole.ADMIN.name())
                         .requestMatchers("/oauth-login/info").authenticated()
+                        .requestMatchers("/api/**").permitAll() // API 경로에 대한 설정 추가
                         .anyRequest().permitAll()
                 )
                 .oauth2Login(oauth2 -> oauth2
@@ -45,7 +46,7 @@ public class SecurityConfig {
         //모든 origin에 대한 요청을 허용하도록 설정함
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000")); // 프론트엔드 서버 주소
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

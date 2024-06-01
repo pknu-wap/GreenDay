@@ -3,7 +3,7 @@ import "./App.css";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Modal from "./modiary.js";
 import Home from "./Home.js";
-import History from "./History.js";
+import History from "./history.js";
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
