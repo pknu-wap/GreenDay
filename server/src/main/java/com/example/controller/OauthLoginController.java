@@ -62,7 +62,7 @@ public class OauthLoginController {
     private Map<String, String> getAccessToken(String code) {
         String clientId = "o72MtePRXsbwlztUtJoj";
         String clientSecret = "syAjjCYexm";
-        String redirectUri = "http://3.36.87.184:8080/api/user-info";
+        String redirectUri = "http://3.36.87.184:8080/authuser";
 
         String tokenUrl = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code" +
                 "&client_id=" + clientId +
