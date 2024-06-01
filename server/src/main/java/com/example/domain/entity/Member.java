@@ -9,6 +9,10 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "member", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "login_Id"),
+        @UniqueConstraint(columnNames = "email")
+})
 public class Member {
     // 회원 식별자를 나타내는 필드
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

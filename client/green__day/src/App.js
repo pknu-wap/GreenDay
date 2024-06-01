@@ -6,12 +6,15 @@ import Home from "./Home.js";
 import Notice from "./Notice.js";
 import History from "./History.js";
 import Xlog from "./xlog.js";
-// import HistoryList from "./routes/HistoryList";
-import NaverLoogin from "./NaverLogin.js";
+import axios from "axios";
+import NaverRedirect from "./NaverRedirect.js";
+
 
 import { useState, useEffect } from "react";
 
 function App() {
+  const [hello, setHello] = useState("");
+
   let [buttonOpen, setButtonOpen] = useState(false);
   /*let [shouldRenderApp,setShouldRenderApp]=useState(true);*/
 
@@ -51,15 +54,18 @@ function App() {
       return null; 
     };
   */
+
   return (
     <>
       <div>
         <Routes>
+
+          <Route path="/authuser" element={<NaverRedirect />}></Route>
           <Route path="/Home" element={<Home />}></Route>
           <Route path="/Notice" element={<Notice />}></Route>
           <Route path="/History" element={<History />}></Route>
           <Route path="/Xlog" element={<Xlog />}></Route>
-          <Route path="/NaverLogin" element={<NaverLoogin />}></Route>
+          <Route path="/" element={<Xlog />}></Route>
         </Routes>
 
         <Modal isOpen={isModalOpen} onClose={closeModal} />

@@ -1,30 +1,49 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Modal from "./modiary";
+import {
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import Notice from "./Notice.js";
 import History from "./History.js";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import Modal from "./modiary";
 import Xlog from "./xlog.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function Home() {
-  // let [buttonOpen,setButtonOpen]=useState(false);
-  const [isModalOpen, setModalOpen] = useState(false); //useState사용하여 상태 초기화 및 모달의 열림/닫힘 상태관리
-  const [buttonOpen, setButtonOpen] = useState(false);
+  const location = useLocation();
+  const [userInformation, setUserInformation] = useState({});
+  const [isModalOpen, setModalOpen] = useState(false); // 모달 상태 추가
 
-  //모달열기
-  const openModal = (event) => {
-    event.preventDefault(); // 링크의 기본 동작 방지
-    setModalOpen(true); //setModalOpen(true)를 호출하여 isModalOpen 상태를 true로 설정해 모달 열기
+  const handleButtonClick = () => {
+    console.log(userInformation);
   };
 
-  //모달닫기함수
+  // 컴포넌트가 마운트될 때 로컬 스토리지에서 사용자 정보 가져오기
+  useEffect(() => {
+    const userInfoFromStorage = localStorage.getItem('userInfo');
+    if (userInfoFromStorage) {
+      setUserInformation(JSON.parse(userInfoFromStorage));
+      console.log(userInfoFromStorage); // 유저 정보를 콘솔에 출력
+    }
+  }, []);
+
+  const openModal = () => {
+    setModalOpen(true); // 모달 열기
+  };
+
   const closeModal = () => {
     setModalOpen(false); // 모달 닫기
   };
 
-  let [userInformation, setUserInformation] = useState([""]);
+  const [buttonOpen, setButtonOpen] = useState(false);
+
 
   useEffect(() => {
     getBoardList();
@@ -38,19 +57,6 @@ function Home() {
     console.log(userInformation);
   };
 
-  //   useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  // async function fetchData() {
-  //   try {
-  //     const response = await fetch('https://api.example.com/visitor');
-  //     const data = await response.json();
-  //     setVisitorData(data); // 서버에서 받아온 데이터를 상태에 저장
-  //   } catch (error) {
-  //     console.error('데이터를 가져오는 중 오류 발생:', error);
-  //   }
-  // }
 
   const apples = [
     { id: 1, src: "apple.png", style: { top: "215px", left: "850px" } },
@@ -70,18 +76,16 @@ function Home() {
           <h4>
             Q. 여러분은 평소에 환경을 얼마큼 생각하시나요?
             <br />
-            Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들을 위한
-            공간입니다.
+            Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들을 위한 공간입니다.
           </h4>
           <h5>
-            {userInformation[0].title}님,
+            {userInformation.name}님,
             <br />
             환영합니다.
             <br />
             <br />
             <div className="one"></div>
           </h5>
-
           <ul className="navigation-menu">
             <li>
               <div className="click">홈</div>
@@ -98,18 +102,19 @@ function Home() {
           </ul>
 
           <Routes>
-            <Route path="/Notice" element={<Notice />}></Route>
-            <Route path="/History" element={<History />}></Route>
+            <Route path="/Notice" element={<Notice />} />
+            <Route path="/History" element={<History />} />
+
           </Routes>
         </div>
       </div>
       <button
         className="tree_image"
         onClick={() => {
-          setButtonOpen(true);
+          setModalOpen(true); // 모달 열기
         }}
       >
-        <img src="tree.png" a href="APIExamNaverLogin.html" />
+        <img src="tree.png" alt="tree" />
       </button>
 
       <div className="App">
@@ -125,7 +130,7 @@ function Home() {
               alt={`Apple ${apple.id}`}
               style={{
                 border: "none",
-                backgroundcolor: "transparent",
+                backgroundColor: "transparent",
                 width: "56px",
                 height: "56px",
               }}
