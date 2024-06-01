@@ -87,21 +87,6 @@ function Notice() {
         <Modal isOpen={isModalOpen} onClose={closeModal} />{" "}
         {/* 모달을 닫기 위한 콜백 전달 */}
       </div>
-      {/*       {userInformation.map((a, i) => (
-        <div>
-          <div className="line1" />
-          <div className="userdata">
-            <div className="bar">
-              <div className="title">{a.title}</div>
-              <div className="writetime">Price:{a.price}</div>
-            </div>
-            <div className="noticeContent">{a.content}</div>
-            <br />
-            <br />
-            <br />
-          </div>
-        </div>
-      ))} */}
       <div className="input_data_list">
         <div className="input1">{oldText}</div>
         <textarea
