@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f14a2e5d-f546-4b75-b685-6517d671c7e8" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/../client/green__day/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/green__day/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/green__day/src/notice.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/green__day/src/notice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/green__day/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../client/green__day/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/controller/OauthLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/controller/OauthLoginController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,11 +253,6 @@
           <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/6.1.5/360ba172a91847200a22dd8ed7c611c72c5d3f9/spring-web-6.1.5-sources.jar!/org/springframework/web/client/RestTemplate.java</url>
           <line>1031</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/controller/OauthLoginController.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

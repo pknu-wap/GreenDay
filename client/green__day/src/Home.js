@@ -8,7 +8,7 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-import Notice from "./Notice.js";
+import Notice from "./notice.js";
 import History from "./History.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";

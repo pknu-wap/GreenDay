@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 function NaverLogin({ setGetToken, setUserInfo }) {
   const NAVER_CLIENT_ID = "o72MtePRXsbwlztUtJoj"; // 발급 받은 Client ID 입력
-  const NAVER_CALLBACK_URL = "http://localhost:8080/login/oauth2/code/naver";
+  const NAVER_CALLBACK_URL = "http://3.36.87.184:8080/authuser";
 
   const initializeNaverLogin = () => {
     if (!window.naver) {

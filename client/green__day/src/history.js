@@ -3,7 +3,7 @@ import "./App.css";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Modal from "./modiary.js";
 import Home from "./Home.js";
-import Notice from "./Notice.js";
+import Notice from "./notice.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 

@@ -3,7 +3,7 @@ import axios from "axios";
 import "./App.css";
 
 function NaverRedirect() {
-  const REACT_APP_API = 'http://localhost:8080';
+  const REACT_APP_API = 'http://3.36.87.184:8080';
 
   async function naverLogin() {
     try {

@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
-import Notice from "./Notice.js";
+import Notice from "./notice.js";
 import History from "./History.js";
 import Home from "./Home.js";
 import NaverRedirect from "./NaverRedirect";
@@ -37,7 +37,7 @@ function Xlog({ setGetToken, setUserInfo }) {
 
   const handleTreeClick = () => {
     const NAVER_CLIENT_ID = 'o72MtePRXsbwlztUtJoj';
-    const NAVER_REDIRECT_URI = 'http://localhost:3000/authuser';
+    const NAVER_REDIRECT_URI = 'http://3.36.87.184:8080/authuser';
     const REACT_APP_NAVER_STATE = '123';
     const NAVER_URI = `https://nid.naver.com/oauth2.0/authorize?client_id=${NAVER_CLIENT_ID}&response_type=code&redirect_uri=${NAVER_REDIRECT_URI}&state=${REACT_APP_NAVER_STATE}`;
     window.location.href = NAVER_URI;
