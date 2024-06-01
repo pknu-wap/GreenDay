@@ -80,7 +80,6 @@ h1{
   text-align: center;
   left: 600px;
   width: 500px;
-
   
 }
 
@@ -98,7 +97,6 @@ h4{
   text-align: center;
   left: 500px;
   width:700px;
-
 }
 
 h5 {
@@ -210,6 +208,7 @@ h5 {
 .input:focus{
   outline: none;
 }
+
 .userdata {
   position:relative;
   top:100px;
@@ -341,4 +340,3 @@ h5 {
 
 
 }
-
