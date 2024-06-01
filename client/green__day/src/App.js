@@ -9,17 +9,12 @@ import Xlog from "./xlog.js";
 import axios from "axios";
 import NaverRedirect from "./NaverRedirect.js";
 
+
 import { useState, useEffect } from "react";
 
 function App() {
   const [hello, setHello] = useState("");
 
-  /*   useEffect(() => {
-    axios
-      .get("/api/hello")
-      .then((response) => setHello(response.data))
-      .catch((error) => console.log(error));
-  }, []); */
   let [buttonOpen, setButtonOpen] = useState(false);
   /*let [shouldRenderApp,setShouldRenderApp]=useState(true);*/
 
@@ -36,10 +31,35 @@ function App() {
     setModalOpen(false); // 모달 닫기
   };
 
+  //   useEffect(() => {
+  //   fetchData();
+  // }, []);
+
+  // async function fetchData() {
+  //   try {
+  //     const response = await fetch('https://api.example.com/visitor');
+  //     const data = await response.json();
+  //     setVisitorData(data); // 서버에서 받아온 데이터를 상태에 저장
+  //   } catch (error) {
+  //     console.error('데이터를 가져오는 중 오류 발생:', error);
+  //   }
+  // }
+  /*  useEffect(() => {
+      const path = window.location.pathname;
+      const excludedPaths = ['/History', '/Notice',"/Home"]; // 제외할 경로들
+      setShouldRenderApp(!excludedPaths.includes(path));
+    }, []);
+  
+    if (!shouldRenderApp) {
+      return null; 
+    };
+  */
+
   return (
     <>
       <div>
         <Routes>
+
           <Route path="/authuser" element={<NaverRedirect />}></Route>
           <Route path="/Home" element={<Home />}></Route>
           <Route path="/Notice" element={<Notice />}></Route>
