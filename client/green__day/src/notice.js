@@ -1,13 +1,11 @@
-import logo from "./logo.svg";
-import "./App.css";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import Modal from "./modiary.js";
 import Home from "./Home.js";
 import History from "./History.js";
-
-import axios from "axios";
-import React, { useEffect, useState } from "react";
 import Pagination from "react-js-pagination";
+import "./App.css";
 
 function Notice() {
   let [text, setText] = useState("");
@@ -55,6 +53,20 @@ function Notice() {
   const itemChange = (e) => {
     setItems(Number(e.target.value));
   };
+
+  // 입력 데이터를 서버로 전송하는 함수
+  const sendDataToServer = async (data) => {
+    try {
+      const response = await axios.post(
+        "https://codingapple1.github.io/shop/data2.json",
+        data
+      );
+      console.log("성공:", response.data);
+    } catch (error) {
+      console.error("실패:", error);
+    }
+  };
+
   return (
     <div>
       <div>
@@ -105,9 +117,13 @@ function Notice() {
           >
             <img
               src="backrock_button.png"
+              alt="backrock button"
               onClick={() => {
                 setOldText({ text });
                 setOldText(text);
+
+                // 서버로 데이터 전송
+                sendDataToServer({ text });
               }}
             />
           </button>
@@ -117,7 +133,7 @@ function Notice() {
           .slice(items * (page - 1), items * (page - 1) + items)
           .map((a, i) => {
             return (
-              <div>
+              <div key={i}>
                 <div className="line1" />
                 <div className="userdata">
                   <div className="bar">
@@ -142,7 +158,7 @@ function Notice() {
             onChange={handlePageChange}
           ></Pagination>
         </>
-        {/*         npm install react-js-pagination
+        {/* npm install react-js-pagination
         yarn add react-js-pagination */}
       </div>
     </div>
