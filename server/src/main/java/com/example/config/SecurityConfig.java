@@ -50,7 +50,8 @@ public class SecurityConfig {
         //모든 origin에 대한 요청을 허용하도록 설정함
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedOrigins(List.of("http://localhost:3000")); // 프론트엔드 서버 주소
+        // 프론트엔드 서버 주소
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:3000/authuser"));
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
