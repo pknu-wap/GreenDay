@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
-import Notice from "./Notice.js";
+import Notice from "./notice.js";
 import History from "./history.js";
 import Home from "./Home.js";
 import NaverRedirect from "./NaverRedirect";
