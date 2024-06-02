@@ -26,6 +26,7 @@ public class SecurityConfig {
                         .requestMatchers("/oauth-login/info").authenticated()
                         .requestMatchers("/api/**").permitAll() // API 경로에 대한 설정 추가
                         .requestMatchers("/authuser/**").permitAll() // /authuser 경로에 대한 인증 요구 추가
+                        .requestMatchers("/write_diary").authenticated() // /write_diary 경로에 대한 인증 요구 추가
                         .anyRequest().permitAll()
                 )
                 .oauth2Login(oauth2 -> oauth2
