@@ -7,7 +7,11 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,8 +30,8 @@ public class OauthLoginController {
 
     @PostMapping("/user-info")
     public ResponseEntity<UserInfoResponse> getUserInfo(@RequestBody TokenRequest tokenRequest) {
-        System.out.println("Received token request: " + tokenRequest.getToken()); // 로그 추가
-        Map<String, String> tokens = getAccessToken(tokenRequest.getToken());
+        System.out.println("Received token request: " + tokenRequest); // 로그 추가
+        Map<String, String> tokens = getAccessToken(tokenRequest);
 
 
         String accessToken = tokens.get("access_token");
@@ -61,17 +65,22 @@ public class OauthLoginController {
         return ResponseEntity.ok(userInfoResponse);
     }
 
-    private Map<String, String> getAccessToken(String code) {
+    private Map<String, String> getAccessToken(TokenRequest tokenRequest) {
         String clientId = "o72MtePRXsbwlztUtJoj";
         String clientSecret = "syAjjCYexm";
-        String tokenUrl = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code" +
-                "&client_id=" + clientId +
-                "&client_secret=" + clientSecret +
-                "&code=" + code +
-                "&state=STATE";
+        String tokenUrl = "https://nid.naver.com/oauth2.0/token";
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        MultiValueMap<String,String> body= new LinkedMultiValueMap<>();
+        body.add("grant_type","authorization_code");
+        body.add("client_id", clientId);
+        body.add("client_secret",clientSecret);
+        body.add("code",tokenRequest.getCode());
+        body.add("state",tokenRequest.getState());
+        HttpEntity<?> request = new HttpEntity<>(body,httpHeaders);
 
         RestTemplate restTemplate = new RestTemplate();
-        Map<String, String> response = restTemplate.postForObject(tokenUrl, null, Map.class);
+        Map<String, String> response = restTemplate.postForObject(tokenUrl, request, Map.class);
 
         return response;
     }
@@ -111,7 +120,12 @@ public class OauthLoginController {
 
     @Data
     private static class TokenRequest {
-        private String token;
+        private String code;
+        private String state;
+        // getToken() 메서드 추가
+        public String getToken() {
+            return this.code;
+        }
     }
 
     @Data
