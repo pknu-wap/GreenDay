@@ -9,6 +9,8 @@ function NaverRedirect() {
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get('code');
+      const state = urlParams.get('state');
+
 
       const res = await axios.post(REACT_APP_API + `/api/user-info`, { code: code, state: state });
       const { accessToken, refreshToken, email, name } = res.data;

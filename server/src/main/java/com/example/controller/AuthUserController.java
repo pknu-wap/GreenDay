@@ -27,7 +27,7 @@ public class AuthUserController {
 
         String clientId = "o72MtePRXsbwlztUtJoj";
         String clientSecret = "syAjjCYexm";
-        String redirectUri = "http://ec2-3-36-87-184.ap-northeast-2.compute.amazonaws.com/authuser";
+        String redirectUri = "http://localhost:3000/authuser";
 
         String tokenUrl = "https://api.example.com/auth/token";
         String requestBody = "grant_type=authorization_code" +

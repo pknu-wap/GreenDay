@@ -64,8 +64,6 @@ public class OauthLoginController {
     private Map<String, String> getAccessToken(String code) {
         String clientId = "o72MtePRXsbwlztUtJoj";
         String clientSecret = "syAjjCYexm";
-        String redirectUrl = "http://ec2-3-36-87-184.ap-northeast-2.compute.amazonaws.com/authuser";
-
         String tokenUrl = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code" +
                 "&client_id=" + clientId +
                 "&client_secret=" + clientSecret +

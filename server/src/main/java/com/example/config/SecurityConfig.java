@@ -33,7 +33,7 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/Home")
                         .failureUrl("/Xlog")
                         .redirectionEndpoint()
-                            .baseUri("http://ec2-3-36-87-184.ap-northeast-2.compute.amazonaws.com/authuser") // 리다이렉션 엔드포인트 설정
+                            .baseUri("http://localhost:3000/authuser") // 리다이렉션 엔드포인트 설정
                         .and()
                         .permitAll()
                 )
