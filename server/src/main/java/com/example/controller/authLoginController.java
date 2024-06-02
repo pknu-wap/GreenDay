@@ -2,6 +2,7 @@ package com.example.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -14,7 +15,7 @@ public class authLoginController {
         this.restTemplate = restTemplate;
     }
 
-    @GetMapping("/authuser")
+    @PostMapping("/authuser")
     public ResponseEntity<String> handleAuthUser(@RequestParam String code,@RequestParam String state) {
         // 받아온 code 값을 이용하여 다른 서비스로 인증 처리를 진행
         String clientId = "o72MtePRXsbwlztUtJoj";
