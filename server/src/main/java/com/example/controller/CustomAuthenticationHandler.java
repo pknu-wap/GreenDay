@@ -8,8 +8,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.io.IOException;
 
+@RestController
 @Component
 public class CustomAuthenticationHandler extends SimpleUrlAuthenticationFailureHandler implements AuthenticationSuccessHandler {
 

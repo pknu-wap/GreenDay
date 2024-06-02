@@ -1,5 +1,8 @@
 package com.example.controller;
 
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
 public class UserInfoResponse {
     private String email;
     private String name;

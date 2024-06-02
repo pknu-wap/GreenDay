@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,16 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-public class authLoginController {
+public class AuthUserController {
+    private static final Logger logger = LoggerFactory.getLogger(AuthUserController.class);
+
     private final RestTemplate restTemplate;
 
-    public authLoginController (RestTemplate restTemplate) {
+
+    public AuthUserController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     @PostMapping("/authuser")
     public ResponseEntity<String> handleAuthUser(@RequestParam String code,@RequestParam String state) {
         // 받아온 code 값을 이용하여 다른 서비스로 인증 처리를 진행
+        logger.info("Received /authuser request with code: {} and state: {}", code, state);
+
         String clientId = "o72MtePRXsbwlztUtJoj";
         String clientSecret = "syAjjCYexm";
         String redirectUri = "http://ec2-3-36-87-184.ap-northeast-2.compute.amazonaws.com/authuser";
@@ -30,6 +37,8 @@ public class authLoginController {
                 "&redirect_uri=" + redirectUri +
                 "&state=" + state; // state 파라미터 추가
 
+        logger.info("Sending POST request to token URL: {}", tokenUrl);
+        logger.info("Request body: {}", requestBody);
 
         // POST 요청으로 토큰을 요청하고 응답을 받음
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(tokenUrl, requestBody, String.class);

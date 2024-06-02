@@ -10,7 +10,7 @@ function NaverRedirect() {
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get('code');
 
-      const res = await axios.post(REACT_APP_API + `/api/user-info`, { token: code });
+      const res = await axios.post(REACT_APP_API + `/api/user-info`, { code: code, state: state });
       const { accessToken, refreshToken, email, name } = res.data;
 
       // JSON 객체로 변환하여 로컬 스토리지에 저장

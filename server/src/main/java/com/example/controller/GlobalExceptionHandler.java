@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 //에러 처리
+@RestController
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(NoHandlerFoundException.class)
@@ -18,7 +19,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The requested resource was not found.");
     }
 
-    @RequestMapping(value = "/error")
+    @RequestMapping(value = "/error/global")
     public ResponseEntity<String> error() {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Custom Not Found Error Message");
     }
