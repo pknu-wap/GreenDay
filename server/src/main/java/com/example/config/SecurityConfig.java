@@ -31,6 +31,9 @@ public class SecurityConfig {
                         .loginPage("/greenday/login")
                         .defaultSuccessUrl("/Home")
                         .failureUrl("/Xlog")
+                        .redirectionEndpoint()
+                            .baseUri("http://ec2-3-36-87-184.ap-northeast-2.compute.amazonaws.com/authuser") // 리다이렉션 엔드포인트 설정
+                        .and()
                         .permitAll()
                 )
                 .logout(logout -> logout
