@@ -15,7 +15,7 @@ public class authLoginController {
     }
 
     @GetMapping("/authuser")
-    public ResponseEntity<String> handleAuthUser(@RequestParam String code) {
+    public ResponseEntity<String> handleAuthUser(@RequestParam String code,@RequestParam String state) {
         // 받아온 code 값을 이용하여 다른 서비스로 인증 처리를 진행
         String clientId = "o72MtePRXsbwlztUtJoj";
         String clientSecret = "syAjjCYexm";
@@ -26,7 +26,9 @@ public class authLoginController {
                 "&client_id=" + clientId +
                 "&client_secret=" + clientSecret +
                 "&code=" + code +
-                "&redirect_uri=" + redirectUri;
+                "&redirect_uri=" + redirectUri +
+                "&state=" + state; // state 파라미터 추가
+
 
         // POST 요청으로 토큰을 요청하고 응답을 받음
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(tokenUrl, requestBody, String.class);
