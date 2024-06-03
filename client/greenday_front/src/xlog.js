@@ -1,86 +1,47 @@
-import logo from "./logo.svg";
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import {
+  Routes,
+  Route, 
+  Link,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
+import axios from "axios";
 import "./App.css";
-import Modal from "./modiary";
-import Notice from "./Notice.js";
-import History from "./History.js";
+import Notice from "./notice.js";
+import History from "./history.js";
 import Home from "./Home.js";
+import NaverRedirect from "./NaverRedirect";
 
 function Xlog({ setGetToken, setUserInfo }) {
   const [buttonOpen, setButtonOpen] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(false); // useState 사용하여 상태 초기화 및 모달의 열림/닫힘 상태 관리
+  const [isModalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const NAVER_CLIENT_ID = "o72MtePRXsbwlztUtJoj"; // 발급 받은 Client ID 입력
-  const NAVER_CALLBACK_URL = "http://localhost:8080/login/oauth2/code/naver";
-
-  const initializeNaverLogin = () => {
-    if (!window.naver) {
-      console.error("Naver SDK not loaded");
-      return;
-    }
-
-    const naverLogin = new window.naver.LoginWithNaverId({
-      clientId: NAVER_CLIENT_ID,
-      callbackUrl: NAVER_CALLBACK_URL,
-      isPopup: false,
-      loginButton: { color: "green", type: 2, height: 0 },
-      callbackHandle: true,
-    });
-    naverLogin.init();
-
-    naverLogin.getLoginStatus(async function (status) {
-      if (status) {
-        const user = {
-          id: naverLogin.user.getEmail(),
-          name: naverLogin.user.getName(),
-        };
-        setUserInfo(user);
-      }
-    });
-  };
-
-  const handleTreeClick = () => {
-    initializeNaverLogin();
-    // 로그인 버튼을 클릭하도록 트리거
-    document.getElementById("naverIdLogin").firstChild.click();
-  };
-
-  const userAccessToken = () => {
-    const url = new URL(window.location.href);
-    const token = url.searchParams.get("access_token");
-    if (token) {
-      getToken(token);
-    }
-  };
-
-  const getToken = (token) => {
-    console.log(token);
-    localStorage.setItem("access_token", token);
-    setGetToken(token);
-  };
 
   useEffect(() => {
-    const loadNaverSDK = () => {
-      if (window.naver) {
-        initializeNaverLogin();
-      } else {
-        setTimeout(loadNaverSDK, 100);
-      }
-    };
+    const accessToken = localStorage.getItem("accessToken");
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (accessToken && refreshToken) {
+      // 여기에 로컬 스토리지에서 가져온 토큰을 사용하여 필요한 작업을 수행함
+      // 예시: 토큰을 상태로 설정하는 함수 호출
+      // 예시: 사용자 정보를 상태로 설정하는 함수 호출
+      // 예시 작업 외에도 필요한 작업을 수행할 수 있습니다.
+  
+      navigate("/home"); // 예시: 로그인 후 화면으로 리다이렉트
+    }
+  }, []); // 컴포넌트가 마운트될 때 한 번만 실행
 
-    loadNaverSDK();
-    userAccessToken();
-  }, []);
-  // const apples = [
-  //   { id: 1, src: "apple.png", style: { top: "215px", left: "850px" } },
-  //   { id: 2, src: "apple.png", style: { top: "285px", left: "755px" } },
-  //   { id: 3, src: "apple.png", style: { top: "320px", left: "890px" } },
-  //   { id: 4, src: "apple.png", style: { top: "270px", left: "975px" } },
-  //   { id: 5, src: "apple.png", style: { top: "390px", left: "730px" } },
-  //   { id: 6, src: "apple.png", style: { top: "350px", left: "810px" } },
-  //   { id: 7, src: "apple.png", style: { top: "360px", left: "1000px" } },
-  // ];
+  
+
+  const handleTreeClick = () => {
+    const NAVER_CLIENT_ID = 'o72MtePRXsbwlztUtJoj';
+    const NAVER_REDIRECT_URI = "http://localhost:3000/authuser";
+    const REACT_APP_NAVER_STATE = '123';
+    const NAVER_URI = `https://nid.naver.com/oauth2.0/authorize?client_id=${NAVER_CLIENT_ID}&response_type=code&redirect_uri=${NAVER_REDIRECT_URI}&state=${REACT_APP_NAVER_STATE}`;
+    window.location.href = NAVER_URI;
+  };
 
   return (
     <>
@@ -104,17 +65,23 @@ function Xlog({ setGetToken, setUserInfo }) {
 
           <ul className="xlog-navigation-menu">
             <li>
-              <div onClick={() => alert("나무를 눌러서 로그인을 해주세요")}> 홈 </div>
+              <div onClick={() => alert("나무를 눌러서 로그인을 해주세요")}>
+                홈
+              </div>
             </li>
             <br />
             <br />
             <li>
-              <div onClick={() => alert("나무를 눌러서 로그인을 해주세요")}>게시판</div>
+              <div onClick={() => alert("나무를 눌러서 로그인을 해주세요")}>
+                게시판
+              </div>
             </li>
             <br />
             <br />
             <li>
-              <div onClick={() => alert("나무를 눌러서 로그인을 해주세요")}>히스토리</div>
+              <div onClick={() => alert("나무를 눌러서 로그인을 해주세요")}>
+                히스토리
+              </div>
             </li>
             <br />
             <br />
@@ -124,12 +91,11 @@ function Xlog({ setGetToken, setUserInfo }) {
 
             <br />
           </ul>
-
           <Routes>
-            <Route path="/Home" element={<Home />}></Route>
-            <Route path="/Notice" element={<Notice />}></Route>
-            <Route path="/History" element={<History />}></Route>
-            <Route path="/Xlog" element={<Xlog />}></Route>
+            <Route path="/home" element={<NaverRedirect />} />
+            <Route path="/Notice" element={<Notice />} />
+            <Route path="/History" element={<History />} />
+            <Route path="/Xlog" element={<Xlog />} />
           </Routes>
         </div>
       </div>
@@ -138,16 +104,17 @@ function Xlog({ setGetToken, setUserInfo }) {
         <img src="tree.png" alt="tree" />
       </button>
 
-      {buttonOpen == true ? (
+      {buttonOpen && (
         <div>
           <div className="login_button">
-            <img src="a.png" />
+            <img src="a.png" alt="a" />
           </div>
 
           <button>
             <div className="login_button_content">
               <img
                 src="x.png"
+                alt="x"
                 onClick={() => {
                   setButtonOpen(false);
                 }}
@@ -155,30 +122,10 @@ function Xlog({ setGetToken, setUserInfo }) {
             </div>
           </button>
         </div>
-      ) : null}
+      )}
 
-      {/* 구현할 위치에 아래와 같이 코드를 입력해주어야 한다. */}
-      {/* 태그에 id="naverIdLogin"를 해주지 않으면 오류가 발생한다! */}
-      <div id="naverIdLogin" />
-      {/* {apples.map((apple) => (
-        <button
-          key={apple.id}
-          className="apple_image"
-          style={{ position: "absolute", ...apple.style }}
-        >
-          <img
-            src={apple.src}
-            alt={`Apple ${apple.id}`}
-            style={{
-              border: "none",
-              backgroundcolor: "transparent",
-              width: "56px",
-              height: "56px",
-            }}
-          />
-        </button>
-      ))} */}
     </>
   );
 }
+
 export default Xlog;

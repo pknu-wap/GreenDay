@@ -3,7 +3,7 @@ import "./App.css";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Modal from "./modiary.js";
 import Home from "./Home.js";
-import Notice from "./Notice.js";
+import Notice from "./notice.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -16,21 +16,40 @@ function History() {
     const [data, setData] = useState(null);
   };
 
-  // 히스토리 받아오는 코드 
+  // const getDiary = async () => {
+  //   const data = await (
+  //     await axios.get("https://codingapple1.github.io/shop/data2.json")
+  //   ).data; // 2) 게시글 목록 데이터에 할당
+  //   setBoardList(data); // 3) boardList 변수에 할당
+  //   console.log(boardList);
+  //   console.log(data);
+  // };
+
+  // useEffect(() => {
+  //   getBoardList(); // 1) 게시글 목록 조회 함수 호출
+  // }, []);
+
+  useEffect(() => {
+    axios.get("").then((response) => {
+      console.log(response);
+    });
+  }, []);
+
   useEffect(() => {
     const fetchDiary = async () => {
       try {
-        const response = await fetch(`https://codingapple1.github.io/shop/data2.json`);
+        const response = await fetch(
+          `https://codingapple1.github.io/shop/data2.json`
+        );
         const data = await response.json();
         setDiary(data);
       } catch (error) {
-        console.error('Error fetching diary:', error);
-      }};
-      fetchDiary();
-    }, [page]);
+        console.error("Error fetching diary:", error);
+      }
+    };
 
-
-    // __님 환영합니다를 받는 코드 
+    fetchDiary();
+  }, [page]);
   let [userInformation, setUserInformation] = useState([""]);
 
   useEffect(() => {
@@ -85,9 +104,7 @@ function History() {
           {diary.map((diary, index) => (
             <div className="history">
               <div className="day">
-                <div className="space">
-                  작성한 날짜 {'<'}{diary.id}{'>'}
-                </div>
+                {diary.id}
                 <br />
               </div>
               <div className="content">{diary.title}</div>
@@ -102,9 +119,11 @@ function History() {
             return <Card diary ={i} key={i}></Card>
           })} */}
 
-        <div className="historybutton">
-          <div className ="beforebutton"><button onClick={() => setPage(page - 1)} disabled={page === 1}>이전</button></div>
-          <div className ="nextbutton"><button onClick={() => setPage(page + 1)}>다음</button></div>
+        <div className="nextbutton">
+          <button onClick={() => setPage(page - 1)} disabled={page === 1}>
+            이전
+          </button>
+          <button onClick={() => setPage(page + 1)}>다음</button>
         </div>
       </div>
     </>
@@ -112,4 +131,3 @@ function History() {
 }
 
 export default History;
-
