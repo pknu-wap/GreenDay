@@ -8,69 +8,35 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-import Notice from "./Notice.js";
-import History from "./History.js";
-import Xlog from "./xlog.js";
+import Notice from "./notice.js";
+import History from "./history.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function Home() {
   const location = useLocation();
-  const [accessToken, setAccessToken] = useState("");
-  const handleTokenReceived = () => {
-    // URL에서 토큰 추출
-    const hash = location.hash.substring(1);
-    const params = new URLSearchParams(hash);
-    const accessToken = params.get("access_token");
+  const [userInformation, setUserInformation] = useState({});
+  const [isModalOpen, setModalOpen] = useState(false); // 모달 상태 추가
 
-    // 토큰을 상태에 저장
-    if (accessToken) {
-      setAccessToken(accessToken);
-      console.log(accessToken);
-
-      // 백엔드로 토큰을 보낼 수 있음
-      sendTokenToBackend(accessToken);
-    }
-  };
-  const sendTokenToBackend = (token) => {
-    axios
-      .post("http://localhost:8080/api/user-info", { token })
-      .then((response) => {
-        console.log("Token sent to backend successfully:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error sending token to backend:", error);
-      });
+  const handleButtonClick = () => {
+    console.log(userInformation);
   };
 
-  // let [buttonOpen,setButtonOpen]=useState(false);
-  const [isModalOpen, setModalOpen] = useState(false); //useState사용하여 상태 초기화 및 모달의 열림/닫힘 상태관리
-  const [buttonOpen, setButtonOpen] = useState(false);
-
-  //모달열기
-  const openModal = (event) => {
-    event.preventDefault(); // 링크의 기본 동작 방지
-    setModalOpen(true); //setModalOpen(true)를 호출하여 isModalOpen 상태를 true로 설정해 모달 열기
-  };
-
-  //모달닫기함수
-  const closeModal = () => {
-    setModalOpen(false); // 모달 닫기
-  };
-
-  let [userInformation, setUserInformation] = useState([""]);
-
+  // 컴포넌트가 마운트될 때 로컬 스토리지에서 사용자 정보 가져오기
   useEffect(() => {
-    getBoardList();
-    handleTokenReceived();
+    const userInfoFromStorage = localStorage.getItem('userInfo');
+    if (userInfoFromStorage) {
+      setUserInformation(JSON.parse(userInfoFromStorage));
+      console.log(userInfoFromStorage); // 유저 정보를 콘솔에 출력
+    }
   }, []);
 
-  const getBoardList = async () => {
-    const data = await (
-      await axios.get("https://codingapple1.github.io/shop/data2.json")
-    ).data;
-    setUserInformation(data);
-    console.log(userInformation);
+  const openModal = () => {
+    setModalOpen(true); // 모달 열기
+  };
+
+  const closeModal = () => {
+    setModalOpen(false); // 모달 닫기
   };
 
   const apples = [
@@ -91,8 +57,7 @@ function Home() {
           <h4>
             Q. 여러분은 평소에 환경을 얼마큼 생각하시나요?
             <br />
-            Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들을 위한
-            공간입니다.
+            Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들을 위한 공간입니다.
           </h4>
           <h5>
             {userInformation.name}님,
@@ -102,7 +67,6 @@ function Home() {
             <br />
             <div className="one"></div>
           </h5>
-
           <ul className="navigation-menu">
             <li>
               <div className="click">홈</div>
@@ -119,18 +83,18 @@ function Home() {
           </ul>
 
           <Routes>
-            <Route path="/Notice" element={<Notice />}></Route>
-            <Route path="/History" element={<History />}></Route>
+            <Route path="/Notice" element={<Notice />} />
+            <Route path="/History" element={<History />} />
           </Routes>
         </div>
       </div>
       <button
         className="tree_image"
         onClick={() => {
-          setButtonOpen(true);
+          setModalOpen(true); // 모달 열기
         }}
       >
-        <img src="tree.png" />
+        <img src="tree.png" alt="tree" />
       </button>
 
       <div className="App">
@@ -146,7 +110,7 @@ function Home() {
               alt={`Apple ${apple.id}`}
               style={{
                 border: "none",
-                backgroundcolor: "transparent",
+                backgroundColor: "transparent",
                 width: "56px",
                 height: "56px",
               }}

@@ -3,7 +3,7 @@ import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Modal from "./modiary.js";
 import Home from "./Home.js";
-import History from "./History.js";
+import History from "./history.js";
 import Pagination from "react-js-pagination";
 import "./App.css";
 
@@ -33,6 +33,11 @@ function Notice() {
   let [userInformation, setUserInformation] = useState([""]);
 
   useEffect(() => {
+    const userInfoFromStorage = localStorage.getItem("userInfo");
+    if (userInfoFromStorage) {
+      setUserInformation(JSON.parse(userInfoFromStorage));
+      console.log(userInfoFromStorage); // 유저 정보를 콘솔에 출력
+    }
     getBoardList();
   }, []);
 
@@ -100,7 +105,7 @@ function Notice() {
         {/* 모달을 닫기 위한 콜백 전달 */}
       </div>
       <div className="input_data_list">
-        <div className="input1">{oldText}</div>
+        {/*         <div className="input1">{oldText}</div> */}
         <textarea
           className="input"
           placeholder="내용을 입력하세요"
