@@ -13,21 +13,18 @@ import java.time.LocalDate;
 public class DiaryDto {
     private Long diary_id;
     private String diary_content;
-    private LocalDate regdate;
     private String login_id;
 
     @Builder
-    public DiaryDto(Long diary_id, String diary_content, LocalDate regdate, String login_id) {
+    public DiaryDto(Long diary_id, String diary_content, String login_id) {
         this.diary_id = diary_id;
         this.diary_content = diary_content;
-        this.regdate = regdate;
         this.login_id = login_id;
     }
 
     public DiaryEntity toEntity() {
         return DiaryEntity.builder()
                 .diary_content(diary_content)
-                .regdate(regdate)
                 .diary_id(diary_id)
                 .login_id(login_id)
                 .build();

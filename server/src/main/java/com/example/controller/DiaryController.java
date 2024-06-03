@@ -21,6 +21,10 @@ public class DiaryController {
 
     @PostMapping("/write_diary")
     public ResponseEntity<String> writeDiary(@RequestBody DiaryDto diaryDto, @AuthenticationPrincipal CustomOauth2UserDetails principal) {
+        if (principal == null || principal.getMember() == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        }//사용자의 loginId를 가져올 때 예외 처리를 추가
+
         // 소셜 로그인 사용자 정보에서 login_id 설정
         String loginId = principal.getMember().getLoginId(); // 사용자의 아이디를 가져옴
         diaryDto.setLogin_id(loginId);
