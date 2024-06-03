@@ -7,6 +7,7 @@ import axios from 'axios';
     const Modal = ({ isOpen, onClose, onSubmit }) => {
         const [text, setText] = useState(''); //text가 값 추적하고 setText함수 통해 상태
         const [message, setMessage] = useState('');
+        const [length, setLength] = useState(0);
         const [placeholder, setPlaceholder] = useState('');
         const [title, setTitle] = useState('오늘의 그린일기');
         const [inputCount, setInputCount] = useState(0);
@@ -22,9 +23,17 @@ import axios from 'axios';
         "플로깅", "봉사활동", "포장", "헌옷수거"
         ];
 
-    const handleInputChange = (event) => { 
-        setText(event.target.value); 
-    };
+    let onChange = (event) => {
+            const value = event.target.value;
+            setText(value);
+            setLength(value.length);
+          };
+
+    // let onChange = (event) => { 
+    //     setText(event.target.value); 
+    //     setText(value);
+    //     setLength(value.length);
+    // }; 
 
     const clearTextarea = () => {
         setText(''); //글을 지워주는 기능
@@ -34,6 +43,8 @@ import axios from 'axios';
         return Math.floor(Math.random() * length)
     };
 
+    const MAX_LENGTH = 200;
+
     useEffect(() => {
         if (isOpen) {
         setPlaceholder(proverbs[getRandomIndex(proverbs.length)]);
@@ -42,6 +53,7 @@ import axios from 'axios';
     }, [isOpen]);
 
     const handleSubmit = async (event) => { //입력 필드에서 입력이 변경될 때마다 호출되며, 입력된 값을 setText를 통해 상태 text에 저장
+        alert("저장됐습니다.");
         const response = await fetch('https://codingapple1.github.io/shop/data2.json', {
             method: 'POST',
             headers: {
@@ -49,11 +61,11 @@ import axios from 'axios';
             },
             body: JSON.stringify({ text }),//content 상태 값을 json으로 변환하여 요청 본문에 포함시킴
         });
-        if (text.trim() === '') { //입력필드가 비어있는지 검사, 공백이나 빈칸 제출 못하게함
-            setText('');
-            setMessage('입력된 내용이 없습니다.');
-            return;
-        }
+        // if (text.trim() === '') { //입력필드가 비어있는지 검사, 공백이나 빈칸 제출 못하게함
+        //     setText('');
+        //     setMessage('입력된 내용이 없습니다.');
+        //     return;
+        // }
         
         onSubmit(text); // 글 등록 버튼 클릭 시 동작
         setText(''); // 텍스트 입력칸을 초기화=> 다음 입력위해 빈필드갖게함
@@ -71,18 +83,22 @@ import axios from 'axios';
                     <button className="Close-button" onClick={() => {onClose(); clearTextarea();}}>
                         close
                     </button>
-                    <h3>{title}</h3>
+                    <h3>🌞 오늘의 주제  {'<'}{title}{'>'} 🌞</h3>
                     <div style={{ display: isOpen ? 'block' : 'none' }}> //isOpen이'block'이면 요소가 보이고, 'none'이면 요소가 보이지 않음
                     <form onSubmit={handleSubmit}>
                         <textarea 
-                            maxLength="200"
+                            className ="diarytextarea"
+                            maxLength={199}
+                            // maxLength="200" alert="200자가 다 채워졌습니다."
                             value={text} //입력된 값을 text와 연결
-                            onChange={handleInputChange} // 입력된 텍스트 변경 시 상태 업데이트
-                            placeholder="오늘의 일기를 작성하세요"
+                            onChange={onChange} // 입력된 텍스트 변경 시 상태 업데이트
+                            placeholder="오늘의 일기를 작성하세요. 일기 작성 후 사과를 눌러 일기를 저장해주세요!"
+                            style={{ whiteSpace: "pre-wrap" }}
                         ></textarea>
-                        <button className="Save-button" onClick={handleSubmit} >
-                            <img src='apple.png' alt="저장됐습니다." />
-                            </button>
+                        <div className="diaryinputLength">{length}/200자</div>
+                        <button className="Save-button" onClick={handleSubmit}>
+                            <img src='apple.png' alt="Save" />
+                        </button>
                         </form>
                         </div>
                         {message && <p>{message}</p>}

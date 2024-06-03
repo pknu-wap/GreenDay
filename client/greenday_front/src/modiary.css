@@ -1,7 +1,6 @@
 .modal {
     position:fixed;
     transform: translate(75%, -3%); 
-
     top: 70px;
     background-color: white; 
     width: 300px;
