@@ -1,35 +1,53 @@
 package com.example.config;
 
+import com.example.config.JwtAuthenticationFilter;
 import com.example.domain.entity.MemberRole;
+import com.nimbusds.oauth2.sdk.auth.JWTAuthentication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.cors.CorsConfigurationSource;
-
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+@ComponentScan("com.example.config")
+public class SecurityConfig{
+
+    private final JwtAuthenticationFilter jwtTokenFilter;
+    private final AuthenticationSuccessHandler authenticationSuccessHandler;
+
+    public SecurityConfig(JwtAuthenticationFilter jwtTokenFilter, AuthenticationSuccessHandler authenticationSuccessHandler) {
+        this.jwtTokenFilter = jwtTokenFilter;
+        this.authenticationSuccessHandler = authenticationSuccessHandler;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors().configurationSource(corsConfigurationSource())
                 .and()
+                // 요청에 대한 인가 규칙 설정
                 .authorizeRequests(authorize -> authorize
                         .requestMatchers("/oauth-login/admin").hasRole(MemberRole.ADMIN.name())
                         .requestMatchers("/oauth-login/info").authenticated()
                         .requestMatchers("/api/**").permitAll() // API 경로에 대한 설정 추가
                         .requestMatchers("/authuser/**").permitAll() // /authuser 경로에 대한 인증 요구 추가
+                        .requestMatchers("/api/private/**").authenticated() // 인증된 사용자만 접근 가능한 리소스
                         .requestMatchers("/write_diary").authenticated() // /write_diary 경로에 대한 인증 요구 추가
                         .anyRequest().permitAll()
                 )
                 .oauth2Login(oauth2 -> oauth2
+                        // OAuth2 로그인 설정
+                        .successHandler(authenticationSuccessHandler) // 성공 핸들러 설정
                         .loginPage("/greenday/login")
                         .defaultSuccessUrl("/Home")
                         .failureUrl("/Xlog")
@@ -41,7 +59,9 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutUrl("/oauth-login/logout")
                 )
-                .csrf().disable();
+                .csrf().disable()
+                .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
     }
 

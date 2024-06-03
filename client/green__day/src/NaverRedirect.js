@@ -3,7 +3,7 @@ import axios from "axios";
 import "./App.css";
 
 function NaverRedirect() {
-  const REACT_APP_API = 'http://3.36.87.184:8080';
+  const REACT_APP_API = 'ec2-3-36-87-184.ap-northeast-2.compute.amazonaws.com:8080';
 
   async function naverLogin() {
     try {
@@ -13,14 +13,15 @@ function NaverRedirect() {
 
 
       const res = await axios.post(REACT_APP_API + `/api/user-info`, { code: code, state: state });
-      const { accessToken, refreshToken, email, name } = res.data;
+      const { accessToken, refreshToken, email, name,jwtToken } = res.data;
 
       // JSON 객체로 변환하여 로컬 스토리지에 저장
       const userInfo = {
         email,
         name,
         accessToken,
-        refreshToken
+        refreshToken,
+        jwtToken // jwtToken 추가
       };
       localStorage.setItem('userInfo', JSON.stringify(userInfo));
 

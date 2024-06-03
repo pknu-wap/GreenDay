@@ -1,12 +1,16 @@
 package com.example.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import com.example.domain.entity.Member;
 import com.example.service.MemberService;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +18,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-
+import java.util.Date;
 import java.util.Map;
 
 @Slf4j
@@ -28,11 +32,17 @@ public class OauthLoginController {
         this.memberService = memberService;
     }
 
+    // JWT 구성 속성
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+
+    @Value("${jwt.expiration}")
+    private int jwtExpirationMs;
+
     @PostMapping("/user-info")
     public ResponseEntity<UserInfoResponse> getUserInfo(@RequestBody TokenRequest tokenRequest) {
         System.out.println("Received token request: " + tokenRequest); // 로그 추가
         Map<String, String> tokens = getAccessToken(tokenRequest);
-
 
         String accessToken = tokens.get("access_token");
         String refreshToken = tokens.get("refresh_token");
@@ -47,6 +57,7 @@ public class OauthLoginController {
         String memberName = memberService.getName(accessToken);
         String provider = "naver";
         String providerId = tokenRequest.getToken(); // 필요 시 적절한 값으로 변경
+
         // 액세스 토큰을 가져옴
         System.out.println("Email: " + naverEmail); // 이메일 출력
         System.out.println("Name: " + memberName); // 회원 이름 출력
@@ -54,15 +65,29 @@ public class OauthLoginController {
         // 이미 존재하는 회원인지 확인
         Member existingMember = memberService.findByEmail(naverEmail);
         if (existingMember != null) {
-            UserInfoResponse userInfoResponse = new UserInfoResponse(existingMember.getEmail(), existingMember.getName(), accessToken, refreshToken);
+            UserInfoResponse userInfoResponse = new UserInfoResponse(existingMember.getEmail(), existingMember.getName(), accessToken, refreshToken, generateJwtToken(existingMember));
             return ResponseEntity.ok(userInfoResponse);
         }
 
         // 존재하지 않는 회원인 경우 새로운 회원으로 등록
         Member savedMember = memberService.saveMember(naverEmail, naverEmail, memberName, provider, providerId);
 
-        UserInfoResponse userInfoResponse = new UserInfoResponse(savedMember.getEmail(), savedMember.getName(), accessToken, refreshToken);
+        // JWT 토큰 생성
+        String jwtToken = generateJwtToken(savedMember);
+
+        // JWT 토큰 저장 및 반환
+        UserInfoResponse userInfoResponse = new UserInfoResponse(savedMember.getEmail(), savedMember.getName(), jwtToken, accessToken, refreshToken);
         return ResponseEntity.ok(userInfoResponse);
+    }
+
+    private String generateJwtToken(Member member) {
+        return Jwts.builder()
+                .setSubject((member.getEmail()))
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                // 필요 시 추가 클레임 추가
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .compact();
     }
 
     private Map<String, String> getAccessToken(TokenRequest tokenRequest) {
@@ -104,7 +129,10 @@ public class OauthLoginController {
         String newAccessToken = response.get("access_token");
         String newRefreshToken = response.get("refresh_token");
 
-        UserInfoResponse userInfoResponse = new UserInfoResponse(refreshTokenRequest.getEmail(), refreshTokenRequest.getName(), newAccessToken, newRefreshToken);
+        // 이 부분에서 Member 객체를 가져와야 함
+        Member member = memberService.findByEmail(refreshTokenRequest.getEmail());
+
+        UserInfoResponse userInfoResponse = new UserInfoResponse(refreshTokenRequest.getEmail(), refreshTokenRequest.getName(), newAccessToken, newRefreshToken, generateJwtToken(member));
         return ResponseEntity.ok(userInfoResponse);
     }
 
@@ -116,6 +144,7 @@ public class OauthLoginController {
         private String name;
         private String accessToken;
         private String refreshToken;
+        private String jwtToken; // JWT 토큰 추가
     }
 
     @Data
