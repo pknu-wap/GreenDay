@@ -1,4 +1,4 @@
-package com.example.controller;
+/*package com.example.controller;
 
 import com.example.dto.LoginRequest;
 import com.example.domain.entity.Member;
@@ -64,4 +64,4 @@ public class SecurityLoginController {
 
         return ResponseEntity.ok(message); // 성공 메시지를 반환함
     }
-}
+}*/
