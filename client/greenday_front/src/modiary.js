@@ -1,8 +1,6 @@
 import { useNavigate, Route, Routes} from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import './modiary.css'; 
-import axios from 'axios';
-
 
     const Modal = ({ isOpen, onClose, onSubmit }) => {
         const [text, setText] = useState(''); //text가 값 추적하고 setText함수 통해 상태
@@ -11,29 +9,12 @@ import axios from 'axios';
         const [placeholder, setPlaceholder] = useState('');
         const [title, setTitle] = useState('오늘의 그린일기');
         const [inputCount, setInputCount] = useState(0);
-        const navigate = useNavigate();
-
-    // const Modal = () => {
-    //     const [message, setMessage] = useState('');
-    // }
 
     const proverbs = [
         "일회용품", "재활용", "물", "전기", "배달", "걷기", "카페-텀블러", "분리수거", "제로웨이스트쇼핑", "친환경", 
         "멸종위기", "에코백", "설거지", "자전거", "대중교통", "미세먼지", "식물키우기", "손빨래", 
         "플로깅", "봉사활동", "포장", "헌옷수거"
         ];
-
-    let onChange = (event) => {
-            const value = event.target.value;
-            setText(value);
-            setLength(value.length);
-          };
-
-    // let onChange = (event) => { 
-    //     setText(event.target.value); 
-    //     setText(value);
-    //     setLength(value.length);
-    // }; 
 
     const clearTextarea = () => {
         setText(''); //글을 지워주는 기능
@@ -43,8 +24,6 @@ import axios from 'axios';
         return Math.floor(Math.random() * length)
     };
 
-    const MAX_LENGTH = 200;
-
     useEffect(() => {
         if (isOpen) {
         setPlaceholder(proverbs[getRandomIndex(proverbs.length)]);
@@ -52,38 +31,19 @@ import axios from 'axios';
         }
     }, [isOpen]);
 
-    //------------------------------------------------------------------------------
-    // function modalToken({ setGetToken, setUserInfo }) {
-
-    //     const userAccessToken = () => {
-    //         const url = new URL(window.location.href);
-    //         const token = url.searchParams.get("access_token");
-    //         if (token) {
-    //         getToken(token);
-    //         }
-    //     };
-        
-    //     const getToken = (token) => {
-    //         console.log(token);
-    //         localStorage.setItem("access_token", token);
-    //         setGetToken(token);
-    //     };
-    // };
     //여기부터 수정---------------------------------------------------------------
-
+    let onChange = (event) => {
+        const value = event.target.value;
+        setText(event.target.value);
+        setLength(event.target.value.length);
+      };
+    
     const handleSubmit = async (event) => { //입력 필드에서 입력이 변경될 때마다 호출되며, 입력된 값을 setText를 통해 상태 text에 저장
-
-        onSubmit(text); // 글 등록 버튼 클릭 시 동작
-        setText(''); // 텍스트 입력칸을 초기화=> 다음 입력위해 빈필드갖게함
-        setMessage('저장됐습니다.');
-        onClose(); //저장하면 하로 닫기게함 지체ㄴㄴ
-
-        event.preventDefault(); // 기본 폼 제출 동작 방지
+        event.preventDefault(); // 기본 폼 제출 동작 방지      
         
         try {
             const jwtToken = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')).jwtToken : null;
-            if (!jwtToken) {
-                // JWT 토큰이 없으면 처리
+            if (!jwtToken) { // JWT 토큰이 없으면 처리
                 console.error("JWT 토큰이 없습니다.");
                 return;
             }
@@ -102,56 +62,30 @@ import axios from 'axios';
                 console.error("요청 실패:", response.statusText);
                 return;
             }
-        
-            // 요청 성공 시 처리
-            const data = await response.json(); // 응답 데이터를 받아와서 data 변수에 할당
-            alert("저장됐습니다.");
 
+            const data = await response.json(); // 응답 데이터를 받아와서 data 변수에 할당
+            setMessage('저장됐습니다.');
+            // onSubmit(text); // 글 등록 버튼 클릭 시 동작
+            alert("저장됐습니다."); // 요청 성공 시 처리
             console.log("응답 데이터:", data);
+
+            //폼 초기화
+            setText(''); // 텍스트 입력칸을 초기화=> 다음 입력위해 빈필드갖게함
+            setLength(0);
+            onClose(); //저장하면 하로 닫기게함 지체ㄴㄴ
             
         } catch (error) {
             console.error("API 요청 오류:", error);
-    };
     }
-    //-------------------------------------------------------------------------
-    async function greenDiary() {
-        const REACT_APP_API = 'http://localhost:8080/post/write_diary';
-        try {
-            const urlParams = new URLSearchParams(window.location.search);
-            const code = urlParams.get('code');
-            const state = urlParams.get('state');
-        
-            const res = await axios.post(REACT_APP_API + `/api/user-info`, { code, state });
-            const { accessToken, refreshToken, diary_id, diary_content, login_id, jwtToken } = res.data;
-        
-            const userInfo = {
-              diary_id,
-              diary_content,
-              login_id,
-              accessToken,
-              refreshToken,
-              jwtToken // jwtToken 추가
-            };
+}
 
-            localStorage.setItem('userInfo', JSON.stringify(userInfo));
-    
-            // 리디렉션 없이 알림만 표시
-            alert("저장됐습니다.");
-        
-            // 리디렉션을 위해 필요한 코드
-            window.location.href = "/modiary";
-        } catch (error) {
-            console.error("오류:", error);
-        }
-    }
-    //---------------------------------------------------------------------------
     if (!isOpen) {
         return null; // 모달이 닫혀 있을 때는 렌더링하지 않음
     }
-    
+
     return (
             <div className="modal">
-                    <button className="Close-button" onClick={() => {onClose(); clearTextarea();}}>
+                    <button className="Close-button" onClick={() => {onClose(); clearTextarea();}} type="button">
                         close
                     </button>
                     <h3>🌞 오늘의 주제  {'<'}{title}{'>'} 🌞</h3>
@@ -167,7 +101,7 @@ import axios from 'axios';
                             style={{ whiteSpace: "pre-wrap" }}
                         ></textarea>
                         <div className="diaryinputLength">{length}/200자</div>
-                        <button className="Save-button" onClick={handleSubmit}>
+                        <button className="Save-button" type="submit">
                             <img src='apple.png' alt="Save" />
                         </button>
                         </form>
