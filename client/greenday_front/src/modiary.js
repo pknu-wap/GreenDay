@@ -52,28 +52,99 @@ import axios from 'axios';
         }
     }, [isOpen]);
 
-    const handleSubmit = async (event) => { //입력 필드에서 입력이 변경될 때마다 호출되며, 입력된 값을 setText를 통해 상태 text에 저장
-        alert("저장됐습니다.");
-        const response = await fetch('https://codingapple1.github.io/shop/data2.json', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ text }),//content 상태 값을 json으로 변환하여 요청 본문에 포함시킴
-        });
-        // if (text.trim() === '') { //입력필드가 비어있는지 검사, 공백이나 빈칸 제출 못하게함
-        //     setText('');
-        //     setMessage('입력된 내용이 없습니다.');
-        //     return;
-        // }
+    //------------------------------------------------------------------------------
+    // function modalToken({ setGetToken, setUserInfo }) {
+
+    //     const userAccessToken = () => {
+    //         const url = new URL(window.location.href);
+    //         const token = url.searchParams.get("access_token");
+    //         if (token) {
+    //         getToken(token);
+    //         }
+    //     };
         
+    //     const getToken = (token) => {
+    //         console.log(token);
+    //         localStorage.setItem("access_token", token);
+    //         setGetToken(token);
+    //     };
+    // };
+    //여기부터 수정---------------------------------------------------------------
+
+    const handleSubmit = async (event) => { //입력 필드에서 입력이 변경될 때마다 호출되며, 입력된 값을 setText를 통해 상태 text에 저장
+
         onSubmit(text); // 글 등록 버튼 클릭 시 동작
         setText(''); // 텍스트 입력칸을 초기화=> 다음 입력위해 빈필드갖게함
         setMessage('저장됐습니다.');
         onClose(); //저장하면 하로 닫기게함 지체ㄴㄴ
-    };
 
+        event.preventDefault(); // 기본 폼 제출 동작 방지
+        
+        try {
+            const jwtToken = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')).jwtToken : null;
+            if (!jwtToken) {
+                // JWT 토큰이 없으면 처리
+                console.error("JWT 토큰이 없습니다.");
+                return;
+            }
     
+            const response = await fetch('http://localhost:8080/post/write_diary', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwtToken}`
+                },
+                body: JSON.stringify({ text }), // content 상태 값을 JSON으로 변환하여 요청 본문에 포함
+            });
+    
+            if (!response.ok) {
+                // 요청이 성공하지 않았을 때 처리
+                console.error("요청 실패:", response.statusText);
+                return;
+            }
+        
+            // 요청 성공 시 처리
+            const data = await response.json(); // 응답 데이터를 받아와서 data 변수에 할당
+            alert("저장됐습니다.");
+
+            console.log("응답 데이터:", data);
+            
+        } catch (error) {
+            console.error("API 요청 오류:", error);
+    };
+    }
+    //-------------------------------------------------------------------------
+    async function greenDiary() {
+        const REACT_APP_API = 'http://localhost:8080/post/write_diary';
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const state = urlParams.get('state');
+        
+            const res = await axios.post(REACT_APP_API + `/api/user-info`, { code, state });
+            const { accessToken, refreshToken, diary_id, diary_content, login_id, jwtToken } = res.data;
+        
+            const userInfo = {
+              diary_id,
+              diary_content,
+              login_id,
+              accessToken,
+              refreshToken,
+              jwtToken // jwtToken 추가
+            };
+
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    
+            // 리디렉션 없이 알림만 표시
+            alert("저장됐습니다.");
+        
+            // 리디렉션을 위해 필요한 코드
+            window.location.href = "/modiary";
+        } catch (error) {
+            console.error("오류:", error);
+        }
+    }
+    //---------------------------------------------------------------------------
     if (!isOpen) {
         return null; // 모달이 닫혀 있을 때는 렌더링하지 않음
     }
@@ -105,5 +176,6 @@ import axios from 'axios';
              </div>
     );
 };
+
 
 export default Modal;
