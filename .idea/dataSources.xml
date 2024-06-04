@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="greenday.cn84e8kaqjsg.ap-northeast-2.rds.amazonaws.com" uuid="8f197599-d6f3-46ea-b758-7042da7bd1f1">
+    <data-source source="LOCAL" name="greenday" uuid="722644dd-498a-43f6-b6ad-d4d5ff471d47">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
