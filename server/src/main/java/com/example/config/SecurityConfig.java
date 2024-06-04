@@ -42,7 +42,7 @@ public class SecurityConfig{
                         .requestMatchers("/api/**").permitAll() // API 경로에 대한 설정 추가
                         .requestMatchers("/authuser/**").permitAll() // /authuser 경로에 대한 인증 요구 추가
                         .requestMatchers("/api/private/**").authenticated() // 인증된 사용자만 접근 가능한 리소스
-                        .requestMatchers("/write_diary").authenticated() // /write_diary 경로에 대한 인증 요구 추가
+                        .requestMatchers("/post/write_diary").authenticated() // /write_diary 경로에 대한 인증 요구 추가
                         .anyRequest().permitAll()
                 )
                 .oauth2Login(oauth2 -> oauth2

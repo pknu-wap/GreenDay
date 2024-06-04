@@ -6,12 +6,10 @@ import com.example.config.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/post")
 public class DiaryController {
     private final Diaryservice diaryService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -28,18 +26,18 @@ public class DiaryController {
         String jwt = extractJwtFromHeader(authorizationHeader);
 
         if (jwt == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("JWT token is missing");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("JWT 토큰이 없습니다");
         }
 
         // 토큰 검증 및 사용자 정보 추출
         if (!jwtAuthenticationFilter.validateToken(jwt)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid JWT token");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유효하지 않은 JWT 토큰입니다");
         }
 
         String loginId = jwtAuthenticationFilter.getUserIdFromJwt(jwt);
 
         if (loginId == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid JWT token");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유효하지 않은 JWT 토큰입니다");
         }
 
         // 다이어리 DTO에 로그인 ID 설정
