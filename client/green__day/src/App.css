@@ -359,3 +359,32 @@ h5 {
   background-color: rgb(191, 216, 199);
 }
 
+.modify{
+  border: none;
+  background: none;
+  float: right;
+
+}
+
+.modify img{
+  position: relative;
+  background-color: none;
+  width:70px;
+  border:none;
+  top:5px;
+
+}
+.delete{
+  border: none;
+  background: none;
+  float: right;
+}
+
+.delete img{
+  position: relative;
+  background-color: none;
+  width: 70px;
+  border:none;
+  top:5px;
+
+}
