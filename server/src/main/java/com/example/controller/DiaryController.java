@@ -55,6 +55,8 @@ public class DiaryController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+
+
     // 요청 헤더에서 JWT 토큰을 추출하는 메서드
     private String extractJwtFromHeader(String authorizationHeader) {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
@@ -62,4 +64,5 @@ public class DiaryController {
         }
         return null;
     }
+
 }
