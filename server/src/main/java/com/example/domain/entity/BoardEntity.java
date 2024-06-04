@@ -35,8 +35,8 @@ public class BoardEntity {
     private LocalDateTime modifiedDate;
 
     @Builder
-    public BoardEntity(Long boardId, String userEmail, String content) { // 매개변수 이름 수정
-        this.id = boardId;
+    public BoardEntity(Long id, String userEmail, String content) { // 매개변수 이름 수정
+        this.id = id;
         this.userEmail = userEmail;
         this.content = content;
         // 오류는 안나지만 주의해야 될 부분

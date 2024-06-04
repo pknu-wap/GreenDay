@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 public class BoardDto {
-    private Long boardId; // 필드 이름 수정
-
+    private Long id;
     private String userEmail;
     private String content;
     private LocalDateTime createdDate;
@@ -19,7 +18,7 @@ public class BoardDto {
 
     public BoardEntity toEntity() {
         BoardEntity boardEntity = BoardEntity.builder()
-                .boardId(boardId) // 메서드 이름 수정
+                .id(id) // 여기서 DTO의 id 필드가 Entity의 id 필드에 매핑됨
                 .userEmail(userEmail)
                 .content(content)
                 .build();
@@ -27,11 +26,20 @@ public class BoardDto {
     }
 
     @Builder
-    public BoardDto(Long boardId, String userEmail, String content, LocalDateTime createdDate, LocalDateTime modifiedDate) {
-        this.boardId = boardId;
+    public BoardDto(Long id, String userEmail, String content, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+        this.id = id;
         this.userEmail = userEmail;
         this.content = content;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
+    }
+
+    // BoardEntity를 인수로 받는 생성자 추가
+    public BoardDto(BoardEntity entity) {
+        this.id= entity.getId();
+        this.userEmail = entity.getUserEmail();
+        this.content = entity.getContent();
+        this.createdDate = entity.getCreatedDate();
+        this.modifiedDate = entity.getModifiedDate();
     }
 }

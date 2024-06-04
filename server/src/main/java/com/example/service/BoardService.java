@@ -17,9 +17,13 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     // 페이징 메서드를 구현
-    public Page<BoardEntity> getBoardList(int page, int size) {
+    // 게시판에 게시글을 페이징 처리로 조회
+    public Page<BoardDto> getBoardList(int page, int size) {
+        // 페이지 번호(page)와 페이지당 게시글 수(size)를 지정
         Pageable pageable = PageRequest.of(page, size);
-        return boardRepository.findAll(pageable);
+        // BoardEntity를 BoardDto로 변환하는 과정
+        Page<BoardEntity> entities = boardRepository.findAll(pageable);
+        return entities.map(BoardDto::new);
     }
 
     @Transactional
