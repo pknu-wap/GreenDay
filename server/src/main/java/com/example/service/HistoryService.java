@@ -20,7 +20,7 @@ public class HistoryService {
     }
 
     public List<DiaryEntity> getDiaryHistory(int page) {
-        Pageable pageable = PageRequest.of(page, 7);
+        Pageable pageable = PageRequest.of(page, 2);
         return diaryrepository.findAll(pageable).getContent();
     }
 }
