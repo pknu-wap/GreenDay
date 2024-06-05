@@ -36,16 +36,18 @@ function Notice() {
     handleSubmit();
   }, []);
 
+  // 게시판 목록 가져오는 코드
   const getBoardList = async () => {
     const data = await (
-      await axios.get("https://codingapple1.github.io/shop/data2.json")
+      await axios.get("http://localhost:8080/api/board/list")
     ).data;
     setUserWriteInformation(data);
     console.log(userWriteInformation);
   };
 
+  //
   const api = axios.create({
-    baseURL: "http://your-api-base-url",
+    baseURL: "http://localhost:8080/api/board",
   });
 
   const handleSubmit = async (event) => {
@@ -60,7 +62,7 @@ function Notice() {
         return;
       }
 
-      const response = await fetch("http://localhost:8080/", {
+      const response = await fetch("http://localhost:8080/api/board/write", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -120,7 +122,7 @@ function Notice() {
 
   const sendUpdateToServer = async (id, data) => {
     try {
-      const response = await api.put(`/posts/${id}`, data);
+      const response = await api.put(`/update/{id}`, data);
       console.log("수정 성공:", response.data);
       setUserWriteInformation(
         userWriteInformation.map((item) =>
@@ -134,7 +136,7 @@ function Notice() {
 
   const sendDeleteToServer = async (id) => {
     try {
-      const response = await api.delete(`/posts/${id}`);
+      const response = await api.delete(`/delete/{id}`);
       console.log("삭제 성공:", response.data);
       setUserWriteInformation(userInformation.filter((item) => item.id !== id));
     } catch (error) {
