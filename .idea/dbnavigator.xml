@@ -24,9 +24,7 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="e90a8997-d26f-41f4-a2f2-2e02245947e5" object-ref="consoles/greenday.cn84e8kaqjsg.ap-northeast-2.rds.amazonaws.com" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="e90a8997-d26f-41f4-a2f2-2e02245947e5" />
@@ -143,7 +141,6 @@
         <display-mode value="TABBED" />
         <navigation-history-size value="100" />
         <show-object-details value="false" />
-        <enable-sticky-paths value="true" />
       </general>
       <filters>
         <object-type-filter>
@@ -264,12 +261,18 @@
           <content-type name="DTD" enabled="true" />
           <content-type name="HTML" enabled="true" />
           <content-type name="XHTML" enabled="true" />
+          <content-type name="CSS" enabled="true" />
           <content-type name="Java" enabled="true" />
           <content-type name="SQL" enabled="true" />
           <content-type name="PL/SQL" enabled="true" />
+          <content-type name="JavaScript" enabled="true" />
           <content-type name="JSON" enabled="true" />
           <content-type name="JSON5" enabled="true" />
+          <content-type name="JSP" enabled="true" />
+          <content-type name="JSPx" enabled="true" />
           <content-type name="Groovy" enabled="true" />
+          <content-type name="FTL" enabled="true" />
+          <content-type name="VTL" enabled="true" />
           <content-type name="YAML" enabled="true" />
           <content-type name="Manifest" enabled="true" />
         </content-types>

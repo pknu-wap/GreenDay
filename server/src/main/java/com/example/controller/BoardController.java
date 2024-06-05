@@ -69,12 +69,8 @@ public class BoardController {
     // 페이징 결과를 클라이언트에 반환하는 메서드 추가
     @GetMapping("/list")
     public ResponseEntity<Page<BoardDto>> list(
-            @RequestParam(value = "page", defaultValue = "0") int page)
-//            @RequestParam(value = "size", defaultValue = "7") int size)
-
-    {
-        // size를 4로 고정
-        int size = 4;
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "7") int size) {
         // 데이터베이스로부터 페이징 처리된 게시글 목록을 조회하는 핵심 로직
         Page<BoardDto> dtoPage = boardService.getBoardList(page, size);
         // BoardEntity 객체를 직접 클라이언트에 반환하지 않고, BoardDto 객체를 이용해 반환
@@ -86,7 +82,7 @@ public class BoardController {
         response.put("content", dtoPage.getContent());
         response.put("boardIds", boardIds);
         response.put("currentPage", dtoPage.getNumber());
-        response.put("totalItemsCount", dtoPage.getTotalElements());
+        response.put("totalItems", dtoPage.getTotalElements());
         response.put("totalPages", dtoPage.getTotalPages());
         response.put("email", dtoPage.getContent().stream().map(BoardDto::getUserEmail).collect(Collectors.toList()));
         response.put("createdDate", dtoPage.getContent().stream().map(BoardDto::getCreatedDate).collect(Collectors.toList()));
