@@ -33,6 +33,7 @@ function Notice() {
 
   useEffect(() => {
     getBoardList();
+    handleSubmit();
   }, []);
 
   // 게시판 목록 가져오는 코드
@@ -44,7 +45,7 @@ function Notice() {
     console.log(userWriteInformation);
   };
 
-  // 
+  //
   const api = axios.create({
     baseURL: "http://localhost:8080/api/board",
   });
