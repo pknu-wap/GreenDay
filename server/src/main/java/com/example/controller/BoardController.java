@@ -10,6 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/board")
@@ -29,8 +33,8 @@ public class BoardController {
         String token = jwtTokenProvider.resolveToken(request);
         if (token != null && jwtTokenProvider.validateToken(token)) {
             String userId = jwtTokenProvider.getUserId(token);
-            Long postId = boardService.write(boardDto, userId); // 생성된 게시글 ID
-            return ResponseEntity.ok(postId); // ID를 프론트엔드에 반환
+            boardService.write(boardDto, userId);
+            return ResponseEntity.ok("작성을 완료하였습니다.");
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증을 실패하였습니다.");
         }
@@ -70,6 +74,20 @@ public class BoardController {
         // 데이터베이스로부터 페이징 처리된 게시글 목록을 조회하는 핵심 로직
         Page<BoardDto> dtoPage = boardService.getBoardList(page, size);
         // BoardEntity 객체를 직접 클라이언트에 반환하지 않고, BoardDto 객체를 이용해 반환
+        // 게시글 목록과 게시글 ID 목록을 함께 반환
+        List<Long> boardIds = dtoPage.getContent().stream().map(BoardDto::getId).collect(Collectors.toList());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "게시글 목록을 성공적으로 반환하였습니다.");
+        response.put("content", dtoPage.getContent());
+        response.put("boardIds", boardIds);
+        response.put("currentPage", dtoPage.getNumber());
+        response.put("totalItems", dtoPage.getTotalElements());
+        response.put("totalPages", dtoPage.getTotalPages());
+        response.put("email", dtoPage.getContent().stream().map(BoardDto::getUserEmail).collect(Collectors.toList()));
+        response.put("createdDate", dtoPage.getContent().stream().map(BoardDto::getCreatedDate).collect(Collectors.toList()));
+        response.put("modifiedDate", dtoPage.getContent().stream().map(BoardDto::getModifiedDate).collect(Collectors.toList()));
+
         return ResponseEntity.ok(dtoPage);
     }
 }
