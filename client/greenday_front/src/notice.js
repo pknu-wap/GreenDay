@@ -42,9 +42,13 @@ function Notice() {
     ).data;
     setUserWriteInformation(data.content);
     console.log(userWriteInformation);
+
+    // // 받아온 데이터를 내림차순으로 정렬
+    const sortedData = data.content.sort(
+      (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+    );
   };
 
-  //
   const api = axios.create({
     baseURL: "http://localhost:8080/api/board",
   });
@@ -110,13 +114,6 @@ function Notice() {
   const itemChange = (e) => {
     setItems(Number(e.target.value));
   };
-
-      // // 받아온 데이터를 내림차순으로 정렬
-    // const sortedData = data.content.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
-    setUserWriteInformation(data.content);
-    console.log(userWriteInformation);
-};
-
 
   const sendDataToServer = async (data) => {
     try {
