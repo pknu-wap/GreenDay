@@ -24,9 +24,7 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="e90a8997-d26f-41f4-a2f2-2e02245947e5" object-ref="consoles/greenday.cn84e8kaqjsg.ap-northeast-2.rds.amazonaws.com" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="e90a8997-d26f-41f4-a2f2-2e02245947e5" />
