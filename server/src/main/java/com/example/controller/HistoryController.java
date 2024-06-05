@@ -23,7 +23,7 @@ public class HistoryController {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
-    @GetMapping("/diary/history")
+    @GetMapping("/history")
     public ResponseEntity<?> getDiaryHistory(@RequestParam("page") int page, @RequestHeader("Authorization") String authorizationHeader) {
         // JWT 토큰을 요청 헤더에서 추출
         String jwt = extractJwtFromHeader(authorizationHeader);
