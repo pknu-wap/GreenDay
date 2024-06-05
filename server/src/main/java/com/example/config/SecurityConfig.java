@@ -49,7 +49,7 @@ public class SecurityConfig{
                 .oauth2Login(oauth2 -> oauth2
                         // OAuth2 로그인 설정
                         .successHandler(authenticationSuccessHandler) // 성공 핸들러 설정
-                        .loginPage("/greenday/login")
+                        //.loginPage("/greenday/login")
                         .defaultSuccessUrl("/Home")
                         .failureUrl("/Xlog")
                         .redirectionEndpoint()
