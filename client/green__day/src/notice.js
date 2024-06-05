@@ -7,20 +7,6 @@ import History from "./history.js";
 import Pagination from "react-js-pagination";
 import "./App.css";
 
-const api = axios.create({
-  baseURL: "http://your-api-base-url",
-});
-
-const attachTokenToRequest = (config) => {
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  if (userInfo && userInfo.jwtToken) {
-    config.headers["Authorization"] = `Bearer ${userInfo.jwtToken}`;
-  }
-  return config;
-};
-
-api.interceptors.request.use(attachTokenToRequest);
-
 function Notice() {
   let [text, setText] = useState("");
   const [length, setLength] = useState(0);
@@ -44,6 +30,7 @@ function Notice() {
 
   let [userInformation, setUserInformation] = useState([]);
   let [email, setEmail] = useState("");
+  let [jwtToken, setjwtToken] = useState();
 
   useEffect(() => {
     const userInfoFromStorage = localStorage.getItem("userInfo");
@@ -51,23 +38,14 @@ function Notice() {
       const userInfo = JSON.parse(userInfoFromStorage);
       setUserInformation(userInfo);
       setEmail(userInfo.email);
+      setjwtToken(userInfo.jwtToken);
     }
-    getBoardList();
   }, []);
-
-  const getBoardList = async () => {
-    try {
-      const response = await api.get("/posts");
-      setUserInformation(response.data);
-    } catch (error) {
-      console.error("Fetch posts failed", error);
-    }
-  };
 
   const navigate = useNavigate();
 
   const [page, setPage] = useState(1);
-  const [items, setItems] = useState(2);
+  const [items, setItems] = useState(1);
   const handlePageChange = (page) => {
     setPage(page);
   };

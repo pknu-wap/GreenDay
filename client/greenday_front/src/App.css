@@ -395,4 +395,52 @@ h5 {
   font-weight: bold;
 }
 
+.pagination{
+  display: flex; 
+  justify-content: center; 
+  margin-top: 15px;
+  width: 500px;
+  height: 300px;
+  margin-left: 600px;
+  align-items: center;
+}
+.pagination li.active a {
+  color: black; 
+  border-radius: 10px;
+  padding: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: rgb(191, 216, 199);
+}
+
+.modify{
+  border: none;
+  background: none;
+  float: right;
+
+}
+
+.modify img{
+  position: relative;
+  background-color: none;
+  width:70px;
+  border:none;
+  top:5px;
+
+}
+.delete{
+  border: none;
+  background: none;
+  float: right;
+}
+
+.delete img{
+  position: relative;
+  background-color: none;
+  width: 70px;
+  border:none;
+  top:5px;
+
+}
+
 
