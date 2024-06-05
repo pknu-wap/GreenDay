@@ -38,9 +38,9 @@ function Notice() {
   // 게시판 목록 가져오는 코드
   const getBoardList = async () => {
     const data = await (
-      await axios.get("http://localhost:8080/api/board/list")
+      await axios.get("http://localhost:8080/api/board/list?page=0&size=7")
     ).data;
-    setUserWriteInformation(data);
+    setUserWriteInformation(data.content);
     console.log(userWriteInformation);
   };
 
@@ -79,8 +79,9 @@ function Notice() {
       alert("등록되었습니다.");
       console.log("응답 데이터:", data);
 
-      setText = "";
+      setText("");
       setLength(0);
+      getBoardList(); // 새로 게시글 목록을 가져옵니다.
     } catch (error) {
       console.error("API 요청 오류:", error);
     }
@@ -110,18 +111,39 @@ function Notice() {
     setItems(Number(e.target.value));
   };
 
-  // const sendDataToServer = async (data) => {
-  //   try {
-  //     const response = await api.post("/posts", data);
-  //     console.log("성공:", response.data);
-  //   } catch (error) {
-  //     console.error("실패:", error);
-  //   }
-  // };
+  const sendDataToServer = async (data) => {
+    try {
+      const jwtToken = localStorage.getItem("userInfo")
+        ? JSON.parse(localStorage.getItem("userInfo")).jwtToken
+        : null;
+      if (!jwtToken) {
+        console.error("JWT 토큰이 없습니다.");
+        return;
+      }
+
+      const response = await api.post("/write", data, {
+        headers: { Authorization: `Bearer ${jwtToken}` },
+      });
+      console.log("성공:", response.data);
+      getBoardList(); // 새로 게시글 목록을 가져옵니다.
+    } catch (error) {
+      console.error("실패:", error);
+    }
+  };
 
   const sendUpdateToServer = async (id, data) => {
     try {
-      const response = await api.put(`/update/{id}`, data);
+      const jwtToken = localStorage.getItem("userInfo")
+        ? JSON.parse(localStorage.getItem("userInfo")).jwtToken
+        : null;
+      if (!jwtToken) {
+        console.error("JWT 토큰이 없습니다.");
+        return;
+      }
+
+      const response = await api.put(`/update/${id}`, data, {
+        headers: { Authorization: `Bearer ${jwtToken}` },
+      });
       console.log("수정 성공:", response.data);
       setUserWriteInformation(
         userWriteInformation.map((item) =>
@@ -135,9 +157,19 @@ function Notice() {
 
   const sendDeleteToServer = async (id) => {
     try {
-      const response = await api.delete(`/delete/{id}`);
+      const jwtToken = localStorage.getItem("userInfo")
+        ? JSON.parse(localStorage.getItem("userInfo")).jwtToken
+        : null;
+      if (!jwtToken) {
+        console.error("JWT 토큰이 없습니다.");
+        return;
+      }
+
+      const response = await api.delete(`/delete/${id}`, {
+        headers: { Authorization: `Bearer ${jwtToken}` },
+      });
       console.log("삭제 성공:", response.data);
-      setUserWriteInformation(userInformation.filter((item) => item.id !== id));
+      setUserWriteInformation(userWriteInformation.filter((item) => item.id !== id));
     } catch (error) {
       console.error("삭제 실패:", error);
     }
@@ -197,62 +229,60 @@ function Notice() {
           <button
             className="backrock_button"
             style={{ whiteSpace: "pre-wrap" }}
+            onClick={() => {
+              setOldText(text);
+              alert(editId ? "수정되었습니다." : "등록되었습니다.");
+              if (editId) {
+                sendUpdateToServer(editId, { content: text });
+                setEditId(null);
+              } else {
+                sendDataToServer({ content: text });
+              }
+              setText("");
+              setLength(0);
+            }}
           >
             <img
               src="backrock_button.png"
               alt="backrock button"
-              onClick={() => {
-                setOldText(text);
-                alert(editId ? "수정되었습니다." : "등록되었습니다.");
-                if (editId) {
-                  sendUpdateToServer(editId, { content: text });
-                  setEditId(null);
-                } else {
-                  response();
-                }
-                setText("");
-                setLength(0);
-              }}
             />
           </button>
         </div>
 
-        {userWriteInformation
-          /* .slice(items * (page - 1), items * (page - 1) + items) */
-          .map((a, i) => {
-            const canModifyAndDelete = email === a.email; // 현재 사용자가 작성한 글인지 확인
-            return (
-              <div key={i}>
-                <div className="line1" />
-                <div className="userdata">
-                  <div className="bar">
-                    <div className="title">{a.title}</div>
-                    <div className="writetime">Price:{a.price}</div>
-                  </div>
-                  {canModifyAndDelete && (
-                    <div>
-                      <button
-                        className="delete"
-                        onClick={() => sendDeleteToServer(a.id)}
-                      >
-                        <img src="deleteButton.png" alt="delete button" />
-                      </button>
-                      <button
-                        className="modify"
-                        onClick={() => loadDataToTextarea(a.id, a.content)}
-                      >
-                        <img src="modifyButton.png" alt="modify button" />
-                      </button>
-                    </div>
-                  )}
-                  <div className="noticeContent">{a.content}</div>
-                  <br />
-                  <br />
-                  <br />
+        {userWriteInformation.map((a, i) => {
+          const canModifyAndDelete =true//email === a.email; // 현재 사용자가 작성한 글인지 확인
+          return (
+            <div key={i}>
+              <div className="line1" />
+              <div className="userdata">
+                <div className="bar">
+                  <div className="title">{a.title}</div>
+                  <div className="writetime">작성일: {a.createdDate}</div>
                 </div>
+                {canModifyAndDelete && (
+                  <div>
+                    <button
+                      className="delete"
+                      onClick={() => sendDeleteToServer(a.id)}
+                    >
+                      <img src="deleteButton.png" alt="delete button" />
+                    </button>
+                    <button
+                      className="modify"
+                      onClick={() => loadDataToTextarea(a.id, a.content)}
+                    >
+                      <img src="modifyButton.png" alt="modify button" />
+                    </button>
+                  </div>
+                )}
+                <div className="noticeContent">{a.content}</div>
+                <br />
+                <br />
+                <br />
               </div>
-            );
-          })}
+            </div>
+          );
+        })}
         <>
           <Pagination
             className="pagination"
