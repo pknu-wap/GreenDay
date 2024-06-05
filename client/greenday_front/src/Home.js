@@ -24,7 +24,7 @@ function Home() {
 
   // 컴포넌트가 마운트될 때 로컬 스토리지에서 사용자 정보 가져오기
   useEffect(() => {
-    const userInfoFromStorage = localStorage.getItem('userInfo');
+    const userInfoFromStorage = localStorage.getItem("userInfo");
     if (userInfoFromStorage) {
       setUserInformation(JSON.parse(userInfoFromStorage));
       console.log(userInfoFromStorage); // 유저 정보를 콘솔에 출력
@@ -38,7 +38,7 @@ function Home() {
   const closeModal = () => {
     setModalOpen(false); // 모달 닫기
   };
-
+  //아란이 최공 ><><><
   const apples = [
     { id: 1, src: "apple.png", style: { top: "215px", left: "850px" } },
     { id: 2, src: "apple.png", style: { top: "285px", left: "755px" } },
@@ -57,7 +57,8 @@ function Home() {
           <h4>
             Q. 여러분은 평소에 환경을 얼마큼 생각하시나요?
             <br />
-            Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들을 위한 공간입니다.
+            Green Day는 제로-웨이스트 시도 또는 습관을 기르려는 사람들을 위한
+            공간입니다.
           </h4>
           <h5>
             {userInformation.name}님,

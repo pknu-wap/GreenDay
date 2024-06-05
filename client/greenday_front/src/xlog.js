@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Routes,
-  Route, 
+  Route,
   Link,
   useNavigate,
   useLocation,
@@ -19,7 +19,6 @@ function Xlog({ setGetToken, setUserInfo }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     const refreshToken = localStorage.getItem("refreshToken");
@@ -28,18 +27,16 @@ function Xlog({ setGetToken, setUserInfo }) {
       // 예시: 토큰을 상태로 설정하는 함수 호출
       // 예시: 사용자 정보를 상태로 설정하는 함수 호출
       // 예시 작업 외에도 필요한 작업을 수행할 수 있습니다.
-  
+
       navigate("/home"); // 예시: 로그인 후 화면으로 리다이렉트
     }
   }, []); // 컴포넌트가 마운트될 때 한 번만 실행
 
-  
-
   const handleTreeClick = () => {
-    const NAVER_CLIENT_ID = 'o72MtePRXsbwlztUtJoj';
+    const NAVER_CLIENT_ID = "o72MtePRXsbwlztUtJoj";
     const NAVER_REDIRECT_URI = "http://localhost:3000/authuser";
     // const NAVER_REDIRECT_URI = "http://3.36.87.184:8080";
-    const REACT_APP_NAVER_STATE = '123';
+    const REACT_APP_NAVER_STATE = "123";
     const NAVER_URI = `https://nid.naver.com/oauth2.0/authorize?client_id=${NAVER_CLIENT_ID}&response_type=code&redirect_uri=${NAVER_REDIRECT_URI}&state=${REACT_APP_NAVER_STATE}`;
     window.location.href = NAVER_URI;
   };
@@ -86,9 +83,6 @@ function Xlog({ setGetToken, setUserInfo }) {
             </li>
             <br />
             <br />
-            <li>
-              <Link to="/home">로그인 후 화면</Link>
-            </li>
 
             <br />
           </ul>
@@ -124,7 +118,6 @@ function Xlog({ setGetToken, setUserInfo }) {
           </button>
         </div>
       )}
-
     </>
   );
 }
