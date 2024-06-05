@@ -249,15 +249,18 @@ function Notice() {
         </div>
 
         {userWriteInformation.map((a, i) => {
-          const canModifyAndDelete = true; //email === a.email; // 현재 사용자가 작성한 글인지 확인
+          const canModifyAndDelete = email === a.userEmail; // 현재 사용자가 작성한 글인지 확인
 
           return (
             <div key={i}>
               <div className="line1" />
               <div className="userdata">
                 <div className="bar">
-                  <div className="title">{a.title}</div>
-                  <div className="writetime">작성일: {a.createdDate}</div>
+                  <div className="title">{a.userEmail}</div>
+                  <div className="writetime">
+                    작성일:{" "}
+                    {a.createdDate ? a.createdDate.substring(0, 10) : ""}
+                  </div>
                 </div>
                 {canModifyAndDelete && (
                   <div>
