@@ -1,75 +1,67 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
-import Modal from "./modiary.js";
 import Home from "./Home.js";
 import Notice from "./notice.js";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import Pagination from "react-js-pagination";
 import axios from "axios";
 
 function History() {
   const [diary, setDiary] = useState([]);
   const [page, setPage] = useState(1);
-  const navigate = useNavigate();
+  const [count, setCount] = useState(0); // 총 아이템 수를 저장할 상태
+  const [userInformation, setUserInformation] = useState([]);
+  const [token, setToken] = useState(""); // 토큰 상태 추가
 
-  const MyComponent = () => {
-    const [data, setData] = useState(null);
-  };
-
-  // const getDiary = async () => {
-  //   const data = await (
-  //     await axios.get("https://codingapple1.github.io/shop/data2.json")
-  //   ).data; // 2) 게시글 목록 데이터에 할당
-  //   setBoardList(data); // 3) boardList 변수에 할당
-  //   console.log(boardList);
-  //   console.log(data);
-  // };
-
-  // useEffect(() => {
-  //   getBoardList(); // 1) 게시글 목록 조회 함수 호출
-  // }, []);
-
-  useEffect(() => {
-    axios.get("").then((response) => {
-      console.log(response);
-    });
-  }, []);
-
-  useEffect(() => {
-    const fetchDiary = async () => {
+    // const handlePageChange = (page) => {
+    //   setPage(page);
+    //   console.log(page);
+    // };
+    // 위에꺼 안되면 밑에껄로 실행해보기 
+    const handlePageChange = (pageNumber) => {
+      setPage(pageNumber);
+    };
+  
+    const fetchDiary = async (pageNumber) => {
       try {
-        const response = await fetch(
-          `https://codingapple1.github.io/shop/data2.json`
-        );
-        const data = await response.json();
-        setDiary(data);
+        const response = await axios.get(`https://codingapple1.github.io/shop/data2.json`,{
+        // const data = await response.json();
+          headers: {
+            Authorization: `Bearer ${token}` // 요청 시 토큰을 포함하여 보낸다
+          }
+        });
+        const data = response.data;
+        // setDiary(data.items || []);
+        // setCount(data.totalCount || 0);
+        setDiary(data.items); //백에서 설정한 이름으로 바꿔야함. 데이터를 items로 가정해줌
+        setCount(data.totalCount); //백에서 설정한 이름으로 바꿔야함. 총 데이터 수를 totalCount로 가정
       } catch (error) {
-        console.error("Error fetching diary:", error);
+        console.error(  "Error fetching diary:", error);
       }
     };
 
-    fetchDiary();
+    useEffect(() => {
+      fetchDiary(page);
   }, [page]);
-  let [userInformation, setUserInformation] = useState([""]);
 
-  useEffect(() => {
-    getBoardList();
-  }, []);
-
-  const getBoardList = async () => {
-    const data = await (
-      await axios.get("https://codingapple1.github.io/shop/data2.json")
-    ).data;
-    setUserInformation(data);
-    console.log(userInformation);
-  };
-
+    //사용자아이디 받아오는 구역
+    useEffect(() => {
+      const userInfoFromStorage = localStorage.getItem('userInfo');
+      if (userInfoFromStorage) {
+        setUserInformation(JSON.parse(userInfoFromStorage));
+        console.log(userInfoFromStorage); // 유저 정보를 콘솔에 출력
+      }
+    }, []);
+// 효원 언니 최고 ><><><
+    
+  
   return (
     <>
       <div className="App">
         <div>
           <h5>
-            {userInformation[0].title}님,
+          {userInformation.name}님,
             <br />
             환영합니다.
             <br />
@@ -102,29 +94,28 @@ function History() {
 
         <div>
           {diary.map((diary, index) => (
-            <div className="history">
+            <div className="history" key={index}>
               <div className="day">
-                {diary.id}
+                {diary.index}
                 <br />
               </div>
-              <div className="content">{diary.title}</div>
+              <div className="content">{diary.content}</div>
               {/* <li key={index}>{diary.id}</li>
               <li key={index}>{diary.title}</li><br /> */}
             </div>
           ))}
         </div>
 
-        {/* 7개씩 데이터를 뜨게 하는 코드 */}
-        {/* {diary.map((a, i) => {
-            return <Card diary ={i} key={i}></Card>
-          })} */}
-
-        <div className="nextbutton">
-          <button onClick={() => setPage(page - 1)} disabled={page === 1}>
-            이전
-          </button>
-          <button onClick={() => setPage(page + 1)}>다음</button>
-        </div>
+        <Pagination
+              activePage={page} //현재페이지
+              itemsCountPerPage={2} //한 페이지당 보여줄 리스트 아이템의 개수
+              // totalItemsCount={count} //총 데이터 개수
+              totalItemsCount={14} //총 데이터 개수
+              pageRangeDisplayed={10} //paginator 내에서 보여줄 페이지의 범위
+              prevPageText={"‹"} // "이전"을 나타낼 텍스트(prev, <, )
+              nextPageText={"›"} // "다음"을 나타낼 텍스트(next, >, )
+              onChange={handlePageChange} //페이지가 바뀔 때 핸들링해줄 함수
+            />  
       </div>
     </>
   );
