@@ -22,19 +22,21 @@ public class BoardController {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
+    // 게시글 작성
     @PostMapping("/write")
     // ? 부분 -> String으로 바꿔도 상관없음, 통일하면 더 명확해짐
     public ResponseEntity<?> write(@RequestBody BoardDto boardDto, HttpServletRequest request) {
         String token = jwtTokenProvider.resolveToken(request);
         if (token != null && jwtTokenProvider.validateToken(token)) {
             String userId = jwtTokenProvider.getUserId(token);
-            boardService.write(boardDto, userId);
-            return ResponseEntity.ok("작성을 완료하였습니다.");
+            Long postId = boardService.write(boardDto, userId); // 생성된 게시글 ID
+            return ResponseEntity.ok(postId); // ID를 프론트엔드에 반환
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("인증을 실패하였습니다.");
         }
     }
 
+    // 게시글 수정
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody BoardDto boardDto, HttpServletRequest request) {
         String token = jwtTokenProvider.resolveToken(request);
@@ -47,6 +49,7 @@ public class BoardController {
         }
     }
 
+    // 게시글 삭제
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id, HttpServletRequest request) {
         String token = jwtTokenProvider.resolveToken(request);
