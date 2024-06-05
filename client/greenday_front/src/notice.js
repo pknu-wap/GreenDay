@@ -33,22 +33,24 @@ function Notice() {
 
   useEffect(() => {
     getBoardList();
-    handleSubmit();
   }, []);
 
   // 게시판 목록 가져오는 코드
   const getBoardList = async () => {
-    const data = await (
-      await axios.get("http://localhost:8080/api/board/list?page=0&size=7")
-    ).data;
-    setUserWriteInformation(data.content);
+    try {
+      const data = await axios.get("http://localhost:8080/api/board/list?page=0&size=100");
+      setUserWriteInformation(data.data.content);
+    } catch (error) {
+      console.error("API 요청 오류:", error);
+    }
+    // // 받아온 데이터를 내림차순으로 정렬
+    // const sortedData = data.content.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
     console.log(userWriteInformation);
-  };
+};
 
-  //
-  const api = axios.create({
-    baseURL: "http://localhost:8080/api/board",
-  });
+const api = axios.create({
+  baseURL: "http://localhost:8080/api/board",
+});
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -104,7 +106,7 @@ function Notice() {
   const navigate = useNavigate();
 
   const [page, setPage] = useState(1);
-  const [items, setItems] = useState(2);
+  const [items, setItems] = useState(4);
   const handlePageChange = (page) => {
     setPage(page);
   };
@@ -250,14 +252,14 @@ function Notice() {
           </button>
         </div>
 
-        {userWriteInformation.map((a, i) => {
+        {userWriteInformation.slice(items * (page - 1), items * (page - 1) + items).map((a, i) => {
           const canModifyAndDelete =true//email === a.email; // 현재 사용자가 작성한 글인지 확인
           return (
             <div key={i}>
               <div className="line1" />
               <div className="userdata">
                 <div className="bar">
-                  <div className="title">{a.title}</div>
+                  <div className="title">{a.userEmail}</div>
                   <div className="writetime">작성일: {a.createdDate}</div>
                 </div>
                 {canModifyAndDelete && (
@@ -289,7 +291,7 @@ function Notice() {
             className="pagination"
             activePage={page}
             itemsCountPerPage={items}
-            /* totalItemsCount={userWriteInformation.length} */
+            totalItemsCount={userWriteInformation.length}
             pageRangeDisplayed={5}
             onChange={handlePageChange}
           ></Pagination>
