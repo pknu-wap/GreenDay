@@ -4,7 +4,6 @@ import "./App.css";
 
 function NaverRedirect() {
   const REACT_APP_API = 'http://localhost:8080';
-  // const REACT_APP_API = 'ec2-3-36-87-184.ap-northeast-2.compute.amazonaws.com:8080';
 
   async function naverLogin() {
     try {

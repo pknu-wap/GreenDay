@@ -1,14 +1,14 @@
-import logo from "./logo.svg";
-import "./App.css";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import Modal from "./modiary.js";
 import Home from "./Home.js";
 import History from "./history.js";
-
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import Pagination from "react-js-pagination";
+import "./App.css";
 
 function Notice() {
+  const [userInformation, setUserInformation] = useState({});
   let [text, setText] = useState("");
   const [length, setLength] = useState(0);
   let onChange = (event) => {
@@ -18,32 +18,177 @@ function Notice() {
   };
   let [oldText, setOldText] = useState("");
 
-  const [isModalOpen, setModalOpen] = useState(false); //useState사용하여 상태 초기화 및 모달의 열림/닫힘 상태관리
+  const [isModalOpen, setModalOpen] = useState(false);
 
-  //모달열기
   const openModal = (event) => {
-    event.preventDefault(); // 링크의 기본 동작 방지
-    setModalOpen(true); //setModalOpen(true)를 호출하여 isModalOpen 상태를 true로 설정해 모달 열기
+    event.preventDefault();
+    setModalOpen(true);
   };
 
-  //모달닫기함수
   const closeModal = () => {
-    setModalOpen(false); // 모달 닫기
+    setModalOpen(false);
   };
 
-  let [userInformation, setUserInformation] = useState([""]);
+  let [userWriteInformation, setUserWriteInformation] = useState([""]);
 
   useEffect(() => {
     getBoardList();
   }, []);
 
+  // 게시판 목록 가져오는 코드
   const getBoardList = async () => {
-    const data = await (
-      await axios.get("https://codingapple1.github.io/shop/data2.json")
-    ).data;
-    setUserInformation(data);
-    console.log(userInformation);
+      const data = await (
+        await axios.get("http://localhost:8080/api/board/list?page=0&size=100")
+      ).data;
+    // // 받아온 데이터를 내림차순으로 정렬
+    const sortedData = data.content.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
+    setUserWriteInformation(data.content);
+    console.log(userWriteInformation);
+
+    // // // 받아온 데이터를 내림차순으로 정렬
+    // const sortedData = data.content.sort(
+    //   (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+    // );
   };
+
+  const api = axios.create({
+    baseURL: "http://localhost:8080/api/board",
+  });
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const jwtToken = localStorage.getItem("userInfo")
+        ? JSON.parse(localStorage.getItem("userInfo")).jwtToken
+        : null;
+      if (!jwtToken) {
+        console.error("JWT 토큰이 없습니다.");
+        return;
+      }
+
+      const response = await fetch("http://localhost:8080/api/board/write", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtToken}`,
+        },
+        body: JSON.stringify({ text }),
+      });
+
+      if (!response.ok) {
+        console.error("요청 실패:", response.statusText);
+        return;
+      }
+
+      const data = await response.json();
+      alert("등록되었습니다.");
+      console.log("응답 데이터:", data);
+
+      setText("");
+      setLength(0);
+      getBoardList(); // 새로 게시글 목록을 가져옵니다.
+    } catch (error) {
+      console.error("API 요청 오류:", error);
+    }
+  };
+
+  let [email, setEmail] = useState("");
+  let [jwtToken, setjwtToken] = useState("");
+
+  useEffect(() => {
+    const userInfoFromStorage = localStorage.getItem("userInfo");
+    if (userInfoFromStorage) {
+      const userInfo = JSON.parse(userInfoFromStorage);
+      setUserInformation(userInfo);
+      setEmail(userInfo.email);
+      setjwtToken(userInfo.jwtToken);
+    }
+  }, []);
+
+  const navigate = useNavigate();
+
+  const [page, setPage] = useState(1);
+  const [items, setItems] = useState(4);
+  const handlePageChange = (page) => {
+    setPage(page);
+  };
+  const itemChange = (e) => {
+    setItems(Number(e.target.value));
+  };
+
+  const sendDataToServer = async (data) => {
+    try {
+      const jwtToken = localStorage.getItem("userInfo")
+        ? JSON.parse(localStorage.getItem("userInfo")).jwtToken
+        : null;
+      if (!jwtToken) {
+        console.error("JWT 토큰이 없습니다.");
+        return;
+      }
+
+      const response = await api.post("/write", data, {
+        headers: { Authorization: `Bearer ${jwtToken}` },
+      });
+      console.log("성공:", response.data);
+      getBoardList(); // 새로 게시글 목록을 가져옵니다.
+    } catch (error) {
+      console.error("실패:", error);
+    }
+  };
+
+  const sendUpdateToServer = async (id, data) => {
+    try {
+      const jwtToken = localStorage.getItem("userInfo")
+        ? JSON.parse(localStorage.getItem("userInfo")).jwtToken
+        : null;
+      if (!jwtToken) {
+        console.error("JWT 토큰이 없습니다.");
+        return;
+      }
+
+      const response = await api.put(`/update/${id}`, data, {
+        headers: { Authorization: `Bearer ${jwtToken}` },
+      });
+      console.log("수정 성공:", response.data);
+      setUserWriteInformation(
+        userWriteInformation.map((item) =>
+          item.id === id ? { ...item, ...data } : item
+        )
+      );
+    } catch (error) {
+      console.error("수정 실패:", error);
+    }
+  };
+
+  const sendDeleteToServer = async (id) => {
+    try {
+      const jwtToken = localStorage.getItem("userInfo")
+        ? JSON.parse(localStorage.getItem("userInfo")).jwtToken
+        : null;
+      if (!jwtToken) {
+        console.error("JWT 토큰이 없습니다.");
+        return;
+      }
+
+      const response = await api.delete(`/delete/${id}`, {
+        headers: { Authorization: `Bearer ${jwtToken}` },
+      });
+      console.log("삭제 성공:", response.data);
+      setUserWriteInformation(userWriteInformation.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error("삭제 실패:", error);
+    }
+  };
+
+  const loadDataToTextarea = (id, content) => {
+    setText(content);
+    setLength(content.length);
+    setEditId(id);
+  };
+
+  const [modifyAndDelete, setModifyAndDelete] = useState(true);
+  const [editId, setEditId] = useState(null);
 
   return (
     <div>
@@ -74,26 +219,9 @@ function Notice() {
           <Route path="/Home" element={<Home />}></Route>
           <Route path="/History" element={<History />}></Route>
         </Routes>
-        <Modal isOpen={isModalOpen} onClose={closeModal} />{" "}
-        {/* 모달을 닫기 위한 콜백 전달 */}
+        <Modal isOpen={isModalOpen} onClose={closeModal} />
       </div>
-      {userInformation.map((a, i) => (
-        <div>
-          <div className="line1" />
-          <div className="userdata">
-            <div className="bar">
-              <div className="title">{a.title}</div>
-              <div className="writetime">Price:{a.price}</div>
-            </div>
-            <div className="noticeContent">{a.content}</div>
-            <br />
-            <br />
-            <br />
-          </div>
-        </div>
-      ))}
       <div className="input_data_list">
-        <div className="input1">{oldText}</div>
         <textarea
           className="input"
           placeholder="내용을 입력하세요"
@@ -107,16 +235,75 @@ function Notice() {
           <button
             className="backrock_button"
             style={{ whiteSpace: "pre-wrap" }}
+            onClick={() => {
+              setOldText(text);
+              alert(editId ? "수정되었습니다." : "등록되었습니다.");
+              if (editId) {
+                sendUpdateToServer(editId, { content: text });
+                setEditId(null);
+              } else {
+                sendDataToServer({ content: text });
+              }
+              setText("");
+              setLength(0);
+            }}
           >
             <img
               src="backrock_button.png"
-              onClick={() => {
-                setOldText({ text });
-                setOldText(text);
-              }}
+              alt="backrock button"
             />
           </button>
         </div>
+        {userWriteInformation
+          .slice(items * (page - 1), items * (page - 1) + items)
+          .map((a, i) => {
+            const canModifyAndDelete = email === a.userEmail; // 현재 사용자가 작성한 글인지 확인
+
+            return (
+              <div key={i}>
+                <div className="line1" />
+                <div className="userdata">
+                  <div className="bar">
+                    <div className="title">{a.userEmail}</div>
+                    <div className="writetime">
+                      작성일:{" "}
+                      {a.createdDate ? a.createdDate.substring(0, 10) : ""}
+                    </div>
+                  </div>
+                  {canModifyAndDelete && (
+                    <div>
+                      <button
+                        className="delete"
+                        onClick={() => sendDeleteToServer(a.id)}
+                      >
+                        <img src="deleteButton.png" alt="delete button" />
+                      </button>
+                      <button
+                        className="modify"
+                        onClick={() => loadDataToTextarea(a.id, a.content)}
+                      >
+                        <img src="modifyButton.png" alt="modify button" />
+                      </button>
+                    </div>
+                  )}
+                  <div className="noticeContent">{a.content}</div>
+                  <br />
+                  <br />
+                  <br />
+                </div>
+              </div>
+            );
+          })}
+        <>
+          <Pagination
+            className="pagination"
+            activePage={page}
+            itemsCountPerPage={items}
+            totalItemsCount={userWriteInformation.length}
+            pageRangeDisplayed={5}
+            onChange={handlePageChange}
+          ></Pagination>
+        </>
       </div>
     </div>
   );
