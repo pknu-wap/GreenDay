@@ -33,6 +33,7 @@ function Notice() {
 
   useEffect(() => {
     getBoardList();
+    handleSubmit();
   }, []);
 
   const getBoardList = async () => {
@@ -108,14 +109,14 @@ function Notice() {
     setItems(Number(e.target.value));
   };
 
-  const sendDataToServer = async (data) => {
+  /*   const sendDataToServer = async (data) => {
     try {
       const response = await api.post("/posts", data);
       console.log("성공:", response.data);
     } catch (error) {
       console.error("실패:", error);
     }
-  };
+  }; */
 
   const sendUpdateToServer = async (id, data) => {
     try {
@@ -206,7 +207,7 @@ function Notice() {
                   sendUpdateToServer(editId, { content: text });
                   setEditId(null);
                 } else {
-                  sendDataToServer({ content: text });
+                  response();
                 }
                 setText("");
                 setLength(0);
