@@ -250,6 +250,7 @@ function Notice() {
 
         {userWriteInformation.map((a, i) => {
           const canModifyAndDelete = true; //email === a.email; // 현재 사용자가 작성한 글인지 확인
+
           return (
             <div key={i}>
               <div className="line1" />
