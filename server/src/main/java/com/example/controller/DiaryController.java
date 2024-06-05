@@ -8,6 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/post")
 public class DiaryController {
@@ -21,30 +25,34 @@ public class DiaryController {
     }
 
     @PostMapping("/write_diary")
-    public ResponseEntity<String> writeDiary(@RequestBody DiaryDto diaryDto, @RequestHeader("Authorization") String authorizationHeader) {
+    public ResponseEntity<Map<String, String>> writeDiary(@RequestBody DiaryDto diaryDto, @RequestHeader("Authorization") String authorizationHeader) {
         // JWT 토큰을 요청 헤더에서 추출
         String jwt = extractJwtFromHeader(authorizationHeader);
 
         if (jwt == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("JWT 토큰이 없습니다");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("message", "JWT 토큰이 없습니다"));
         }
 
         // 토큰 검증 및 사용자 정보 추출
         if (!jwtAuthenticationFilter.validateToken(jwt)) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유효하지 않은 JWT 토큰입니다");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("message", "유효하지 않은 JWT 토큰입니다"));
         }
 
         String loginId = jwtAuthenticationFilter.getUserIdFromJwt(jwt);
 
         if (loginId == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유효하지 않은 JWT 토큰입니다");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("message", "유효하지 않은 JWT 토큰입니다"));
         }
 
         // 다이어리 DTO에 로그인 ID 설정
         diaryDto.setLogin_id(loginId);
         diaryService.writeDiary(diaryDto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("저장이 완료되었습니다");
+        // 성공 응답 생성
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "저장이 완료되었습니다");
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     // 요청 헤더에서 JWT 토큰을 추출하는 메서드
