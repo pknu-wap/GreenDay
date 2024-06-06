@@ -68,7 +68,7 @@ function Home() {
               logoutWindow.close();
             }
             // 현재 창을 http://localhost:3000/로 리다이렉트
-            window.location.href = `http://localhost:3000/`
+            window.location.href = `http://localhost:3000/`;
           }, 50); // 3초 후 새 창 닫기 및 리다이렉트
         }
       })
