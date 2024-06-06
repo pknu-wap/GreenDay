@@ -442,5 +442,18 @@ h5 {
   top:5px;
 
 }
+.patmal{
+  position:relative;
+  width: 150px;
+  left:500px;
+  top: 400px;
 
+}
 
+.Logout{
+  position:relative;
+  top:265px;
+  background: none;
+  border: none;
+  width:40px;
+}

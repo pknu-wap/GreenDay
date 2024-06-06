@@ -37,11 +37,13 @@ function Notice() {
 
   // 게시판 목록 가져오는 코드
   const getBoardList = async () => {
-      const data = await (
-        await axios.get("http://localhost:8080/api/board/list?page=0&size=100")
-      ).data;
+    const data = await (
+      await axios.get("http://localhost:8080/api/board/list?page=0&size=100")
+    ).data;
     // // 받아온 데이터를 내림차순으로 정렬
-    const sortedData = data.content.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
+    const sortedData = data.content.sort(
+      (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+    );
     setUserWriteInformation(data.content);
     console.log(userWriteInformation);
 
@@ -175,7 +177,9 @@ function Notice() {
         headers: { Authorization: `Bearer ${jwtToken}` },
       });
       console.log("삭제 성공:", response.data);
-      setUserWriteInformation(userWriteInformation.filter((item) => item.id !== id));
+      setUserWriteInformation(
+        userWriteInformation.filter((item) => item.id !== id)
+      );
     } catch (error) {
       console.error("삭제 실패:", error);
     }
@@ -215,6 +219,9 @@ function Notice() {
           </li>
           <br />
         </ul>
+        <button className="Logout">
+          <img className="Logout" src="logout.png" />
+        </button>
         <Routes>
           <Route path="/Home" element={<Home />}></Route>
           <Route path="/History" element={<History />}></Route>
@@ -248,10 +255,7 @@ function Notice() {
               setLength(0);
             }}
           >
-            <img
-              src="backrock_button.png"
-              alt="backrock button"
-            />
+            <img src="backrock_button.png" alt="backrock button" />
           </button>
         </div>
         {userWriteInformation

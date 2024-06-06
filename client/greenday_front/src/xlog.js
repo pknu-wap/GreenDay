@@ -99,6 +99,8 @@ function Xlog({ setGetToken, setUserInfo }) {
         <img src="tree.png" alt="tree" />
       </button>
 
+      <img className="patmal" src="patmal2.png " />
+
       {buttonOpen && (
         <div>
           <div className="login_button">

@@ -89,6 +89,9 @@ function Home() {
           </Routes>
         </div>
       </div>
+      <button className="Logout">
+        <img className="Logout" src="logout.png" />
+      </button>
       <button
         className="tree_image"
         onClick={() => {
