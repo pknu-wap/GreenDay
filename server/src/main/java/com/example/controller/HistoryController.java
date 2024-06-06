@@ -1,62 +1,66 @@
 package com.example.controller;
 
-import com.example.domain.entity.DiaryEntity;
+import com.example.dto.DiaryDto;
 import com.example.service.HistoryService;
-import com.example.config.JwtTokenProvider; // JwtTokenProvider import 추가
+import com.example.config.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Collections;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/get")
-public class HistoryController {/*
+@RequestMapping("/history")
+public class HistoryController {
 
     private final HistoryService historyService;
-    private final JwtTokenProvider jwtTokenProvider; // JwtTokenProvider로 변경
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    // HistoryController 생성자
     @Autowired
-    public HistoryController(HistoryService historyService, JwtTokenProvider jwtTokenProvider) { // JwtTokenProvider로 변경
+    public HistoryController(HistoryService historyService, JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.historyService = historyService;
-        this.jwtTokenProvider = jwtTokenProvider; // JwtTokenProvider로 변경
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
-    // 일기 히스토리를 가져오는 API 엔드포인트
-    @GetMapping("/history")
-    public ResponseEntity<?> getDiaryHistory(@RequestParam("page") int page, @RequestHeader("Authorization") String authorizationHeader) {
-        // JWT 토큰을 JwtTokenProvider를 사용하여 추출
-        String jwt = jwtTokenProvider.resolveToken(authorizationHeader);
+    @GetMapping("/diaries")
+    public ResponseEntity<?> getDiaries(@RequestHeader("Authorization") String authorizationHeader,
+                                        @RequestParam(defaultValue = "0") int page,
+                                        @RequestParam(defaultValue = "2") int size) {
+        // JWT 토큰을 요청 헤더에서 추출
+        String jwt = extractJwtFromHeader(authorizationHeader);
 
         if (jwt == null) {
-            // 토큰이 없을 경우 UNAUTHORIZED 상태 코드 반환
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("JWT 토큰이 없습니다");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Collections.singletonMap("message", "JWT 토큰이 없습니다"));
         }
 
         // 토큰 검증 및 사용자 정보 추출
-        if (!jwtTokenProvider.validateToken(jwt)) {
-            // 토큰이 유효하지 않을 경우 UNAUTHORIZED 상태 코드 반환
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유효하지 않은 JWT 토큰입니다");
+        if (!jwtAuthenticationFilter.validateToken(jwt)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Collections.singletonMap("message", "유효하지 않은 JWT 토큰입니다"));
         }
 
-        String loginId = jwtTokenProvider.getUserIdFromJwt(jwt);
+        String loginId = jwtAuthenticationFilter.getUserIdFromJwt(jwt);
 
         if (loginId == null) {
-            // 토큰에서 사용자 ID를 추출할 수 없을 경우 UNAUTHORIZED 상태 코드 반환
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유효하지 않은 JWT 토큰입니다");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Collections.singletonMap("message", "유효하지 않은 JWT 토큰입니다"));
         }
 
-        // 일기 히스토리 가져오기
-        List<DiaryEntity> diaryHistory = historyService.getDiaryHistory(page);
+        // 페이징된 다이어리 목록을 조회
+        Page<DiaryDto> diaryPage = historyService.getDiaryList(page, size);
 
-        if (diaryHistory.isEmpty()) {
-            // 일기 히스토리가 비어있을 경우 NO_CONTENT 상태 코드 반환
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("더 이상 일기가 없습니다");
+        return new ResponseEntity<>(diaryPage, HttpStatus.OK);
+    }
+
+    // 요청 헤더에서 JWT 토큰을 추출하는 메서드
+    private String extractJwtFromHeader(String authorizationHeader) {
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            return authorizationHeader.substring(7); // "Bearer " 이후의 토큰 부분만 추출
         }
-
-        // 일기 히스토리가 존재할 경우 OK 상태 코드와 함께 일기 목록 반환
-        return ResponseEntity.ok(diaryHistory);
-    }*/
+        return null;
+    }
 }

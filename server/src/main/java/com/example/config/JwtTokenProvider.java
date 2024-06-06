@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.example.config;
 
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -56,4 +56,3 @@ public class JwtTokenProvider {
         }
     }
 }
-

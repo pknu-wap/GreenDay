@@ -1,29 +1,31 @@
 package com.example.service;
 
 import com.example.domain.entity.DiaryEntity;
-import com.example.repository.Diaryrepository;
+import com.example.dto.DiaryDto;
+import com.example.repository.HistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class HistoryService {/*
-
-    private final Diaryrepository diaryrepository;
+public class HistoryService {
+    private final HistoryRepository historyRepository;
 
     @Autowired
-    public HistoryService(Diaryrepository diaryrepository) {
-        this.diaryrepository = diaryrepository;
+    public HistoryService(HistoryRepository historyRepository) {
+        this.historyRepository = historyRepository;
     }
 
-    // 페이징 처리하여 일기 히스토리를 가져오는 메서드
-    public Page<DiaryEntity> getDiaryHistory(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return diaryrepository.findAll(pageable);
-    }*/
+    public Page<DiaryDto> getDiaryList(int page, int size) {
+        // 요청에 따라 페이지당 2개의 일기를 가져오도록 수정
+        Pageable pageable = PageRequest.of(page, size * 2, Sort.by("diary_id").ascending());
+        Page<DiaryEntity> diaryEntities = historyRepository.findAll(pageable);
+
+        // 일기 엔티티를 일기 DTO로 변환하여 반환
+        return diaryEntities.map(diaryEntity -> new DiaryDto(diaryEntity.getDiary_id(), diaryEntity.getDiary_content(), diaryEntity.getLogin_id()));
+    }
 }
 
