@@ -10,6 +10,7 @@ import axios from "axios";
 import Modal from "./modiary";
 import Notice from "./notice.js";
 import History from "./history.js";
+import Xlog from "./xlog.js"; // Xlog 컴포넌트 추가
 import "./App.css";
 
 function Home() {
@@ -55,15 +56,15 @@ function Home() {
           // Remove all local storage data
           localStorage.clear();
 
-          // Clear all caches
-          caches.keys().then((names) => {
-            names.forEach((name) => {
-              caches.delete(name);
-            });
-          });
+          // // Clear browser cache
+          // caches.keys().then((names) => {
+          //   names.forEach((name) => {
+          //     caches.delete(name);
+          //   });
+          // });
 
-          console.log("logout!");
-          navigate("/"); // 홈으로 이동
+          // 네이버 로그아웃 URL로 리다이렉션
+          window.location.href = "https://nid.naver.com/nidlogin.logout";
         }
       })
       .catch((error) => {
@@ -118,6 +119,9 @@ function Home() {
           <Routes>
             <Route path="/Notice" element={<Notice />} />
             <Route path="/History" element={<History />} />
+            <Route path="/Xlog" element={<Xlog />} /> {/* Xlog 경로 추가 */}
+            <Route path="/logout/callback" element={<Xlog />} />{" "}
+            {/* 로그아웃 콜백 URL 경로 추가 */}
           </Routes>
         </div>
       </div>
