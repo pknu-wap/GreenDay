@@ -11,6 +11,7 @@ function Notice() {
   const [userInformation, setUserInformation] = useState({});
   let [text, setText] = useState("");
   const [length, setLength] = useState(0);
+  //  const [items, setItems ] = useState(2);
   let onChange = (event) => {
     const value = event.target.value;
     setText(value);
@@ -46,16 +47,11 @@ function Notice() {
     );
     setUserWriteInformation(data.content);
     console.log(userWriteInformation);
+};
 
-    // // // 받아온 데이터를 내림차순으로 정렬
-    // const sortedData = data.content.sort(
-    //   (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
-    // );
-  };
-
-  const api = axios.create({
-    baseURL: "http://localhost:8080/api/board",
-  });
+const api = axios.create({
+  baseURL: "http://localhost:8080/api/board",
+});
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -258,46 +254,41 @@ function Notice() {
             <img src="backrock_button.png" alt="backrock button" />
           </button>
         </div>
-        {userWriteInformation
-          .slice(items * (page - 1), items * (page - 1) + items)
-          .map((a, i) => {
-            const canModifyAndDelete = email === a.userEmail; // 현재 사용자가 작성한 글인지 확인
 
-            return (
-              <div key={i}>
-                <div className="line1" />
-                <div className="userdata">
-                  <div className="bar">
-                    <div className="title">{a.userEmail}</div>
-                    <div className="writetime">
-                      작성일:{" "}
-                      {a.createdDate ? a.createdDate.substring(0, 10) : ""}
-                    </div>
-                  </div>
-                  {canModifyAndDelete && (
-                    <div>
-                      <button
-                        className="delete"
-                        onClick={() => sendDeleteToServer(a.id)}
-                      >
-                        <img src="deleteButton.png" alt="delete button" />
-                      </button>
-                      <button
-                        className="modify"
-                        onClick={() => loadDataToTextarea(a.id, a.content)}
-                      >
-                        <img src="modifyButton.png" alt="modify button" />
-                      </button>
-                    </div>
-                  )}
-                  <div className="noticeContent">{a.content}</div>
-                  <br />
-                  <br />
-                  <br />
+        {userWriteInformation.slice(items * (page - 1), items * (page - 1) + items).map((a, i) => {
+          const canModifyAndDelete = email === a.userEmail; // 현재 사용자가 작성한 글인지 확인
+          return (
+            <div key={i}>
+              <div className="line1" />
+              <div className="userdata">
+                <div className="bar">
+                  <div className="title">{a.userEmail}</div>
+                  <div className="writetime">작성일: {a.createdDate ? a.createdDate.substring(0,10):""}</div>
                 </div>
+                {canModifyAndDelete && (
+                  <div>
+                    <button
+                      className="delete"
+                      onClick={() => sendDeleteToServer(a.id)}
+                    >
+                      <img src="deleteButton.png" alt="delete button" />
+                    </button>
+                    <button
+                      className="modify"
+                      onClick={() => loadDataToTextarea(a.id, a.content)}
+                    >
+                      <img src="modifyButton.png" alt="modify button" />
+                    </button>
+                  </div>
+                )}
+                <div className="noticeContent">{a.content}</div>
+                <br />
+                <br />
+                <br />
               </div>
-            );
-          })}
+            </div>
+          );
+        })}
         <>
           <Pagination
             className="pagination"
