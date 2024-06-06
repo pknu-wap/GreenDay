@@ -69,14 +69,13 @@ function Home() {
             }
             // 현재 창을 http://localhost:3000/로 리다이렉트
             window.location.href = `http://localhost:3000/`;
-          }, 50); // 3초 후 새 창 닫기 및 리다이렉트
+          }, 100); // 3초 후 새 창 닫기 및 리다이렉트
         }
       })
       .catch((error) => {
         console.error("Logout error:", error);
       });
   };
-
 
   const apples = [
     { id: 1, src: "apple.png", style: { top: "215px", left: "850px" } },
