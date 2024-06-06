@@ -110,14 +110,6 @@ function History() {
             </li>
             <br />
           </ul>
-          <button
-            className="Logout"
-            onClick={() => {
-              handleNaverLogout();
-            }}
-          >
-            <img className="Logout" src="logout.png" />
-          </button>
 
           <Routes>
             <Route path="/Home" element={<Home />}></Route>
@@ -151,6 +143,14 @@ function History() {
           onChange={handlePageChange} //페이지가 바뀔 때 핸들링해줄 함수
         />
       </div>
+      <button
+        className="Logout"
+        onClick={() => {
+          handleNaverLogout();
+        }}
+      >
+        <img className="Logout" src="logout.png" />
+      </button>
     </>
   );
 }
