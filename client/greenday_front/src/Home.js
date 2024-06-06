@@ -41,7 +41,9 @@ function Home() {
   };
 
   const handleNaverLogout = () => {
-    const accessToken = JSON.parse(localStorage.getItem("userInfo"))?.accessToken;
+    const accessToken = JSON.parse(
+      localStorage.getItem("userInfo")
+    )?.accessToken;
 
     if (!accessToken) {
       console.error("No access token found");
@@ -53,21 +55,28 @@ function Home() {
         if (response.status === 200) {
           // Remove all local storage data
           localStorage.clear();
-          // // Clear browser cache
-          // caches.keys().then((names) => {
-          //   names.forEach((name) => {
-          //     caches.delete(name);
-          //   });
-          // });
-  
-        // 네이버 로그아웃 URL로 리다이렉션
-        window.location.href = `https://nid.naver.com/nidlogin.logout`;
+
+          // 네이버 로그아웃 URL을 새 창으로 열기
+          const logoutWindow = window.open(
+            `https://nid.naver.com/nidlogin.logout`,
+            "_blank"
+          );
+
+          // 일정 시간(예: 3초) 후 새 창을 닫고 원래 창을 리다이렉트
+          setTimeout(() => {
+            if (logoutWindow) {
+              logoutWindow.close();
+            }
+            // 현재 창을 http://localhost:3000/로 리다이렉트
+            window.location.href = `http://localhost:3000/`;
+          }, 3000); // 3초 후 새 창 닫기 및 리다이렉트
         }
       })
       .catch((error) => {
         console.error("Logout error:", error);
       });
   };
+
 
   const apples = [
     { id: 1, src: "apple.png", style: { top: "215px", left: "850px" } },
@@ -117,7 +126,6 @@ function Home() {
             <Route path="/Notice" element={<Notice />} />
             <Route path="/History" element={<History />} />
             <Route path="/Xlog" element={<Xlog />} /> {/* Xlog 경로 추가 */}
-            <Route path="/logout/callback" element={<Xlog />} /> {/* 로그아웃 콜백 URL 경로 추가 */}
           </Routes>
         </div>
       </div>
