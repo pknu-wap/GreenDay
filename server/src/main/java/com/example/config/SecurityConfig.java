@@ -52,12 +52,13 @@ public class SecurityConfig{
                         .defaultSuccessUrl("/Home")
                         .failureUrl("/Xlog")
                         .redirectionEndpoint()
-                            .baseUri("http://localhost:3000/authuser") // 리다이렉션 엔드포인트 설정
+                        .baseUri("/authuser") // 리다이렉션 엔드포인트 설정
                         .and()
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/oauth-login/logout")
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/") // 로그아웃 후에는 홈 페이지로 이동
                 )
                 .csrf().disable()
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
@@ -68,11 +69,11 @@ public class SecurityConfig{
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        //모든 origin에 대한 요청을 허용하도록 설정함
+        // 모든 origin에 대한 요청을 허용하도록 설정함
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         // 프론트엔드 서버 주소
-        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:3000/authuser"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:3000/authuser", "http://localhost:3000/naverlogout"));
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
