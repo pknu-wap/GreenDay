@@ -83,11 +83,6 @@ function Xlog({ setGetToken, setUserInfo }) {
             </li>
             <br />
             <br />
-            <li>
-              <Link to="/home">로그인 후 화면</Link>
-            </li>
-
-            <br />
           </ul>
           <Routes>
             <Route path="/home" element={<NaverRedirect />} />

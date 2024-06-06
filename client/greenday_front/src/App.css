@@ -444,8 +444,8 @@ h5 {
 }
 
 .Logout{
-  position:absolute;
-  top:315px;
+  position:fixed;
+  top:650px;
   background: none;
   border: none;
   width:40px;

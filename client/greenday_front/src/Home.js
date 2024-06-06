@@ -68,8 +68,8 @@ function Home() {
               logoutWindow.close();
             }
             // 현재 창을 http://localhost:3000/로 리다이렉트
-            window.location.href = `http://localhost:3000/`;
-          }, 3000); // 3초 후 새 창 닫기 및 리다이렉트
+            window.location.href = `http://localhost:3000/`
+          }, 50); // 3초 후 새 창 닫기 및 리다이렉트
         }
       })
       .catch((error) => {
@@ -126,6 +126,8 @@ function Home() {
             <Route path="/Notice" element={<Notice />} />
             <Route path="/History" element={<History />} />
             <Route path="/Xlog" element={<Xlog />} /> {/* Xlog 경로 추가 */}
+            <Route path="/logout/callback" element={<Xlog />} />{" "}
+            {/* 로그아웃 콜백 URL 경로 추가 */}
           </Routes>
         </div>
       </div>
