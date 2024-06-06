@@ -77,6 +77,7 @@ function Home() {
       });
   };
 
+
   const apples = [
     { id: 1, src: "apple.png", style: { top: "215px", left: "850px" } },
     { id: 2, src: "apple.png", style: { top: "285px", left: "755px" } },

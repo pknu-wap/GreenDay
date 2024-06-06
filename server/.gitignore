@@ -40,5 +40,6 @@ out/
 ### VS Code ###
 .vscode/
 
-node_modules/
-client/greenday_front/node_modules/
+# Ignore all node_modules directories
+/node_modules
+!/client/greenday_front/node_modules
