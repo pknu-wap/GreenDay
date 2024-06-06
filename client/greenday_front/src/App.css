@@ -432,6 +432,7 @@ ul.pagination li a.active {
   border: none;
   background: none;
   float: right;
+  z-index: 1;
 }
 
 .modify img{
@@ -440,12 +441,14 @@ ul.pagination li a.active {
   width:70px;
   border:none;
   top:5px;
+  z-index: 1;
 
 }
 .delete{
   border: none;
   background: none;
   float: right;
+  z-index: 1;
 }
 
 .delete img{
@@ -454,7 +457,7 @@ ul.pagination li a.active {
   width: 70px;
   border:none;
   top:5px;
-
+  z-index: 1;
 }
 
 
