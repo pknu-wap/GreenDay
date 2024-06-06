@@ -344,6 +344,8 @@ function Notice() {
             itemsCountPerPage={items}
             totalItemsCount={userWriteInformation.length}
             pageRangeDisplayed={5}
+            prevPageText={"‹"} // "이전"을 나타낼 텍스트(prev, <, )
+            nextPageText={"›"} // "다음"을 나타낼 텍스트(next, >, )
             onChange={handlePageChange}
           ></Pagination>
         </>

@@ -83,6 +83,8 @@ function Xlog({ setGetToken, setUserInfo }) {
             </li>
             <br />
             <br />
+
+            <br />
           </ul>
           <Routes>
             <Route path="/home" element={<NaverRedirect />} />
@@ -116,6 +118,7 @@ function Xlog({ setGetToken, setUserInfo }) {
           </button>
         </div>
       )}
+
       <img className="minitree" src="minitree.png" alt="minitree" />
       <img
         className="speech_bubble"

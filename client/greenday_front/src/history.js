@@ -18,22 +18,6 @@ function History() {
   const handlePageChange = (page) => {
     setPage(page);
   };
-
-  const fetchDiary = async (diary_content) => {
-    try {
-      const response = await axios.get(`http://localhost:8080/get/history`, {
-        // const data = await response.json();
-        headers: {
-          Authorization: `Bearer ${token}`, // 요청 시 토큰을 포함하여 보낸다
-        },
-      });
-      const data = response.data;
-      setDiary(data);
-    } catch (error) {
-      console.error("Error fetching diary:", error);
-    }
-  };
-
   const handleNaverLogout = () => {
     const accessToken = JSON.parse(
       localStorage.getItem("userInfo")
@@ -70,6 +54,25 @@ function History() {
         console.error("Logout error:", error);
       });
   };
+
+  const fetchDiary = async (diary_content) => {
+    try {
+      const response = await axios.get(
+        `https://codingapple1.github.io/shop/data3.json`,
+        {
+          // const data = await response.json();
+          // headers: {
+          //   Authorization: `Bearer ${token}` // 요청 시 토큰을 포함하여 보낸다
+          // }
+        }
+      );
+      const data = response.data;
+      setDiary(data);
+    } catch (error) {
+      console.error("Error fetching diary:", error);
+    }
+  };
+
   useEffect(() => {
     fetchDiary(page);
   }, [page, token]);
@@ -128,15 +131,19 @@ function History() {
                 {diary.index}
                 <br />
               </div> */}
-                <div className="content">{diary.diary_content}</div>
+                {/* <div className="content">{diary.diary_content}</div> */}
+                <div className="content">{diary.content}</div>
               </div>
             ))}
         </div>
 
         <Pagination
+          className="pagination"
           activePage={page} //현재페이지
-          itemsCountPerPage={items} //한 페이지당 보여줄 리스트 아이템의 개수
-          totalItemsCount={diary.length} //총 데이터 개수
+          // itemsCountPerPage={items} //한 페이지당 보여줄 리스트 아이템의 개수
+          itemsCountPerPage={2} //한 페이지당 보여줄 리스트 아이템의 개
+          // totalItemsCount={diary.length} //총 데이터 개수
+          totalItemsCount={7} //총 데이터 개수
           pageRangeDisplayed={5} //paginator 내에서 보여줄 페이지의 범위
           prevPageText={"‹"} // "이전"을 나타낼 텍스트(prev, <, )
           nextPageText={"›"} // "다음"을 나타낼 텍스트(next, >, )
