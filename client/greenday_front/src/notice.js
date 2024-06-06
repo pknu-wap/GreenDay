@@ -35,8 +35,6 @@ function Notice() {
   useEffect(() => {
     getBoardList();
   }, []);
-
-  // 게시판 목록 가져오는 코드
   const getBoardList = async () => {
     const data = await (
       await axios.get("http://localhost:8080/api/board/list?page=0&size=100")
@@ -85,7 +83,7 @@ function Notice() {
 
       setText("");
       setLength(0);
-      getBoardList(); // 새로 게시글 목록을 가져옵니다.
+      getBoardList();
     } catch (error) {
       console.error("API 요청 오류:", error);
     }
@@ -104,33 +102,25 @@ function Notice() {
       .post("http://localhost:8080/api/logout", { accessToken })
       .then((response) => {
         if (response.status === 200) {
-          // Remove all local storage data
           localStorage.clear();
-
-          // 네이버 로그아웃 URL을 새 창으로 열기
           const logoutWindow = window.open(
             `https://nid.naver.com/nidlogin.logout`,
             "_blank"
           );
-
-          // 일정 시간(예: 3초) 후 새 창을 닫고 원래 창을 리다이렉트
           setTimeout(() => {
             if (logoutWindow) {
               logoutWindow.close();
             }
-            // 현재 창을 http://localhost:3000/로 리다이렉트
             window.location.href = `http://localhost:3000/`;
-          }, 100); // 3초 후 새 창 닫기 및 리다이렉트
+          }, 100);
         }
       })
       .catch((error) => {
         console.error("Logout error:", error);
       });
   };
-
   let [email, setEmail] = useState("");
   let [jwtToken, setjwtToken] = useState("");
-
   useEffect(() => {
     const userInfoFromStorage = localStorage.getItem("userInfo");
     if (userInfoFromStorage) {
@@ -140,9 +130,7 @@ function Notice() {
       setjwtToken(userInfo.jwtToken);
     }
   }, []);
-
   const navigate = useNavigate();
-
   const [page, setPage] = useState(1);
   const [items, setItems] = useState(4);
   const handlePageChange = (page) => {
@@ -151,7 +139,6 @@ function Notice() {
   const itemChange = (e) => {
     setItems(Number(e.target.value));
   };
-
   const sendDataToServer = async (data) => {
     try {
       const jwtToken = localStorage.getItem("userInfo")
@@ -161,7 +148,6 @@ function Notice() {
         console.error("JWT 토큰이 없습니다.");
         return;
       }
-
       const response = await api.post("/write", data, {
         headers: { Authorization: `Bearer ${jwtToken}` },
       });
@@ -181,7 +167,6 @@ function Notice() {
         console.error("JWT 토큰이 없습니다.");
         return;
       }
-
       const response = await api.put(`/update/${id}`, data, {
         headers: { Authorization: `Bearer ${jwtToken}` },
       });
@@ -271,7 +256,6 @@ function Notice() {
         <textarea
           className="input"
           placeholder="내용을 입력하세요"
-          style={{ whiteSpace: "pre-wrap" }}
           onChange={onChange}
           value={text}
           maxLength={199}
@@ -308,28 +292,34 @@ function Notice() {
                 <div className="userdata">
                   <div className="bar">
                     <div className="title">{a.userEmail}</div>
+                    {canModifyAndDelete && (
+                      <div>
+                        <button
+                          className="delete"
+                          onClick={() => sendDeleteToServer(a.id)}
+                        >
+                          <img src="deleteButton.png" alt="delete button" />
+                        </button>
+                        <button
+                          className="modify"
+                          onClick={() => loadDataToTextarea(a.id, a.content)}
+                        >
+                          <img src="modifyButton.png" alt="modify button" />
+                        </button>
+                      </div>
+                    )}
                     <div className="writetime">
                       작성일:{" "}
                       {a.createdDate ? a.createdDate.substring(0, 10) : ""}
                     </div>
                   </div>
-                  {canModifyAndDelete && (
-                    <div>
-                      <button
-                        className="delete"
-                        onClick={() => sendDeleteToServer(a.id)}
-                      >
-                        <img src="deleteButton.png" alt="delete button" />
-                      </button>
-                      <button
-                        className="modify"
-                        onClick={() => loadDataToTextarea(a.id, a.content)}
-                      >
-                        <img src="modifyButton.png" alt="modify button" />
-                      </button>
-                    </div>
-                  )}
-                  <div className="noticeContent">{a.content}</div>
+
+                  <div
+                    className="noticeContent"
+                    style={{ whiteSpace: "pre-wrap" }}
+                  >
+                    {a.content}
+                  </div>
                   <br />
                   <br />
                   <br />

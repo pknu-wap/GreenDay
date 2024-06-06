@@ -220,7 +220,7 @@ h5 {
   width: 1090px;
   margin-left: 260px;
   text-align: left;
-  height:120px;
+  
 }
 
 .input1{
@@ -241,17 +241,17 @@ h5 {
 }
 
 .title {
-  display:inline-block;
   color:#282c34;
   font-weight: bold;
 }
 
 .writetime{
+  position:relative;
   display:inline-block;
   /* text-align: right;  */
-  float: right;
   color:gray;
-
+  top:0px;
+  
 }
 
 .line1{
@@ -259,18 +259,21 @@ h5 {
   display: flex;
   flex-direction: column;
   align-items:right;
-  padding-top: 20px;
-  margin-bottom: 20px;
+  padding-top: 10px;
+  margin-bottom: 10px;
   margin-left: 250px;
 }
 
 .noticeContent{
-  position: absolute;
+  position: relative;
   font-size: 25px;
   font-family: "Nanum Pen Script", cursive;
   padding-top: 20px;
   font-weight: lighter;
   display:inline-block;
+  overflow-wrap: break-word;
+  width:1070px;
+  background-color: white;
 }
 
 .backrock_button{
@@ -431,32 +434,38 @@ ul.pagination li a.active {
 .modify{
   border: none;
   background: none;
+  display: inline-block;
   float: right;
   z-index: 1;
 }
 
 .modify img{
-  position: relative;
+  position: absolute;
+  display: inline-block;
   background-color: none;
   width:70px;
   border:none;
-  top:5px;
+  top:10px;
   z-index: 1;
+  left: 950px;
 
 }
 .delete{
   border: none;
+  display: inline-block;
   background: none;
   float: right;
   z-index: 1;
 }
 
 .delete img{
-  position: relative;
+  position: absolute;
+  display: inline-block;
   background-color: none;
   width: 70px;
   border:none;
-  top:5px;
+  top:10px;
+  left:1030px;
   z-index: 1;
 }
 
