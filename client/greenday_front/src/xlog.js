@@ -83,6 +83,9 @@ function Xlog({ setGetToken, setUserInfo }) {
             </li>
             <br />
             <br />
+            <li>
+              <Link to="/home">로그인 후 화면</Link>
+            </li>
 
             <br />
           </ul>
@@ -98,8 +101,6 @@ function Xlog({ setGetToken, setUserInfo }) {
       <button className="tree_image" onClick={handleTreeClick}>
         <img src="tree.png" alt="tree" />
       </button>
-
-      <img className="patmal" src="patmal2.png " />
 
       {buttonOpen && (
         <div>
@@ -120,6 +121,15 @@ function Xlog({ setGetToken, setUserInfo }) {
           </button>
         </div>
       )}
+      <img className="minitree" src="minitree.png" alt="minitree" />
+      <img
+        className="speech_bubble"
+        src="speech bubble.png"
+        alt="speech_bubble"
+      />
+      <img className="padlock" src="padlock.png" alt="padlock" />
+      <img className="chipmunk" src="chipmunk.png" alt="chipmunk" />
+      <img className="hand" src="hand.png" alt="hand" />
     </>
   );
 }

@@ -42,18 +42,17 @@ function Home() {
 
   const handleNaverLogout = () => {
     const accessToken = JSON.parse(localStorage.getItem("userInfo"))?.accessToken;
+
     if (!accessToken) {
       console.error("No access token found");
       return;
     }
-  
     axios
       .post("http://localhost:8080/api/logout", { accessToken })
       .then((response) => {
         if (response.status === 200) {
           // Remove all local storage data
           localStorage.clear();
-  
           // // Clear browser cache
           // caches.keys().then((names) => {
           //   names.forEach((name) => {
@@ -63,14 +62,12 @@ function Home() {
   
         // 네이버 로그아웃 URL로 리다이렉션
         window.location.href = `https://nid.naver.com/nidlogin.logout`;
-
         }
       })
       .catch((error) => {
         console.error("Logout error:", error);
       });
   };
-  
 
   const apples = [
     { id: 1, src: "apple.png", style: { top: "215px", left: "850px" } },
