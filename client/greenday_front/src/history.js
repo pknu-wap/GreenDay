@@ -34,6 +34,42 @@ function History() {
     }
   };
 
+  const handleNaverLogout = () => {
+    const accessToken = JSON.parse(
+      localStorage.getItem("userInfo")
+    )?.accessToken;
+
+    if (!accessToken) {
+      console.error("No access token found");
+      return;
+    }
+    axios
+      .post("http://localhost:8080/api/logout", { accessToken })
+      .then((response) => {
+        if (response.status === 200) {
+          // Remove all local storage data
+          localStorage.clear();
+
+          // 네이버 로그아웃 URL을 새 창으로 열기
+          const logoutWindow = window.open(
+            `https://nid.naver.com/nidlogin.logout`,
+            "_blank"
+          );
+
+          // 일정 시간(예: 3초) 후 새 창을 닫고 원래 창을 리다이렉트
+          setTimeout(() => {
+            if (logoutWindow) {
+              logoutWindow.close();
+            }
+            // 현재 창을 http://localhost:3000/로 리다이렉트
+            window.location.href = `http://localhost:3000/`;
+          }, 100); // 3초 후 새 창 닫기 및 리다이렉트
+        }
+      })
+      .catch((error) => {
+        console.error("Logout error:", error);
+      });
+  };
   useEffect(() => {
     fetchDiary(page);
   }, [page, token]);
@@ -74,6 +110,14 @@ function History() {
             </li>
             <br />
           </ul>
+          <button
+            className="Logout"
+            onClick={() => {
+              handleNaverLogout();
+            }}
+          >
+            <img className="Logout" src="logout.png" />
+          </button>
 
           <Routes>
             <Route path="/Home" element={<Home />}></Route>
