@@ -1,6 +1,4 @@
-import logo from "./logo.svg";
-import "./App.css";
-import Modal from "./modiary";
+import React, { useEffect, useState } from "react";
 import {
   Routes,
   Route,
@@ -8,15 +6,17 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
+import axios from "axios";
+import Modal from "./modiary";
 import Notice from "./notice.js";
 import History from "./history.js";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import "./App.css";
 
 function Home() {
   const location = useLocation();
   const [userInformation, setUserInformation] = useState({});
   const [isModalOpen, setModalOpen] = useState(false); // 모달 상태 추가
+  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     console.log(userInformation);
@@ -38,7 +38,39 @@ function Home() {
   const closeModal = () => {
     setModalOpen(false); // 모달 닫기
   };
-  //아란이 최공 ><><><
+
+  const handleNaverLogout = () => {
+    const accessToken = JSON.parse(
+      localStorage.getItem("userInfo")
+    )?.accessToken;
+    if (!accessToken) {
+      console.error("No access token found");
+      return;
+    }
+
+    axios
+      .post("http://localhost:8080/api/logout", { accessToken })
+      .then((response) => {
+        if (response.status === 200) {
+          // Remove all local storage data
+          localStorage.clear();
+
+          // Clear all caches
+          caches.keys().then((names) => {
+            names.forEach((name) => {
+              caches.delete(name);
+            });
+          });
+
+          console.log("logout!");
+          navigate("/"); // 홈으로 이동
+        }
+      })
+      .catch((error) => {
+        console.error("Logout error:", error);
+      });
+  };
+
   const apples = [
     { id: 1, src: "apple.png", style: { top: "215px", left: "850px" } },
     { id: 2, src: "apple.png", style: { top: "285px", left: "755px" } },
@@ -89,15 +121,10 @@ function Home() {
           </Routes>
         </div>
       </div>
-      <button className="Logout">
-        <img className="Logout" src="logout.png" />
+      <button className="Logout" onClick={handleNaverLogout}>
+        <img className="Logout" src="logout.png" alt="logout" />
       </button>
-      <button
-        className="tree_image"
-        onClick={() => {
-          setModalOpen(true); // 모달 열기
-        }}
-      >
+      <button className="tree_image" onClick={() => setModalOpen(true)}>
         <img src="tree.png" alt="tree" />
       </button>
 

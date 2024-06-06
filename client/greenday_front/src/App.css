@@ -457,3 +457,42 @@ h5 {
   border: none;
   width:40px;
 }
+
+.chipmunk {
+  position: absolute;
+  width: 80px;
+  top: 530px;
+  left: 900px;
+  transform: rotate(30deg);
+}
+
+.speech_bubble {
+  position: absolute;
+  width: 220px;
+  top: 490px;
+  left: 990px;
+}
+
+.minitree{
+  position: absolute;
+  width: 50px;
+  top: 507px;
+  left: 1020px;
+  z-index: 1;
+}
+
+.hand {
+  position: absolute;
+  width: 50px;
+  top: 507px;
+  left: 1080px;
+  z-index: 1;
+}
+
+.padlock{
+  position: absolute;
+  width: 50px;
+  top: 507px;
+  left: 1150px;
+  z-index: 1;
+}
