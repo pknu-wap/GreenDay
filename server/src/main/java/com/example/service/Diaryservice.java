@@ -2,17 +2,17 @@ package com.example.service;
 
 import com.example.domain.entity.DiaryEntity;
 import com.example.dto.DiaryDto;
-import com.example.repository.Diaryrepository;
+import com.example.repository.DiaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class Diaryservice {
-    private final Diaryrepository diaryrepository;//변수에서 할당된 값이 변경될 수 없음을 나타냄
+    private final DiaryRepository diaryrepository;//변수에서 할당된 값이 변경될 수 없음을 나타냄
 
     // 의존성 주입을 통해 Diaryrepository 객체를 주입받음
     @Autowired
-    public Diaryservice(Diaryrepository diaryrepository){
+    public Diaryservice(DiaryRepository diaryrepository){
 
         this.diaryrepository =diaryrepository;
     }

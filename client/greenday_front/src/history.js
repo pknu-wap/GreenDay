@@ -55,23 +55,37 @@ function History() {
       });
   };
 
-  const fetchDiary = async (diary_content) => {
+  const fetchDiary = async () => {
     try {
-      const response = await axios.get(
-        `https://codingapple1.github.io/shop/data3.json`,
-        {
-          // const data = await response.json();
-          // headers: {
-          //   Authorization: `Bearer ${token}` // 요청 시 토큰을 포함하여 보낸다
-          // }
-        }
-      );
-      const data = response.data;
-      setDiary(data);
+      const userInfoFromStorage = localStorage.getItem("userInfo");
+      if (userInfoFromStorage) {
+        const userInfo = JSON.parse(userInfoFromStorage);
+        setToken(userInfo.jwtToken); // 로컬 스토리지에서 토큰을 가져와서 상태에 저장
+        const response = await axios.get("http://localhost:8080/history/diaries", {
+          headers: {
+            Authorization: `Bearer ${userInfo.jwtToken}` // 토큰을 함께 보냄
+          },
+          params: {
+            page: page - 1,
+            size: items,
+            userId: userInfo.userId // 사용자 ID를 전달
+          },
+        });
+  
+        // 확인용 로그 추가
+        console.log("Fetched diary data:", response.data);
+  
+        // 서버로부터 받아온 데이터 구조에 맞게 설정
+        const { content, totalElements } = response.data;
+        setDiary(content);
+        // setCount(totalElements); // 총 아이템 수 설정 (필요 시)
+      }
     } catch (error) {
       console.error("Error fetching diary:", error);
     }
   };
+  
+  
 
   useEffect(() => {
     fetchDiary(page);
@@ -123,19 +137,19 @@ function History() {
         <h1>your history!</h1>
 
         <div>
-          {diary
-            .slice(items * (page - 1), items * (page - 1) + items)
-            .map((diary, index) => (
-              <div className="history" key={index}>
-                {/* <div className="day">
-                {diary.index}
-                <br />
-              </div> */}
-                {/* <div className="content">{diary.diary_content}</div> */}
-                <div className="content">{diary.content}</div>
-              </div>
-            ))}
-        </div>
+              {diary
+                .slice(items * (page - 1), items * (page - 1) + items)
+                .map((diary, index) => (
+                  <div className="history" key={index}>
+                    {/* <div className="day">
+                    {diary.index}
+                    <br />
+                  </div> */}
+                    {/* <div className="content">{diary.diary_content}</div> */}
+                    <div className="content">{diary.diary_content}</div>
+                  </div>
+                ))}
+            </div>
 
         <Pagination
           className="pagination"
@@ -158,6 +172,7 @@ function History() {
       >
         <img className="Logout" src="logout.png" />
       </button>
+      
     </>
   );
 }
