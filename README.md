@@ -50,16 +50,7 @@
             <th><a href="https://github.com/khw010419">khw010419</a></th>
             <th><a href="https://github.com/Chaeyeon0">Chaeyeon0</a></th>
             <th><a href="https://github.com/janghw0126">janghw0126</a></th>
-            <th><a href="https://github.com/aranlll">aranlll</a></th>
-        </tr>
-    </tbody>
-</table>
-<hr>
-<div align="center">
- <h4>🔎주요 기능</h4>
- <h5>1. 로그인 전 페이지</h5>
- <img src="https://github.com/pknu-wap/GreenDay/assets/127714800/743f7c95-a8f6-4614-bf2d-c09a5da72e13" width="700" height="400"/>
- <h5>2. 네이버 소셜로그인을 이용한 로그인</h5>
+            <th><a 입</h5>
  <img src="https://github.com/pknu-wap/GreenDay/assets/127714800/32fff38d-a52f-46b0-8fbf-af3505d2459a" width="400" height="400"/>
  <h5>3. 메인페이지에 있는 사과 나무를 눌러 랜덤으로 제공되는 단어와 관련된 사과일기 작성</h5>
  <img src="https://github.com/pknu-wap/GreenDay/assets/127714800/913f3bec-3128-46af-abc3-2c2922f4c8d6b" width="600" height="400"/>
