@@ -62,7 +62,7 @@
  <h5> 2. 네이버 소셜로그인을 통한 회원가입</h5>
  <img src="https://github.com/pknu-wap/GreenDay/assets/127714800/32fff38d-a52f-46b0-8fbf-af3505d2459a" width="350" height="350"/>
  <h5>3. 메인페이지에 있는 사과 나무를 눌러 랜덤으로 제공되는 단어와 관련된 사과일기 작성</h5>
- <img src="https://github.com/pknu-wap/GreenDay/assets/127714800/913f3bec-3128-46af-abc3-2c2922f4c8d6b" width="600" height="500"/>
+ <img src="https://github.com/pknu-wap/GreenDay/assets/127714800/913f3bec-3128-46af-abc3-2c2922f4c8d6b" width="600" height="400"/>
  <h5>4. 환경을 생각하는 습관들을 적어 놓은 게시판</h5>
  <img src="https://github.com/pknu-wap/GreenDay/assets/127714800/48423ace-01f6-489c-962a-65f6b765bff4" width="500" height="400"/?>
  <h5>5. 일주일 단위로 본인이 쓴 사과나무 일기들이 올라가 서로의 일기들을 보고 동기부여를 얻을 수 있는 히스토리 페이지</h5>
