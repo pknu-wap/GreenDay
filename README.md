@@ -61,7 +61,7 @@
  <img src="https://github.com/pknu-wap/GreenDay/assets/127714800/47875cf0-812c-46a2-b96f-024dedccb62e" width="550" height="350"/>
  <h5> 2. 네이버 소셜로그인을 통한 회원가입, 로그아웃</h5>
  <img src="https://github.com/pknu-wap/GreenDay/assets/127714800/32fff38d-a52f-46b0-8fbf-af3505d2459a" width="350" height="350"/>
- <h5>3. 메인페이지에 있는 사과 나무를 눌러 제로-웨이스트에 관련된 키워드와 관련된 사과일기 작성</h5>
+ <h5>3. 메인페이지에 있는 사과 나무를 눌러 제로-웨이스트와 관련된 키워드와 관련된 사과일기 작성</h5>
  <img src="https://github.com/pknu-wap/GreenDay/assets/127714800/913f3bec-3128-46af-abc3-2c2922f4c8d6b" width="600" height="400"/>
  <h5>4. 환경과 관련된 이야기를 쓸 수 있는 게시판</h5>
  <img src="https://github.com/pknu-wap/GreenDay/assets/127714800/48423ace-01f6-489c-962a-65f6b765bff4" width="500" height="400"/?>
