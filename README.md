@@ -58,7 +58,7 @@
 <div align="center">
  <h4>🌳 주요 기능 🌳</h4>
  <h5> 1. 로그인 전 페이지 </h5>
- <img src="https://github.com/pknu-wap/GreenDay/assets/127714800/47875cf0-812c-46a2-b96f-024dedccb62e" width="550" height="350"/>
+ <img src="https://github.com/pknu-wap/GreenDay/assets/127714800/47875cf0-812c-46a2-b96f-024dedccb62e" width="550" height="370"/>
  <h5> 2. 네이버 소셜로그인을 통한 회원가입, 로그아웃</h5>
  <img src="https://github.com/pknu-wap/GreenDay/assets/127714800/32fff38d-a52f-46b0-8fbf-af3505d2459a" width="350" height="350"/>
  <h5>3. 메인페이지에 있는 사과 나무를 눌러 제로-웨이스트 키워드와 관련된 사과일기 작성</h5>
